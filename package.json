@@ -10,10 +10,13 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@radial-color-picker/vue-color-picker": "^2.3.0",
     "core-js": "^3.6.4",
+    "mqtt": "^3.0.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
+    "vue-debounce": "^2.5.1",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"

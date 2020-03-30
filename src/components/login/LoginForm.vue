@@ -103,7 +103,7 @@ export default class LoginForm extends Vue {
             this.httpRequestStarted = false;
             return;
         }
-        this.$router.push({name: RouteNames.home});
+        this.$router.push({name: RouteNames.Devices});
         this.httpRequestStarted = false;
     }
 

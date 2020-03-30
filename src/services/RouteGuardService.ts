@@ -23,7 +23,7 @@ export class RouteGuardService {
     }
 
     private async manageTokenExistence(route: Route, next: any) {
-        if (route.name === RouteNames.login) {
+        if (route.name === RouteNames.Login) {
             next();
             return;
         }

@@ -9,8 +9,8 @@
 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator';
-    import LoginForm from '@/components/views/login/LoginForm.vue';
-    import LoginUpperSection from '@/components/views/login/LoginUpperSection.vue';
+    import LoginForm from '@/components/login/LoginForm.vue';
+    import LoginUpperSection from '@/components/login/LoginUpperSection.vue';
 
     @Component({
         name: 'Login',

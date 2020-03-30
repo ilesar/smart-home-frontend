@@ -44,10 +44,10 @@ appAxios.interceptors.response.use(async (response) => {
     return response;
 }, (error) => {
     if (error.response.status === 401 && !error.response.config.url.includes('refresh-token')) {
-        if (router.currentRoute.name === RouteNames.login) {
+        if (router.currentRoute.name === RouteNames.Login) {
             return;
         }
-        router.push({name: RouteNames.login});
+        router.push({name: RouteNames.Login});
         return Promise.reject(new Error('Vrijeme prijave je isteklo, molimo da se ponovo prijavite.'));
     }
     return Promise.reject(error);

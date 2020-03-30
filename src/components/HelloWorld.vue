@@ -12,8 +12,7 @@
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
 
-  // @ts-ignore
-  import mqtt = require('mqtt');
+  const mqtt = require('mqtt');
   const client = mqtt.connect('mqtt://192.168.31.125:9001');
 
   client.on('connect', () => {

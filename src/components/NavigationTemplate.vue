@@ -1,71 +1,72 @@
 <template>
-    <a-layout class="o-section">
-<!--        <a-layout-header class="o-section__header">-->
-<!--            <a-menu-->
-<!--                    class="o-section__horizontal-navigation"-->
-<!--                    theme="light"-->
-<!--                    mode="horizontal"-->
-<!--                    :defaultSelectedKeys="['2']"-->
-<!--            >-->
-<!--                <AMenuItem class="o-section__user-settings-icon" @click="goToUserSettings">-->
-<!--                    <AIcon type="setting"></AIcon>-->
-<!--                </AMenuItem>-->
-<!--            </a-menu>-->
-<!--        </a-layout-header>-->
+    <a-layout id="components-layout-demo-custom-trigger" class="o-section">
+        <a-layout-header style="background: #fff; padding: 0">
+            <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" class="o-section-header" />
+        </a-layout-header>
         <a-layout>
-            <a-layout-sider class="o-section__sidemenu-wrapper">
-                <a-menu
-                        :defaultSelectedKeys="defaultSelectedKeys"
-                        mode="inline"
-                        class="o-section__sidemenu"
-                >
+            <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider">
+                <div class="logo" />
+                <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
                     <a-menu-item
                             key="devices"
                             @click="goToDevices()"
+                            class="o-section-menu-item"
                     >
                         <a-icon type="bulb"/>
-                        Uređaji
+                        <span>Uređaji</span>
                     </a-menu-item>
 
                     <a-menu-item
                             key="shopping"
                             @click="goToShopping()"
+                            class="o-section-menu-item"
                     >
                         <a-icon type="shopping"/>
-                        Šoping
+                        <span>Šoping</span>
                     </a-menu-item>
 
                     <a-menu-item
                             key="payments"
                             @click="goToPayments()"
+                            class="o-section-menu-item"
                     >
                         <a-icon type="idcard"/>
-                        Plaćanja
+                        <span>Plaćanja</span>
                     </a-menu-item>
                     <a-menu-item
                             key="groceries"
                             @click="goToGroceries()"
+                            class="o-section-menu-item"
                     >
                         <a-icon type="cloud"/>
-                        Namirnice
+                        <span>Namirnice</span>
                     </a-menu-item>
+<!--                    <a-menu-item-->
+<!--                            key="logout"-->
+<!--                            @click="logout()"-->
+<!--                            class="o-section-menu-item"-->
+<!--                    >-->
+<!--                        <a-icon type="logout"/>-->
+<!--                        <span>Odjavi se</span>-->
+<!--                    </a-menu-item>-->
                     <a-menu-item
-                            key="logout"
-                            @click="logout()"
+                            key="menuControl"
+                            style="position:absolute; bottom: 0px;"
+                            @click="()=> collapsed = !collapsed"
                     >
-                        <a-icon type="logout"/>
-                        Odjavi se
+                        <a-icon
+                                class="trigger"
+                                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                        />
+                        <span>Collapse</span>
                     </a-menu-item>
-
                 </a-menu>
             </a-layout-sider>
-            <a-layout class="o-section__main-section">
-                <a-layout-content
-                        class="o-section__content"
-                >
-                    <slot></slot>
-                </a-layout-content>
-            </a-layout>
+            <a-layout-content
+                    :style="{ padding: '24px', background: '#fff', minHeight: '280px' }"
+            >
+                <slot></slot>
+            </a-layout-content>
         </a-layout>
     </a-layout>
 </template>
@@ -74,13 +75,14 @@
   import {Component, Vue} from 'vue-property-decorator';
   import User from '@/api/models/User.ts';
   import {RouteNames} from '@/enums/RouteNames';
-  import {CmsEntityTypes} from '@/enums/CmsEntityTypes';
 
   @Component({
     name: 'NavigationTemplate',
   })
   export default class NavigationTemplate extends Vue {
     private defaultSelectedKeys: string[] = [];
+
+    private collapsed: boolean = true;
 
     private logout() {
       User.logout().then(() => {
@@ -112,20 +114,6 @@
       }
     }
 
-    //
-    // private goToProductDetails(product: Product) {
-    //     this.$router.push({
-    //         name: RouteNames.cmsIndex,
-    //         params: {
-    //             entityName: CmsEntityTypes.ProductDetails,
-    //             entityId: product.productDetails ? product.productDetails.id : 'new',
-    //         },
-    //         query: {
-    //             additionalId: product.id,
-    //         },
-    //     });
-    // }
-
     private async created() {
       switch (this.$route.name) {
         case RouteNames.Devices:
@@ -149,81 +137,15 @@
     .o-section {
         height: 100vh;
 
-        /*
-        &__header {
-            background: $white-two !important;
-
+        &-nav {
+            height:100vh;
+            border: none;
         }
 
-        &__logo {
-            float: left;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: $mid-blue;
-            text-transform: uppercase;
-            padding: 10px;
-            margin: 0 47px 0 0;
-            max-width: 120px;
-
+        &-header {
+            border: none !important;
+            padding-left: 100px;
         }
-
-        &__horizontal-navigation {
-            line-height: 64px !important;
-        }
-
-        &__sidemenu-wrapper {
-            background-color: $white-two;
-            overflow-y: auto;
-            height: calc(100vh - 70px);
-        }
-
-        &__sidemenu {
-            border-right: none;
-            height: 100%;
-        }
-
-        &__main-section {
-            background: $white-two !important;
-        }
-
-        &__breadcrumbs {
-            margin: 16px 0 !important;
-        }
-
-        &__content {
-            min-height: 280px;
-        }
-
-        &__user-settings-icon {
-            float: right;
-
-            .anticon {
-                margin-right: 0;
-            }
-        }
-
-        .ant-menu-horizontal > .ant-menu-item {
-            vertical-align: middle;
-
-            .ant-input-group-wrapper {
-                display: block;
-            }
-
-            &:hover, &.ant-menu-item-selected {
-                border-bottom: none;
-            }
-        }
-
-        &__logout {
-            max-width: 120px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .first-divider {
-            margin-top: 1px;
-        }*/
     }
 
 </style>

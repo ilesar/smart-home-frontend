@@ -16,6 +16,7 @@
   import NavigationTemplate from '@/components/NavigationTemplate.vue';
   import Popup from '@/components/Popup.vue';
 
+
   export default {
     name: 'app',
     components: {Popup, NavigationTemplate},

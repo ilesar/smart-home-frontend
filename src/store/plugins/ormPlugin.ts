@@ -15,8 +15,8 @@ export const registerDatabase = (dbModels: any, dbModules: any): Database => {
   return database;
 };
 
-export const curriedRegisterDatabase = curry(registerDatabase);
-export const curriedDatabase = curriedRegisterDatabase(models)(modules);
+// export const curriedRegisterDatabase = curry(registerDatabase);
+// export const curriedDatabase = curriedRegisterDatabase(models)(modules);
 
 /**
  * Register database as Vuex plugin

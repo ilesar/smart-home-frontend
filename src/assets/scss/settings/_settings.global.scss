@@ -1,0 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.is-locked {
+    opacity: 0.6;
+    pointer-events: none;
+}

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
+import { RouteGuardService } from '@/services/RouteGuardService';
 
 Vue.use(Router);
 
@@ -18,6 +19,8 @@ requiredRoute.keys().forEach((key) => {
 
 const router = new Router({
   routes: routes as RouteConfig[],
+  mode: 'history',
+  base: process.env.BASE_URL,
 });
 
 // router gards
@@ -29,5 +32,7 @@ router.beforeEach((to: any, from: any, next: any) => {
 router.afterEach((to: any, from: any) => {
   console.log('Arrived ' + to.path + ' from ' + from.path);
 });
+
+const routeGuar = new RouteGuardService(router);
 
 export default router;

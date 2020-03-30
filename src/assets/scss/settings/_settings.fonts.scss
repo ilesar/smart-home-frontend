@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('/src/assets/fonts/Roboto-Bold.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('/src/assets/fonts/Roboto-Medium.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('/src/assets/fonts/Roboto-Regular.ttf') format('ttf');
+}
+
+$font-bold: 'Roboto-Bold', 'Arial', sans-serif;
+$font-medium: 'Roboto-Medium', 'Arial', sans-serif;
+$font-regular: 'Roboto-Regular', 'Arial', sans-serif;
+
+$settings-fonts: (
+    'default': Arial,
+    'titles': ''
+);
+
+$settings-font-weight: (
+    'default': 400,
+    'thin': 100,
+    'extra-light': 200,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'semibold': 600,
+    'bold': 700,
+    'black': 800,
+    'ultra-black': 900
+);

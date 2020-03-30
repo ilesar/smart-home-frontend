@@ -1,0 +1,147 @@
+.co-login {
+    .ant-form-item {
+        margin-right: 0;
+    }
+
+    .ant-form-item-control-wrapper {
+        width: 100%;
+    }
+}
+
+.co-offer-history {
+    &__dropdown {
+
+        .ant-dropdown-menu-item {
+            &.is-active {
+                color: $mid-blue;
+                background-color: #1257ab11;
+            }
+
+            padding: 8px 12px;
+        }
+    }
+}
+
+.co-product-in-offer {
+    .co-product-in-offer__product-list .ant-table-thead > tr > th {
+        background: $white-two;
+        color: $cool-grey;
+        @extend .u-b3;
+    }
+
+    .co-product-in-offer__product-list {
+        .ant-table-tbody {
+            tr {
+                &:nth-child(odd) {
+                    background-color: $pale-grey;
+                }
+
+                td {
+                    @extend .u-b3-;
+                    color: $dark;
+
+                    &:first-child {
+                        @extend .u-b4;
+                        color: $cool-grey;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ant-select-dropdown-menu-item {
+    height: 32px;
+}
+
+.c-edit-client {
+
+    &__input {
+        .ant-input-group-addon {
+            border-color: $cloudy-blue;
+        }
+
+        .ant-input {
+            border-color: $cloudy-blue;
+        }
+
+        &.has-errors {
+            .ant-input-group-addon {
+                border-color: $dull-red;
+            }
+
+            .ant-input {
+                border-color: $dull-red;
+            }
+        }
+    }
+
+    .ant-collapse .ant-collapse-item .ant-collapse-header .anticon {
+        left: initial;
+        right: 16px;
+    }
+
+    .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+        padding: 12px 16px;
+    }
+
+    .ant-collapse-borderless > .ant-collapse-item {
+        border-radius: 18px;
+        border-bottom: none;
+    }
+}
+
+.c-cms-list {
+
+}
+
+.c-material-search {
+    &.ant-select-auto-complete.ant-select {
+        .ant-input {
+            background: #e8eff9aa;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .ant-select-selection__placeholder {
+            color: $dark;
+        }
+    }
+
+
+    .ant-input-search-icon {
+        color: $dark;
+    }
+
+    &__dropdown {
+        .ant-select-dropdown-menu-item {
+            height: auto;
+        }
+    }
+
+}
+
+.ant-table-wrapper.is-materials {
+    .ant-table-row-expand-icon {
+        display: none;
+    }
+}
+
+.c-language-picker {
+    &__option {
+        text-transform: uppercase;
+    }
+}
+
+.o-section {
+    .ant-menu-inline .ant-menu-item, .ant-menu-inline .ant-menu-submenu-title {
+        width: 100%;
+    }
+}
+
+.certain-category-search-dropdown {
+    .ant-select-dropdown-menu-item-group-list > .ant-select-dropdown-menu-item.is-special {
+        pointer-events: none;
+        padding-left: 4px;
+    }
+}

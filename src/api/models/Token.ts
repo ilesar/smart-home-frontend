@@ -1,6 +1,6 @@
 import {BelongsTo, Model} from '@vuex-orm/core';
 import { AxiosError, AxiosResponse } from 'axios';
-// import TokenAPI from '@/api/TokenAPI';
+import TokenAPI from '@/api/requests/TokenAPI';
 import {keys} from 'lodash';
 
 export interface IToken {

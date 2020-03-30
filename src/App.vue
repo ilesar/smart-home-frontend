@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <HelloWorldWrapper msg="Welcome to Your Vue.js App"/>
-    <HelloWorldDuoTone msg="Welcome to Your Vue.js App"/>
+    <template v-if="$route.meta.navigationLayout">
+      <navigation-template>
+        <router-view></router-view>
+      </navigation-template>
+    </template>
+    <template v-else>
+      <router-view></router-view>
+    </template>
+<!--    <Popup />-->
   </div>
 </template>
 
@@ -13,11 +19,6 @@ import HelloWorldDuoTone from '@/components/HelloWorldDuoTone';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorldDuoTone,
-    HelloWorldWrapper,
-    HelloWorld,
-  },
 };
 </script>
 
@@ -28,6 +29,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

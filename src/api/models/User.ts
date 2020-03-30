@@ -12,9 +12,8 @@ export default class Activity extends Model {
   public static fields() {
     return {
       id: Model.increment(),
-      username: Model.string('Daniel'),
-      email: Model.string('daniel@gmail.com'),
-      password: Model.string('123456'),
+      email: Model.string('ivan.lesar.pmf+smarthome@gmail.com'),
+      password: Model.string('admin'),
     };
   }
 }

@@ -13,7 +13,8 @@ import './plugins/element.js';
 Vue.config.productionTip = false;
 
 Vue.use(vueDebounce, {
-  listenTo: 'input',
+  listenTo: ['keyup', 'click'],
+  defaultTime: '200ms',
 });
 
 new Vue({

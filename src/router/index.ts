@@ -1,29 +1,33 @@
+/* eslint-disable */
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Router, { RouteConfig } from 'vue-router';
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-];
+import { routes } from './routes';
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes,
+/**
+ * 动态路由
+ */
+const requiredRoute = require.context('.', false, /\.ts$/);
+
+requiredRoute.keys().forEach((key) => {
+  if (key === './index.ts' || key === './routes.ts') { return; }
+  routes.push(requiredRoute(key).default || requiredRoute(key));
+});
+
+const router = new Router({
+  routes: routes as RouteConfig[],
+});
+
+// router gards
+router.beforeEach((to: any, from: any, next: any) => {
+  console.log('Going From ' + from.path + ' to ' + to.path);
+  next();
+});
+
+router.afterEach((to: any, from: any) => {
+  console.log('Arrived ' + to.path + ' from ' + from.path);
 });
 
 export default router;

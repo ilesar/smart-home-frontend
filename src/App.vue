@@ -1,40 +1,33 @@
 <template>
   <div id="app">
-<!--    <p>-->
-<!--      <router-link to="/">Go to Foo</router-link>-->
-<!--      <router-link to="/about">Go to Bar</router-link>-->
-<!--    </p>-->
-    <router-view></router-view>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorldWrapper msg="Welcome to Your Vue.js App"/>
+    <HelloWorldDuoTone msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+<script>
 import HelloWorld from './components/HelloWorld.vue';
-import HelloWorldDuoTone from '@/components/HelloWorldDuoTone.vue';
-import HelloWorldWrapper from '@/components/HelloWorldWrapper.vue';
+import HelloWorldWrapper from '@/components/HelloWorldWrapper';
+import HelloWorldDuoTone from '@/components/HelloWorldDuoTone';
 
-@Component({
+export default {
+  name: 'app',
   components: {
-    HelloWorldWrapper,
     HelloWorldDuoTone,
+    HelloWorldWrapper,
     HelloWorld,
   },
-})
-export default class App extends Vue {}
+};
 </script>
 
-<style lang="scss">
-
-    body {
-        margin: 0;
-    }
+<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /*margin-top: 60px;*/
+  margin-top: 60px;
 }
 </style>

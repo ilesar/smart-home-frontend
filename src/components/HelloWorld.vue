@@ -12,10 +12,11 @@
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
 
-  const mqtt = require('mqtt');
+  // @ts-ignore
+  import mqtt = require('mqtt');
   const client = mqtt.connect('mqtt://192.168.31.125:9001');
 
-  client.on('connect', function() {
+  client.on('connect', () => {
     console.log('CONNECTED');
   });
 
@@ -34,8 +35,7 @@
       const rgbColor = this.hexToRgb(newColor);
 
       if (rgbColor === null) {
-        throw new Error("RGB CONVERSION FAILED");
-        return;
+        throw new Error('RGB CONVERSION FAILED');
       }
 
       console.log(rgbColor.r.toString());
@@ -43,19 +43,19 @@
       console.log(rgbColor.b.toString());
 
       client.publish('home/tv/light/solid', JSON.stringify({
-        'r': rgbColor.r.toString(),
-        'g': rgbColor.g.toString(),
-        'b': rgbColor.b.toString(),
+        r: rgbColor.r.toString(),
+        g: rgbColor.g.toString(),
+        b: rgbColor.b.toString(),
       }));
     }
 
-    hexToRgb(hex: string) {
-      console.log('CONVERTING: ', hex)
-      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    private hexToRgb(hex: string) {
+      console.log('CONVERTING: ', hex);
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
+        b: parseInt(result[3], 16),
       } : null;
     }
 

@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import 'mocha';
 import { shallowMount } from '@vue/test-utils';
 import HelloWorld from '@/components/HelloWorld.vue';
 

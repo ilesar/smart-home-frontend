@@ -117,14 +117,9 @@
   import {Component, Vue} from 'vue-property-decorator';
   import User from '@/api/models/User.ts';
   import {RouteNames} from '@/enums/RouteNames';
-  import {Row, Col} from 'ant-design-vue';
 
   @Component({
     name: 'NavigationTemplate',
-    components: {
-      Row,
-      Col,
-    },
   })
   export default class NavigationTemplate extends Vue {
     private defaultSelectedKeys: string[] = [];

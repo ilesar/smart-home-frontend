@@ -67,41 +67,46 @@
                 <slot></slot>
             </a-layout-content>
         </a-layout>
-        <a-layout-footer class="o-footer hide-on-mobile">
-                <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">
-                    <a-menu-item
-                            key="devices"
-                            @click="goToDevices()"
-                            class="o-footer-menu-item"
+<!--        <Row>-->
+<!--            <Col>-->
+<!--                <a-layout-footer class="o-footer hide-on-mobile">-->
+<!--                    <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">-->
+<!--                        <a-menu-item-->
+<!--                                key="devices"-->
+<!--                                @click="goToDevices()"-->
+<!--                                class="o-footer-menu-item"-->
 
-                    >
-                        <a-icon type="bulb" theme="twoTone" :style="{ fontSize: '24px' }"/>
-                    </a-menu-item>
+<!--                        >-->
+<!--                            <a-icon type="bulb" theme="twoTone" :style="{ fontSize: '24px' }"/>-->
+<!--                        </a-menu-item>-->
 
-                    <a-menu-item
-                            key="shopping"
-                            @click="goToShopping()"
-                            class="o-footer-menu-item"
-                    >
-                        <a-icon type="shopping" theme="twoTone" twoToneColor="#eb2f96" :style="{ fontSize: '24px' }"/>
-                    </a-menu-item>
+<!--                        <a-menu-item-->
+<!--                                key="shopping"-->
+<!--                                @click="goToShopping()"-->
+<!--                                class="o-footer-menu-item"-->
+<!--                        >-->
+<!--                            <a-icon type="shopping" theme="twoTone" twoToneColor="#eb2f96" :style="{ fontSize: '24px' }"/>-->
+<!--                        </a-menu-item>-->
 
-                    <a-menu-item
-                            key="payments"
-                            @click="goToPayments()"
-                            class="o-footer-menu-item"
-                    >
-                        <a-icon type="idcard" theme="twoTone" twoToneColor="#52c41a" :style="{ fontSize: '24px' }"/>
-                    </a-menu-item>
-                    <a-menu-item
-                            key="groceries"
-                            @click="goToGroceries()"
-                            class="o-footer-menu-item"
-                    >
-                        <a-icon type="cloud" theme="twoTone" twoToneColor="#c4891b" :style="{ fontSize: '24px' }"/>
-                    </a-menu-item>
-                </a-menu>
-        </a-layout-footer>
+<!--                        <a-menu-item-->
+<!--                                key="payments"-->
+<!--                                @click="goToPayments()"-->
+<!--                                class="o-footer-menu-item"-->
+<!--                        >-->
+<!--                            <a-icon type="idcard" theme="twoTone" twoToneColor="#52c41a" :style="{ fontSize: '24px' }"/>-->
+<!--                        </a-menu-item>-->
+<!--                        <a-menu-item-->
+<!--                                key="groceries"-->
+<!--                                @click="goToGroceries()"-->
+<!--                                class="o-footer-menu-item"-->
+<!--                        >-->
+<!--                            <a-icon type="cloud" theme="twoTone" twoToneColor="#c4891b" :style="{ fontSize: '24px' }"/>-->
+<!--                        </a-menu-item>-->
+<!--                    </a-menu>-->
+<!--                </a-layout-footer>-->
+<!--            </Col>-->
+<!--        </Row>-->
+
     </a-layout>
 </template>
 
@@ -109,9 +114,14 @@
   import {Component, Vue} from 'vue-property-decorator';
   import User from '@/api/models/User.ts';
   import {RouteNames} from '@/enums/RouteNames';
+  import {Row, Col} from 'ant-design-vue';
 
   @Component({
     name: 'NavigationTemplate',
+    components: {
+      Row,
+      Col,
+    },
   })
   export default class NavigationTemplate extends Vue {
     private defaultSelectedKeys: string[] = [];

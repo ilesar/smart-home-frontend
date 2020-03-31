@@ -5,12 +5,11 @@
         </a-layout-header>
         <a-layout>
             <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider">
-                <div class="logo" />
                 <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
                     <a-menu-item
                             key="devices"
                             @click="goToDevices()"
-                            class="o-section-menu-item"
+                            class="o-footer-menu-item"
                     >
                         <a-icon type="bulb"/>
                         <span>Uređaji</span>
@@ -19,7 +18,7 @@
                     <a-menu-item
                             key="shopping"
                             @click="goToShopping()"
-                            class="o-section-menu-item"
+                            class="o-footer-menu-item"
                     >
                         <a-icon type="shopping"/>
                         <span>Šoping</span>
@@ -28,7 +27,7 @@
                     <a-menu-item
                             key="payments"
                             @click="goToPayments()"
-                            class="o-section-menu-item"
+                            class="o-footer-menu-item"
                     >
                         <a-icon type="idcard"/>
                         <span>Plaćanja</span>
@@ -36,7 +35,7 @@
                     <a-menu-item
                             key="groceries"
                             @click="goToGroceries()"
-                            class="o-section-menu-item"
+                            class="o-footer-menu-item"
                     >
                         <a-icon type="cloud"/>
                         <span>Namirnice</span>
@@ -44,7 +43,7 @@
 <!--                    <a-menu-item-->
 <!--                            key="logout"-->
 <!--                            @click="logout()"-->
-<!--                            class="o-section-menu-item"-->
+<!--                            class="o-footer-menu-item"-->
 <!--                    >-->
 <!--                        <a-icon type="logout"/>-->
 <!--                        <span>Odjavi se</span>-->
@@ -68,6 +67,41 @@
                 <slot></slot>
             </a-layout-content>
         </a-layout>
+        <a-layout-footer class="o-footer hide-on-mobile">
+                <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">
+                    <a-menu-item
+                            key="devices"
+                            @click="goToDevices()"
+                            class="o-footer-menu-item"
+
+                    >
+                        <a-icon type="bulb" theme="twoTone" :style="{ fontSize: '24px' }"/>
+                    </a-menu-item>
+
+                    <a-menu-item
+                            key="shopping"
+                            @click="goToShopping()"
+                            class="o-footer-menu-item"
+                    >
+                        <a-icon type="shopping" theme="twoTone" twoToneColor="#eb2f96" :style="{ fontSize: '24px' }"/>
+                    </a-menu-item>
+
+                    <a-menu-item
+                            key="payments"
+                            @click="goToPayments()"
+                            class="o-footer-menu-item"
+                    >
+                        <a-icon type="idcard" theme="twoTone" twoToneColor="#52c41a" :style="{ fontSize: '24px' }"/>
+                    </a-menu-item>
+                    <a-menu-item
+                            key="groceries"
+                            @click="goToGroceries()"
+                            class="o-footer-menu-item"
+                    >
+                        <a-icon type="cloud" theme="twoTone" twoToneColor="#c4891b" :style="{ fontSize: '24px' }"/>
+                    </a-menu-item>
+                </a-menu>
+        </a-layout-footer>
     </a-layout>
 </template>
 
@@ -138,7 +172,7 @@
         height: 100vh;
 
         &-nav {
-            height:100vh;
+            /*height:100vh;*/
             border: none;
         }
 
@@ -146,6 +180,10 @@
             border: none !important;
             padding-left: 100px;
         }
+    }
+
+    .o-footer {
+        padding: 0px;
     }
 
 </style>

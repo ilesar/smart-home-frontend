@@ -12,15 +12,30 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import NavigationTemplate from '@/components/NavigationTemplate.vue';
   import Popup from '@/components/Popup.vue';
+  import { Component, Vue } from 'vue-property-decorator'
+  import { Action } from 'vuex-class'
+  import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper'
+  import GroceryItem from '@/api/models/GroceryItem';
 
+  @Component({
+    name: 'App',
+    components: {
+      Popup,
+      NavigationTemplate,
+    },
+  })
+  export default class App extends Vue {
+    @Action('shoppingModule/getItems') private actionFoo;
 
-  export default {
-    name: 'app',
-    components: {Popup, NavigationTemplate},
-  };
+    private loadingOverlay = new LoadingOverlayHelper(this, {});
+
+    public mounted() {
+      GroceryItem.refreshStock();
+    }
+  }
 </script>
 
 <style>

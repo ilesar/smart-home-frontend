@@ -1,5 +1,8 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
+import {AxiosError, AxiosResponse} from 'axios';
+import TokenAPI from '@/api/requests/TokenAPI';
+import GroceryAPI from '@/api/requests/GroceryAPI';
 
 export interface IGroceryItem {
    id: string;
@@ -39,5 +42,9 @@ export default class GroceryItem extends Model {
       image: this.string('image'),
 
     };
+  }
+
+  public static async refreshStock(): Promise<AxiosResponse | AxiosError> {
+    return await GroceryAPI.getAllItems();
   }
 }

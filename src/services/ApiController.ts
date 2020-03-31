@@ -5,11 +5,11 @@ const dataFormatter = new Jsona();
 
 export class ApiController {
 
-    public static async get(url: string, language?: string) {
+    public static async get(url: string) {
         let getHttpResponse = null;
 
         try {
-            getHttpResponse = await AjaxService.get(url, language);
+            getHttpResponse = await AjaxService.get(url);
         } catch (e) {
             return Promise.reject(e);
         }
@@ -17,11 +17,11 @@ export class ApiController {
         return Promise.resolve(getHttpResponse);
     }
 
-    public static async post(url: string, data: any, language?: string) {
+    public static async post(url: string, data: any) {
         let postHttpResponse = null;
 
         try {
-            postHttpResponse = await AjaxService.post(url, data, language);
+            postHttpResponse = await AjaxService.post(url, data);
         } catch (e) {
             return Promise.reject(e);
         }
@@ -29,11 +29,11 @@ export class ApiController {
         return Promise.resolve(postHttpResponse);
     }
 
-    public static async patch(url: string, data: any, language?: string) {
+    public static async patch(url: string, data: any) {
         let patchHttpResponse = null;
 
         try {
-            patchHttpResponse = await AjaxService.patch(url, data, language);
+            patchHttpResponse = await AjaxService.patch(url, data);
         } catch (e) {
             return Promise.reject(e);
         }
@@ -41,11 +41,11 @@ export class ApiController {
         return Promise.resolve(patchHttpResponse);
     }
 
-    public static async delete(url: string, language?: string) {
+    public static async delete(url: string) {
         let deleteHttpResponse = null;
 
         try {
-            deleteHttpResponse = await AjaxService.delete(url, language);
+            deleteHttpResponse = await AjaxService.delete(url);
         } catch (e) {
             return Promise.reject(e);
         }

@@ -67,7 +67,6 @@
     "typescript": "~3.7.5",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-cli-plugin-axios-ts": "^1.0.2",
-    "vue-cli-plugin-element": "^1.0.1",
     "vue-cli-plugin-vuex-orm-generator": "^0.2.3",
     "vue-template-compiler": "^2.6.11"
   }

@@ -96,19 +96,44 @@
 <!--    </div>-->
 </template>
 
-<script>
-  import HelloWorld from '@/components/home/HelloWorld.vue'
-  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone'
-  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper'
+<script lang="ts">
+  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+  import HelloWorld from '@/components/home/HelloWorld.vue';
+  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
+  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
+  import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
+  import {
+    State,
+    Getter,
+    Action,
+    Mutation,
+    namespace,
+  } from 'vuex-class';
 
-  export default {
+  @Component({
     name: 'Devices',
     components: {
       HelloWorldDuoTone,
       HelloWorldWrapper,
       HelloWorld,
     },
+  })
+  export default class Devices extends Vue {
+    @Action('shoppingModule/getItems') private actionFoo;
+
+    private loadingOverlay = new LoadingOverlayHelper(this, {});
+
+    public mounted() {
+
+      // console.log('starting');
+      // this.loadingOverlay.start();
+      //
+      // setTimeout(() => {
+      //   this.loadingOverlay.stop();
+      // }, 1000);
+    }
   }
+
 </script>
 
 <style lang="scss" scoped>

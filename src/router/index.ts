@@ -33,6 +33,6 @@ router.afterEach((to: any, from: any) => {
   console.log('Arrived ' + to.path + ' from ' + from.path);
 });
 
-const routeGuar = new RouteGuardService(router);
+const routeGuard = new RouteGuardService(router);
 
 export default router;

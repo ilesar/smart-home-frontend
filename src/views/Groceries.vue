@@ -2,38 +2,65 @@
 
 </template>
 
-<script>
-  const listData = []
-  for (let i = 0; i < 23; i++) {
-    listData.push({
-      href: 'https://www.antdv.com/',
-      title: `ant design vue part ${i}`,
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    })
-  }
+<script lang="ts">
+  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
+  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
+  import HelloWorld from '@/components/home/HelloWorld.vue';
+  import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
+  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+  import GroceryItem from '@/api/models/GroceryItem';
 
-  export default {
-    name: 'Devices',
+  @Component({
+    name: 'Groceries',
     components: {},
-    data () {
-      return {
-        listData,
-        pagination: {
-          onChange: page => {
-            console.log(page)
-          },
-          pageSize: 10,
-        },
-        actions: [
-          {type: 'star-o', text: '156'},
-          {type: 'like-o', text: '156'},
-          {type: 'message', text: '2'},
-        ],
+  })
+  export default class Groceries extends Vue {
+
+    public listData;
+    private loadingOverzlay = new LoadingOverlayHelper(this, {});
+
+    public created() {
+      for (let i = 0; i < 23; i++) {
+        this.listData.push({
+          href: 'https://www.antdv.com/',
+          title: `ant design vue part ${i}`,
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          description:
+            'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+          content:
+            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+        });
       }
-    },
+    }
+
+    public beforeMount() {
+
+    }
+
+    public mounted() {
+      // console.log('starting');
+      // this.loadingOverlay.start();
+      //
+      // setTimeout(() => {
+      //   this.loadingOverlay.stop();
+      // }, 1000);
+    }
+
+    public get pagination() {
+      return {
+        onChange: (page: number) => {
+                    console.log(page);
+        },
+        pageSize: 10,
+      };
+    }
+
+    public get actions() {
+      return [
+        {type: 'star-o', text: '156'},
+        {type: 'like-o', text: '156'},
+        {type: 'message', text: '2'},
+      ];
+    }
   }
 </script>

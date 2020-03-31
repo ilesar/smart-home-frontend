@@ -1,8 +1,5 @@
 <template>
     <a-layout id="components-layout-demo-custom-trigger" class="o-section">
-        <a-layout-header style="background: #fff; padding: 0">
-            <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" class="o-section-header" />
-        </a-layout-header>
         <a-layout>
             <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider">
                 <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
@@ -61,11 +58,17 @@
                     </a-menu-item>
                 </a-menu>
             </a-layout-sider>
-            <a-layout-content
-                    :style="{ padding: '24px', background: '#fff', minHeight: '280px' }"
-            >
-                <slot></slot>
-            </a-layout-content>
+            <a-layout>
+                <a-layout-header style="background: #fff; padding: 0">
+                    <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" class="o-section-header" />
+                </a-layout-header>
+                <a-layout-content
+                        :style="{ padding: '24px', background: '#fff', minHeight: '280px' }"
+                >
+                    <slot></slot>
+                </a-layout-content>
+            </a-layout>
+
         </a-layout>
 <!--        <Row>-->
 <!--            <Col>-->
@@ -184,11 +187,11 @@
         &-nav {
             /*height:100vh;*/
             border: none;
+            margin-top: 65px;
         }
 
         &-header {
             border: none !important;
-            padding-left: 100px;
         }
     }
 

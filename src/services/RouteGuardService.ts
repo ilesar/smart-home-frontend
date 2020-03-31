@@ -5,6 +5,7 @@ import User from '@/api/models/User';
 import { RouteNames } from '@/enums/RouteNames';
 import Token from '@/api/models/Token';
 import { AxiosResponse } from 'axios';
+import AuthController from '@/api/controllers/AuthController';
 
 export class RouteGuardService {
     constructor(private router: VueRouter) {
@@ -38,16 +39,16 @@ export class RouteGuardService {
     private async checkTokenValidation(next: any) {
         let tokenRefreshed;
         try {
-            tokenRefreshed = await Token.refreshToken() as AxiosResponse;
+            tokenRefreshed = await AuthController.refreshToken() as AxiosResponse;
         } catch (e) {
             await this.redirectToLogin(next);
             return;
         }
-        User.setToken(tokenRefreshed);
+        User.setToken(tokenRefreshed.response);
     }
 
     private async redirectToLogin(next: any) {
-        await User.logout().then(() => {
+        await AuthController.logout().then(() => {
             next('/login');
         });
     }

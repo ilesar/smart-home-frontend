@@ -1,7 +1,7 @@
 import {BelongsTo, Model} from '@vuex-orm/core';
 import { AxiosError, AxiosResponse } from 'axios';
-import TokenAPI from '@/api/requests/TokenAPI';
 import {keys} from 'lodash';
+import {ApiRoutes} from '@/enums/ApiRoutes';
 
 export interface IToken {
     id: string;
@@ -13,12 +13,21 @@ export interface IToken {
 export default class Token extends Model {
     public static entity: string = 'tokens';
 
+    public static apiConfig = {
+        actions: {
+            fetch: {
+                method: 'get',
+                url: ApiRoutes.refreshToken,
+            },
+        },
+    };
+
     public static fieldsKeys() {
         return keys(this.fields());
     }
 
     public static async refreshToken(): Promise<AxiosResponse | AxiosError> {
-        return await TokenAPI.refreshToken();
+        return await Token.api().refreshToken();
     }
 
     public static setToken(token: any) {
@@ -35,6 +44,7 @@ export default class Token extends Model {
             expires_at: this.attr(''),
         };
     }
+
 
 
 }

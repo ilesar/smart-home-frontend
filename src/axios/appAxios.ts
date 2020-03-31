@@ -10,15 +10,7 @@ import { EventBusEvents } from '@/enums/EventBusEvents';
 
 const dataFormatter = new Jsona();
 
-export const appAxios = axios.create({
-    headers: {
-        Accept: 'application/vnd.api+json',
-    },
-    baseURL: process.env.VUE_APP_BASE_URL,
-    responseType: 'json',
-});
-
-appAxios.interceptors.request.use((config) => {
+axios.interceptors.request.use((config) => {
     if (LocalStorageService.has(LocalStorageKeyNames.token)) {
         config.headers.Authorization = `Bearer ${LocalStorageService.get(LocalStorageKeyNames.token)}`;
     }
@@ -26,7 +18,7 @@ appAxios.interceptors.request.use((config) => {
     return config;
 });
 
-appAxios.interceptors.response.use(async (response) => {
+axios.interceptors.response.use(async (response) => {
     if (response.data != null && response.data.meta != null && response.data.meta.totalCount != null) {
         if (response.data.links.self && response.data.links.self.includes('/projects')) {
             EventBus.$emit(EventBusEvents.emitProjectPagination, response.data.meta.totalCount);
@@ -62,3 +54,13 @@ function isProductFormResponse(response: TJsonApiBody) {
     // todo - fix if library fixes this
     return responseData.links && responseData.links.self && responseData.links.self.includes('product/forms');
 }
+
+export const appAxios = {
+    axios,
+    headers: {
+        'Accept': 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+    },
+    baseURL: process.env.VUE_APP_BASE_URL,
+    responseType: 'json',
+};

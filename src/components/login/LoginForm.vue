@@ -57,6 +57,7 @@ import { IformCreateOption } from 'ant-design-vue/types/form/form';
 import { LoginValues } from '@/interfaces/LoginValues';
 import { RouteNames } from '@/enums/RouteNames';
 import { TAnyKeyValueObject } from 'jsona/lib/JsonaTypes';
+import AuthController from '@/api/controllers/AuthController';
 
 interface DynamicObject {
     [key: string]: any;
@@ -85,8 +86,10 @@ export default class LoginForm extends Vue {
         // resets errors before submitting the form
         this.form.setFields(resetErrors);
         try {
-            await User.login(loginValues);
+            await AuthController.login(loginValues);
+            // await User.login(loginValues);
         } catch (e) {
+            console.log(e);
             const errors: DynamicObject = {};
             if (e.response.data.errors) {
                 e.response.data.errors.forEach((errorDetails: TAnyKeyValueObject) => {

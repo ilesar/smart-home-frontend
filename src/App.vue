@@ -33,7 +33,7 @@
     private loadingOverlay = new LoadingOverlayHelper(this, {});
 
     public mounted() {
-      GroceryItem.refreshStock();
+      // GroceryItem.refreshStock();
     }
   }
 </script>

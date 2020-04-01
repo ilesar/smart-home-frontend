@@ -3,7 +3,6 @@ import { LocalStorageService } from '@/services/LocalStorageService';
 import { LocalStorageKeyNames } from '@/enums/LocalStorageKeyNames';
 import User from '@/api/models/User';
 import { RouteNames } from '@/enums/RouteNames';
-import Token from '@/api/models/Token';
 import { AxiosResponse } from 'axios';
 import AuthController from '@/api/controllers/AuthController';
 

@@ -1,6 +1,7 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
 import {AxiosError, AxiosResponse} from 'axios';
+import {ApiRoutes} from '@/enums/ApiRoutes';
 
 export interface IGroceryItem {
    id: string;
@@ -12,6 +13,15 @@ export default class GroceryItem extends Model {
   public static entity = 'groceryitem';
 
   public static primaryKey = 'id';
+
+  public static apiConfig = {
+    actions: {
+      fetch: {
+        method: 'get',
+        url: ApiRoutes.refreshToken,
+      },
+    },
+  };
 
   public static fieldsKeys() {
     return keys(this.fields());

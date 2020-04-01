@@ -29,9 +29,9 @@ export default class Activity extends Model {
     };
   }
 
-  public static async setToken(loginResponse: any) {
-    LocalStorageService.save(LocalStorageKeyNames.token, loginResponse.data.access_token);
-    await Token.setToken(loginResponse.data);
+  public static async setToken(token: string) {
+    LocalStorageService.save(LocalStorageKeyNames.token, token);
+    await Token.setToken(token);
   }
 
 }

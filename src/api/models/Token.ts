@@ -31,6 +31,7 @@ export default class Token extends Model {
     }
 
     public static setToken(token: any) {
+        console.log('setting token', token);
         this.create({
             data: token,
         });

@@ -86,8 +86,7 @@ export default class LoginForm extends Vue {
         // resets errors before submitting the form
         this.form.setFields(resetErrors);
         try {
-            await AuthController.login(loginValues);
-            // await User.login(loginValues);
+            await AuthController.login(loginValues.username, loginValues.password);
         } catch (e) {
             console.log(e);
             const errors: DynamicObject = {};

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import { LocalStorageService } from '@/services/LocalStorageService';
 import { LocalStorageKeyNames } from '@/enums/LocalStorageKeyNames';
 import router from '@/router/index';
@@ -16,33 +16,6 @@ axios.interceptors.request.use((config) => {
     }
 
     return config;
-});
-
-axios.interceptors.response.use(async (response) => {
-    if (response.data != null && response.data.meta != null && response.data.meta.totalCount != null) {
-        if (response.data.links.self && response.data.links.self.includes('/projects')) {
-            EventBus.$emit(EventBusEvents.emitProjectPagination, response.data.meta.totalCount);
-        } else if (response.data.links.self && response.data.links.self.includes('/clients')) {
-            EventBus.$emit(EventBusEvents.emitClientPagination, response.data.meta.totalCount);
-        }
-    }
-    if (isProductFormResponse(response)) {
-        response.data = await dataFormatter.deserialize(response.data);
-    } else {
-        if (response.headers['content-type'] && response.headers['content-type'].includes('application/vnd.api+json')) {
-            response.data = dataFormatter.deserialize(response.data);
-        }
-    }
-    return response;
-}, (error) => {
-    if (error.response.status === 401 && !error.response.config.url.includes('refresh-token')) {
-        if (router.currentRoute.name === RouteNames.Login) {
-            return;
-        }
-        router.push({name: RouteNames.Login});
-        return Promise.reject(new Error('Vrijeme prijave je isteklo, molimo da se ponovo prijavite.'));
-    }
-    return Promise.reject(error);
 });
 
 function isProductFormResponse(response: TJsonApiBody) {
@@ -63,4 +36,10 @@ export const appAxios = {
     },
     baseURL: process.env.VUE_APP_BASE_URL,
     responseType: 'json',
+    dataTransformer: (response: AxiosResponse) => {
+        console.log('IN', response.data);
+        const data = dataFormatter.deserialize(response.data);
+        console.log('OUT', data);
+        return data;
+    },
 };

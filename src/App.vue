@@ -19,6 +19,7 @@
   import { Action } from 'vuex-class'
   import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper'
   import GroceryItem from '@/api/models/GroceryItem';
+  import GroceryController from '@/api/controllers/GroceryController';
 
   @Component({
     name: 'App',
@@ -33,7 +34,6 @@
     private loadingOverlay = new LoadingOverlayHelper(this, {});
 
     public mounted() {
-      // GroceryItem.refreshStock();
     }
   }
 </script>

@@ -1,5 +1,4 @@
 import {ApiRoutes} from '@/enums/ApiRoutes';
-import Token from '@/api/models/Token';
 import {AxiosError, AxiosResponse} from 'axios';
 import GroceryItem from '@/api/models/GroceryItem';
 
@@ -14,9 +13,6 @@ export default class GroceryController {
     } catch (e) {
       return Promise.reject(e);
     }
-
-    // debugger;
-    // await groceries.save();
 
     return Promise.resolve(groceries);
   }

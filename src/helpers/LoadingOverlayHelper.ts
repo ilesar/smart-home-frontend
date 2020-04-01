@@ -5,7 +5,6 @@ export class LoadingOverlayHelper {
         public vue: any = vue,
         public options: any,
     ) {
-        console.log(vue);
         const defaultOptions = {
             zIndex: 1001,
         };

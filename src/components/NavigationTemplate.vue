@@ -63,53 +63,13 @@
                     <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" class="o-section-header" />
                 </a-layout-header>
                 <a-layout-content
-                        :style="{ padding: '24px', background: '#fff', minHeight: '280px' }"
+                        class="content-container"
                 >
                     <slot></slot>
                 </a-layout-content>
             </a-layout>
 
         </a-layout>
-<!--        <Row>-->
-<!--            <Col>-->
-<!--                <a-layout-footer class="o-footer hide-on-mobile">-->
-<!--                    <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">-->
-<!--                        <a-menu-item-->
-<!--                                key="devices"-->
-<!--                                @click="goToDevices()"-->
-<!--                                class="o-footer-menu-item"-->
-
-<!--                        >-->
-<!--                            <a-icon type="bulb" theme="twoTone" :style="{ fontSize: '24px' }"/>-->
-<!--                        </a-menu-item>-->
-
-<!--                        <a-menu-item-->
-<!--                                key="shopping"-->
-<!--                                @click="goToShopping()"-->
-<!--                                class="o-footer-menu-item"-->
-<!--                        >-->
-<!--                            <a-icon type="shopping" theme="twoTone" twoToneColor="#eb2f96" :style="{ fontSize: '24px' }"/>-->
-<!--                        </a-menu-item>-->
-
-<!--                        <a-menu-item-->
-<!--                                key="payments"-->
-<!--                                @click="goToPayments()"-->
-<!--                                class="o-footer-menu-item"-->
-<!--                        >-->
-<!--                            <a-icon type="idcard" theme="twoTone" twoToneColor="#52c41a" :style="{ fontSize: '24px' }"/>-->
-<!--                        </a-menu-item>-->
-<!--                        <a-menu-item-->
-<!--                                key="groceries"-->
-<!--                                @click="goToGroceries()"-->
-<!--                                class="o-footer-menu-item"-->
-<!--                        >-->
-<!--                            <a-icon type="cloud" theme="twoTone" twoToneColor="#c4891b" :style="{ fontSize: '24px' }"/>-->
-<!--                        </a-menu-item>-->
-<!--                    </a-menu>-->
-<!--                </a-layout-footer>-->
-<!--            </Col>-->
-<!--        </Row>-->
-
     </a-layout>
 </template>
 
@@ -192,6 +152,12 @@
 
     .o-footer {
         padding: 0px;
+    }
+
+    .content-container {
+        padding: 0 24px;
+        background: #fff;
+        overflow: scroll !important;
     }
 
 </style>

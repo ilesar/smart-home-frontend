@@ -1,10 +1,11 @@
 import { Route, VueRouter } from 'vue-router/types/router';
 import { LocalStorageService } from '@/services/LocalStorageService';
 import { LocalStorageKeyNames } from '@/enums/LocalStorageKeyNames';
-import User from '@/api/models/User';
 import { RouteNames } from '@/enums/RouteNames';
 import { AxiosResponse } from 'axios';
 import AuthController from '@/api/controllers/AuthController';
+import Token from '@/api/models/Token';
+import TokenRepository from '@/repositories/TokenRepository';
 
 export class RouteGuardService {
     constructor(private router: VueRouter) {
@@ -37,13 +38,17 @@ export class RouteGuardService {
 
     private async checkTokenValidation(next: any) {
         let tokenRefreshed;
-        try {
-            tokenRefreshed = await AuthController.refreshToken() as AxiosResponse;
-        } catch (e) {
-            await this.redirectToLogin(next);
-            return;
-        }
-        User.setToken(tokenRefreshed.response);
+
+        await AuthController
+          .refreshToken()
+          .then((responseObject: any) => {
+              const token: Token = TokenRepository.getToken();
+              LocalStorageService.save(LocalStorageKeyNames.token, token.access_token);
+          })
+          .catch((error: Error) => {
+              console.error(error);
+              this.redirectToLogin(next);
+          });
     }
 
     private async redirectToLogin(next: any) {

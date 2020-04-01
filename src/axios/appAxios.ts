@@ -1,12 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import { LocalStorageService } from '@/services/LocalStorageService';
 import { LocalStorageKeyNames } from '@/enums/LocalStorageKeyNames';
-import router from '@/router/index';
 import Jsona from 'jsona';
-import { TJsonApiBody, TJsonApiData } from 'jsona/lib/JsonaTypes';
-import { RouteNames } from '@/enums/RouteNames';
-import { EventBus } from '@/helpers/EventBusHelper';
-import { EventBusEvents } from '@/enums/EventBusEvents';
+import {TAnyKeyValueObject} from 'jsona/lib/JsonaTypes';
 
 const dataFormatter = new Jsona();
 
@@ -18,15 +14,25 @@ axios.interceptors.request.use((config) => {
     return config;
 });
 
-function isProductFormResponse(response: TJsonApiBody) {
-    if (response.data == null) {
-        return false;
+axios.interceptors.response.use(null, (error) => {
+    const errors = [];
+    const errorObjects = error.response.data.errors;
+
+    if (!errorObjects) {
+        return;
     }
-    const responseData = response.data as TJsonApiData;
-    // handles response from product/response because of issue in json-api-response-converter library
-    // todo - fix if library fixes this
-    return responseData.links && responseData.links.self && responseData.links.self.includes('product/forms');
-}
+
+    errorObjects.forEach((errorObject) => {
+        const pointerArray = errorObject.source.pointer.split('/');
+        const errorField = pointerArray[pointerArray.length - 1];
+
+        errors[errorField] = errorObject.detail;
+    });
+
+    error.formattedErrors = errors;
+
+    return Promise.reject({ ...error });
+});
 
 export const appAxios = {
     axios,
@@ -37,9 +43,7 @@ export const appAxios = {
     baseURL: process.env.VUE_APP_BASE_URL,
     responseType: 'json',
     dataTransformer: (response: AxiosResponse) => {
-        console.log('IN', response.data);
         const data = dataFormatter.deserialize(response.data);
-        console.log('OUT', data);
         return data;
     },
 };

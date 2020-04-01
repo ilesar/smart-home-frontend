@@ -115,8 +115,8 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
-  import User from '@/api/models/User.ts';
   import {RouteNames} from '@/enums/RouteNames';
+  import AuthController from '@/api/controllers/AuthController';
 
   @Component({
     name: 'NavigationTemplate',
@@ -127,7 +127,7 @@
     private collapsed: boolean = true;
 
     private logout() {
-      User.logout().then(() => {
+      AuthController.logout().then(() => {
         this.$router.push({name: RouteNames.Login});
       });
     }

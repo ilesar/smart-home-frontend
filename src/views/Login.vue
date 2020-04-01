@@ -1,7 +1,6 @@
 <template>
     <div class="co-login">
         <div class="co-login__inner">
-            <LoginUpperSection/>
             <LoginForm/>
         </div>
     </div>
@@ -10,12 +9,10 @@
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator';
     import LoginForm from '@/components/login/LoginForm.vue';
-    import LoginUpperSection from '@/components/login/LoginUpperSection.vue';
 
     @Component({
         name: 'Login',
         components: {
-            LoginUpperSection,
             LoginForm,
         },
     })
@@ -29,7 +26,7 @@
         height: 100vh;
         justify-content: center;
         align-items: center;
-        background-color: $very-light-blue-two;
+        text-align: center;
 
         &__inner {
             display: flex;

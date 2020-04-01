@@ -13,29 +13,27 @@
 </template>
 
 <script lang="ts">
-  import NavigationTemplate from '@/components/NavigationTemplate.vue';
-  import Popup from '@/components/Popup.vue';
-  import { Component, Vue } from 'vue-property-decorator'
-  import { Action } from 'vuex-class'
-  import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper'
-  import GroceryItem from '@/api/models/GroceryItem';
-  import GroceryController from '@/api/controllers/GroceryController';
+import NavigationTemplate from '@/components/NavigationTemplate.vue';
+import Popup from '@/components/Popup.vue';
+import { Component, Vue } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
+import GroceryItem from '@/api/models/GroceryItem';
+import GroceryController from '@/api/controllers/GroceryController';
 
-  @Component({
-    name: 'App',
-    components: {
-      Popup,
-      NavigationTemplate,
-    },
-  })
-  export default class App extends Vue {
-    @Action('shoppingModule/getItems') private actionFoo;
+@Component({
+  name: 'App',
+  components: {
+    Popup,
+    NavigationTemplate,
+  },
+})
+export default class App extends Vue {
+  @Action('shoppingModule/getItems') private actionFoo;
 
-    private loadingOverlay = new LoadingOverlayHelper(this, {});
+  private loadingOverlay = new LoadingOverlayHelper(this, {});
 
-    public mounted() {
-    }
-  }
+}
 </script>
 
 <style>

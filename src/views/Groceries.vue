@@ -33,19 +33,6 @@
       }
     }
 
-    public beforeMount() {
-
-    }
-
-    public mounted() {
-      // console.log('starting');
-      // this.loadingOverlay.start();
-      //
-      // setTimeout(() => {
-      //   this.loadingOverlay.stop();
-      // }, 1000);
-    }
-
     public get pagination() {
       return {
         onChange: (page: number) => {

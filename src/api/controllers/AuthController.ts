@@ -3,8 +3,6 @@ import Token from '@/api/models/Token';
 import {AxiosError, AxiosResponse} from 'axios';
 import {LocalStorageService} from '@/services/LocalStorageService';
 import {LocalStorageKeyNames} from '@/enums/LocalStorageKeyNames';
-import User from '@/api/models/User';
-import {debug} from 'webpack';
 
 export default class AuthController {
   public static async refreshToken(): Promise<AxiosResponse | AxiosError> {
@@ -20,28 +18,27 @@ export default class AuthController {
   }
 
   public static async login(username: string, password: string): Promise<AxiosResponse | AxiosError> {
-    let loginResponse;
-    const request = {
+    let responseObject;
+
+    const requestBody = {
       data: {
         attributes: {
-          username: username,
-          password: password,
+          username,
+          password,
         },
       },
     };
+
     try {
-      loginResponse = await User.api().post(ApiRoutes.login, request);
+      responseObject = await Token.api().post(ApiRoutes.login, requestBody);
     } catch (e) {
       return Promise.reject(e);
     }
 
-    console.log(loginResponse);
-    await User.setToken(loginResponse.response.access_token);
-    return Promise.resolve(loginResponse);
+    return Promise.resolve(responseObject);
   }
 
   public static async logout() {
-    await User.deleteAll();
     LocalStorageService.remove(LocalStorageKeyNames.token);
     return Promise.resolve();
   }

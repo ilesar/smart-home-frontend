@@ -1,11 +1,10 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Shopping" class="o-section-header">
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Kupovina" class="o-section-header">
         <template slot="extra">
-<!--            <a-badge-->
-<!--                    :overflowCount="999"-->
-<!--                    :count="shoppingEstimate"-->
-<!--                    :numberStyle="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}"-->
-<!--            />-->
+            <router-link :to="{name: historyRoute }">
+                <a-button type="link" @click="">Povijest kupovine</a-button>
+            </router-link>
+
             <a-button type="primary" @click="showDrawer" >
                 Dodaj proizvod
             </a-button>
@@ -70,10 +69,8 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
-  import GroceryController from '@/api/controllers/GroceryController';
-  import GroceryItem from '@/api/models/GroceryItem';
-  import ShoppingController from '@/api/controllers/ShoppingController';
   import {Action, Getter} from 'vuex-class';
+  import {RouteNames} from '@/enums/RouteNames';
 
   @Component
   export default class ShoppingHeader extends Vue {
@@ -82,6 +79,7 @@
     private loadingOverlay = new LoadingOverlayHelper(this, {});
     private chosenItem = null;
     private value = 1;
+    private readonly historyRoute = RouteNames.ShoppingHistory;
 
     @Getter('shopping/getGroceryItemList')
     private groceryList;
@@ -136,17 +134,12 @@
     }
 
     addItemToList() {
-      this.addGroceryItemToShoppingList(this.chosenItem);
-      this.childVisible = false;
-      this.visible = false;
-      // this.loadingOverlay.start();
-      // ShoppingController.addGroceryToShoppingList(this.chosenItem).then(() => {
-      //   this.loadingOverlay.stop();
-      //   this.childVisible = false;
-      //   this.visible = false;
-      // }).catch((error) => {
-      //   console.error(error)
-      // });
+      this.addGroceryItemToShoppingList(this.chosenItem).then(() => {
+        this.childVisible = false;
+        this.visible = false;
+      }).catch((error) => {
+        alert(error);
+      });
     }
   }
 </script>

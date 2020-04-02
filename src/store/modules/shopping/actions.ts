@@ -7,12 +7,15 @@ import GroceryItem from '@/api/models/GroceryItem';
 
 
 const actions: ActionTree<ILocalState, {}> = {
-    fetchShoppingItemList({commit, getters}, productFormId) {
-        ShoppingController.fetchAll().then(() => {
-        }).catch((error) => {
-            console.error(error);
-        });
-        // commit('mutationCall', data);
+    async fetchShoppingItemList({commit, getters}, productFormId) {
+        return new Promise<void>(((resolve, reject) => {
+            ShoppingController.fetchAll().then(() => {
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+
     },
     fetchGroceryItemList({commit, getters}, productFormId) {
         GroceryController.fetchAll().then(() => {
@@ -21,12 +24,14 @@ const actions: ActionTree<ILocalState, {}> = {
         });
     },
     addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: GroceryItem) {
-        ShoppingController.addGroceryToShoppingList(groceryItem).then(() => {
-            dispatch('fetchShoppingItemList');
-        }).catch((error) => {
-            console.error(error)
-        });
-        // commit('mutationCall', data);
+        return new Promise<void>(((resolve, reject) => {
+            ShoppingController.addGroceryToShoppingList(groceryItem).then(() => {
+                dispatch('fetchShoppingItemList');
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
     },
 
 };

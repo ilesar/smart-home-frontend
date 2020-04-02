@@ -29,6 +29,15 @@ export const routes: RouteConfig[] = [
     }
   },
   {
+    path: '/shopping/history',
+    name: RouteNames.ShoppingHistory,
+    meta: {navigationLayout: true},
+    components: {
+      default: loadView('shopping/History'),
+      header: loadView('shopping/HistoryHeader')
+    }
+  },
+  {
     path: '/payments',
     name: RouteNames.Payments,
     component: loadView('Payment'),

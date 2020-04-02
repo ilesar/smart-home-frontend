@@ -15,13 +15,9 @@
 </template>
 
 <script lang="ts">
-  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
-  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
-  import HelloWorld from '@/components/home/HelloWorld.vue';
   import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import GroceryItem from '@/api/models/GroceryItem';
-  import GroceryController from '@/api/controllers/GroceryController';
+  import {Action, Getter} from 'vuex-class';
 
   @Component({
     name: 'Groceries',
@@ -29,18 +25,16 @@
   })
   export default class Groceries extends Vue {
 
-    private groceryList = [];
     private loadingOverlay = new LoadingOverlayHelper(this, {});
+
+    @Getter('shopping/getGroceryItemList')
+    private groceryList;
+    @Action('shopping/fetchGroceryItemList')
+    private fetchGroceryItemList;
 
 
     public beforeMount() {
-      this.loadingOverlay.start();
-      GroceryController.fetchAll().then(() => {
-        this.loadingOverlay.stop();
-
-        this.groceryList = GroceryItem.query().with('image').all();
-        console.log(this.groceryList);
-      });
+      this.fetchGroceryItemList();
     }
 
   }

@@ -19,8 +19,6 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
-  import ShoppingItem from '@/api/models/ShoppingItem';
-  import ShoppingController from '@/api/controllers/ShoppingController';
   import {Action, Getter} from 'vuex-class';
 
 
@@ -28,7 +26,7 @@
     name: 'Shopping',
     components: {},
   })
-  export default class Login extends Vue {
+  export default class Shopping extends Vue {
 
     @Getter('shopping/getShoppingList')
     private shoppingList;
@@ -39,21 +37,6 @@
 
     public beforeMount() {
       this.fetchShoppingList();
-      // this.loadingOverlay.start();
-      // ShoppingController.fetchAll().then(() => {
-      //   this.loadingOverlay.stop();
-      //
-      //   this.shoppingList = ShoppingItem
-      //     .query()
-      //     .with('groceryItem.image')
-      //     .all()
-      //     .map((shoppingItem: ShoppingItem) => {
-      //       return shoppingItem.groceryItem;
-      //     });
-      //
-      // }).catch((error) => {
-      //   console.error(error);
-      // });
     }
 
   }

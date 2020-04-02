@@ -13,6 +13,8 @@ export default class ShoppingItem extends Model {
 
   public static primaryKey = 'id';
 
+  public groceryItem;
+
   public static fieldsKeys() {
     return keys(this.fields());
   }

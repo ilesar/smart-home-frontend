@@ -26,6 +26,10 @@ export default class GroceryItemImage extends Model {
     return keys(this.fields());
   }
 
+  public get path() {
+    return this.image;
+  }
+
   public static relationFields() {
     /**
      * fields that has relations

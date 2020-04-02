@@ -7,7 +7,7 @@
                 <p slot="title">{{item.name}}</p>
                 <a-avatar
                         slot="avatar"
-                        :src="item.image ? item.image.image : 'testiram'"
+                        :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
         </a-list-item>

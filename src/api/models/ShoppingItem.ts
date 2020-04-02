@@ -1,5 +1,6 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
+import GroceryItem from '@/api/models/GroceryItem';
 
 export interface IShoppingItem {
    id: string;
@@ -33,8 +34,9 @@ export default class ShoppingItem extends Model {
   public static fields() {
     return {
       id: this.increment(),
-      groceryItem: this.attr('asdd'),
       quantity: this.string('quantity'),
+      groceryItem_id: this.attr(null),
+      groceryItem: this.belongsTo(GroceryItem, 'groceryItem_id'),
     };
   }
 }

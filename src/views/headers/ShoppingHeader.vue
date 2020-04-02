@@ -22,7 +22,7 @@
                         <span slot="title">{{item.name}}</span>
                         <a-avatar
                                 slot="avatar"
-                                :src="item.image ? item.image.image : 'testiram'"
+                                :src="item.image ? item.image.path : 'testiram'"
                         />
                     </a-list-item-meta>
                     <div>
@@ -48,7 +48,7 @@
                                         <span slot="title">{{chosenItem ? chosenItem.name : ''}}</span>
                                         <a-avatar
                                                 slot="avatar"
-                                                :src="chosenItem ? chosenItem.image.image : 'testiram'"
+                                                :src="chosenItem ? chosenItem.image.path : 'testiram'"
                                         />
                                     </a-list-item-meta>
                                     <a-input-number id="inputNumber" v-model="value" @change="onChange" />
@@ -78,12 +78,12 @@
     private value = 1;
 
     public beforeMount() {
-      this.loadingOverlay.start();
-      GroceryController.fetchAll().then(() => {
-        this.loadingOverlay.stop();
-
-        this.groceryList = GroceryItem.query().with('image').limit(10).all();
-      });
+      // this.loadingOverlay.start();
+      // GroceryController.fetchAll().then(() => {
+      //   this.loadingOverlay.stop();
+      //
+      //   this.groceryList = GroceryItem.query().with('image').limit(10).all();
+      // });
     }
 
     showDrawer() {
@@ -96,7 +96,6 @@
 
     showChildrenDrawer(index) {
       this.chosenItem = this.groceryList[index];
-      console.log(this.chosenItem);
       this.childVisible = true;
     }
 

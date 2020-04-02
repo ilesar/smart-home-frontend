@@ -3,6 +3,7 @@ import { keys } from 'lodash';
 import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
+import ShoppingItem from '@/api/models/ShoppingItem';
 
 export interface IGroceryItem {
    id: string;

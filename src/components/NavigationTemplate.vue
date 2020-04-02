@@ -61,8 +61,8 @@
             </a-layout-sider>
             <a-layout>
                 <a-layout-header style="background: #fff; padding: 0">
-                    <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title"
-                                   subTitle="This is a subtitle" class="o-section-header"/>
+                    <router-view name="header"></router-view>
+
                 </a-layout-header>
                 <a-layout-content
                         class="content-container"

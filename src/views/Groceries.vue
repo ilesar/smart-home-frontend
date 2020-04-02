@@ -43,8 +43,5 @@
       });
     }
 
-    public mounted() {
-
-    }
   }
 </script>

@@ -10,6 +10,8 @@
                 :src="item.image ? item.image.path : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Red.svg/1200px-Red.svg.png'"
         />
       </a-list-item-meta>
+      <a-button type="default" shape="round" icon="check">Kupljeno</a-button>
+      <a-button type="default" shape="round" icon="delete" style="margin-left: 16px"></a-button>
     </a-list-item>
   </a-list>
 </template>
@@ -42,13 +44,12 @@
           .map((shoppingItem: ShoppingItem) => {
             return shoppingItem.groceryItem;
           });
-        ;
 
-        console.log(this.shoppingList[0]);
       }).catch((error) => {
         console.error(error);
       });
     }
+
   }
 </script>
 

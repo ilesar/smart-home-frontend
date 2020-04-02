@@ -1,7 +1,7 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Shopping" class="o-section-header">
         <template slot="extra">
-            <a-button type="primary" @click="showDrawer">
+            <a-button type="primary" @click="showDrawer" >
                 Dodaj proizvod
             </a-button>
         </template>

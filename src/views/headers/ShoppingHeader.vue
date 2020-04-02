@@ -1,5 +1,5 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Kupovina" class="o-section-header">
+    <a-page-header style="border: 1px solid rgb(235, 237, 240);" title="Kupovina" class="o-section-header">
         <template slot="extra">
             <router-link :to="{name: historyRoute }">
                 <a-button type="link" @click="">Povijest kupovine</a-button>

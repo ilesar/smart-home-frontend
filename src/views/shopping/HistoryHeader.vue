@@ -1,5 +1,10 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Povijest kupovine" @back="goBackToShopping" class="o-section-header">
+        <template slot="extra">
+            <a-button type="danger" >
+                Očisti povijest
+            </a-button>
+        </template>
     </a-page-header>
 </template>
 

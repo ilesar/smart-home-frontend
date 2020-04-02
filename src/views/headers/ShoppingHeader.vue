@@ -67,23 +67,32 @@
   import GroceryController from '@/api/controllers/GroceryController';
   import GroceryItem from '@/api/models/GroceryItem';
   import ShoppingController from '@/api/controllers/ShoppingController';
+  import {Action, Getter} from 'vuex-class';
 
   @Component
   export default class ShoppingHeader extends Vue {
     private visible: boolean = false;
     private childVisible: boolean = false;
-    private groceryList = [];
     private loadingOverlay = new LoadingOverlayHelper(this, {});
     private chosenItem = null;
     private value = 1;
 
-    public beforeMount() {
-      this.loadingOverlay.start();
-      GroceryController.fetchAll().then(() => {
-        this.loadingOverlay.stop();
+    @Getter('shopping/getGroceryItemList')
+    private groceryList;
+    @Action('shopping/fetchGroceryItemList')
+    private fetchGroceryItemList;
+    @Action('shopping/addGroceryItemToShoppingList')
+    private addGroceryItemToShoppingList;
 
-        this.groceryList = GroceryItem.query().with('image').limit(10).all();
-      });
+
+    public beforeMount() {
+      this.fetchGroceryItemList();
+      // this.loadingOverlay.start();
+      // GroceryController.fetchAll().then(() => {
+      //   this.loadingOverlay.stop();
+      //
+      //   this.groceryList = GroceryItem.query().with('image').limit(10).all();
+      // });
     }
 
     showDrawer() {
@@ -116,14 +125,17 @@
     }
 
     addItemToList() {
-      this.loadingOverlay.start();
-      ShoppingController.addGroceryToShoppingList(this.chosenItem).then(() => {
-        this.loadingOverlay.stop();
-        this.childVisible = false;
-        this.visible = false;
-      }).catch((error) => {
-        console.error(error)
-      });
+      this.addGroceryItemToShoppingList(this.chosenItem);
+      this.childVisible = false;
+      this.visible = false;
+      // this.loadingOverlay.start();
+      // ShoppingController.addGroceryToShoppingList(this.chosenItem).then(() => {
+      //   this.loadingOverlay.stop();
+      //   this.childVisible = false;
+      //   this.visible = false;
+      // }).catch((error) => {
+      //   console.error(error)
+      // });
     }
   }
 </script>

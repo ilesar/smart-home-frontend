@@ -21,6 +21,7 @@
   import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
   import ShoppingItem from '@/api/models/ShoppingItem';
   import ShoppingController from '@/api/controllers/ShoppingController';
+  import {Action, Getter} from 'vuex-class';
 
 
   @Component({
@@ -28,26 +29,31 @@
     components: {},
   })
   export default class Login extends Vue {
-    private shoppingList = [];
+
+    @Getter('shopping/getShoppingList')
+    private shoppingList;
+    @Action('shopping/fetchShoppingItemList')
+    private fetchShoppingList;
     private loadingOverlay = new LoadingOverlayHelper(this, {});
 
 
     public beforeMount() {
-      this.loadingOverlay.start();
-      ShoppingController.fetchAll().then(() => {
-        this.loadingOverlay.stop();
-
-        this.shoppingList = ShoppingItem
-          .query()
-          .with('groceryItem.image')
-          .all()
-          .map((shoppingItem: ShoppingItem) => {
-            return shoppingItem.groceryItem;
-          });
-
-      }).catch((error) => {
-        console.error(error);
-      });
+      this.fetchShoppingList();
+      // this.loadingOverlay.start();
+      // ShoppingController.fetchAll().then(() => {
+      //   this.loadingOverlay.stop();
+      //
+      //   this.shoppingList = ShoppingItem
+      //     .query()
+      //     .with('groceryItem.image')
+      //     .all()
+      //     .map((shoppingItem: ShoppingItem) => {
+      //       return shoppingItem.groceryItem;
+      //     });
+      //
+      // }).catch((error) => {
+      //   console.error(error);
+      // });
     }
 
   }

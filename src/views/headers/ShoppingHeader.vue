@@ -1,6 +1,11 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Shopping" class="o-section-header">
         <template slot="extra">
+<!--            <a-badge-->
+<!--                    :overflowCount="999"-->
+<!--                    :count="shoppingEstimate"-->
+<!--                    :numberStyle="{backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}"-->
+<!--            />-->
             <a-button type="primary" @click="showDrawer" >
                 Dodaj proizvod
             </a-button>
@@ -59,6 +64,7 @@
             </a-drawer>
         </a-drawer>
     </a-page-header>
+
 </template>
 
 <script lang="ts">
@@ -83,16 +89,21 @@
     private fetchGroceryItemList;
     @Action('shopping/addGroceryItemToShoppingList')
     private addGroceryItemToShoppingList;
+    @Getter('shopping/getShoppingList')
+    private shoppingList;
 
 
     public beforeMount() {
       this.fetchGroceryItemList();
-      // this.loadingOverlay.start();
-      // GroceryController.fetchAll().then(() => {
-      //   this.loadingOverlay.stop();
-      //
-      //   this.groceryList = GroceryItem.query().with('image').limit(10).all();
-      // });
+    }
+
+    shoppingEstimate() {
+      console.log(this.groceryList);
+      return this.shoppingList.reduce((aggregator, groceryItem) => {
+        console.log(parseFloat(groceryItem.price));
+        return aggregator + parseFloat(groceryItem.price);
+
+      }, 0);
     }
 
     showDrawer() {

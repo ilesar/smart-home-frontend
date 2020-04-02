@@ -136,7 +136,6 @@
     addItemToList() {
       this.addGroceryItemToShoppingList(this.chosenItem).then(() => {
         this.childVisible = false;
-        this.visible = false;
       }).catch((error) => {
         alert(error);
       });

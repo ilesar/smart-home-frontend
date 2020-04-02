@@ -27,6 +27,8 @@ export default class GroceryItem extends Model {
     },
   };
 
+  public id;
+
   public static fieldsKeys() {
     return keys(this.fields());
   }

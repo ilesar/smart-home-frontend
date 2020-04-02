@@ -6,14 +6,20 @@ import {OrderDirection} from '@vuex-orm/core/lib/query/options';
 
 const getters: GetterTree<ILocalState, {}> = {
     getShoppingList(state) {
+      return ShoppingItem
+        .query()
+        .with('groceryItem.image')
+        .where('isResolved', false)
+        .orderBy('id', 'desc')
+        .all();
+    },
+    getResolvedList(state) {
         return ShoppingItem
           .query()
           .with('groceryItem.image')
+          .where('isResolved', true)
           .orderBy('id', 'desc')
-          .all()
-          .map((shoppingItem: ShoppingItem) => {
-              return shoppingItem.groceryItem;
-          });
+          .all();
     },
     getGroceryItemList(state) {
         return GroceryItem
@@ -22,9 +28,6 @@ const getters: GetterTree<ILocalState, {}> = {
           .limit(30)
           .all();
     },
-    // sampleGetterWithParameter: (state) => (parameter: string) => {
-    //
-    // },
 };
 
 export default getters;

@@ -1,9 +1,9 @@
 import { ActionTree } from 'vuex';
 import ILocalState from './stateInterface';
 import ShoppingController from '@/api/controllers/ShoppingController';
-import ShoppingItem from '@/api/models/ShoppingItem';
 import GroceryController from '@/api/controllers/GroceryController';
 import GroceryItem from '@/api/models/GroceryItem';
+import ShoppingItem from '@/api/models/ShoppingItem';
 
 
 const actions: ActionTree<ILocalState, {}> = {
@@ -17,13 +17,23 @@ const actions: ActionTree<ILocalState, {}> = {
         }));
 
     },
-    fetchGroceryItemList({commit, getters}, productFormId) {
+    async fetchResolvedItemList({commit, getters}, productFormId) {
+        return new Promise<void>(((resolve, reject) => {
+            ShoppingController.fetchResolved().then(() => {
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+
+    },
+    async fetchGroceryItemList({commit, getters}, productFormId) {
         GroceryController.fetchAll().then(() => {
         }).catch((error) => {
             console.error(error);
         });
     },
-    addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: GroceryItem) {
+    async addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: GroceryItem) {
         return new Promise<void>(((resolve, reject) => {
             ShoppingController.addGroceryToShoppingList(groceryItem).then(() => {
                 dispatch('fetchShoppingItemList');
@@ -33,7 +43,26 @@ const actions: ActionTree<ILocalState, {}> = {
             });
         }));
     },
-
+    async resolveShoppingItem({commit, getters, dispatch}, shoppingItem: ShoppingItem) {
+        return new Promise<void>(((resolve, reject) => {
+            ShoppingController.resolveShoppingItem(shoppingItem).then(() => {
+                dispatch('fetchShoppingItemList');
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+    },
+    async removeShoppingItem({commit, getters, dispatch}, shoppingItem: ShoppingItem) {
+        return new Promise<void>(((resolve, reject) => {
+            ShoppingController.removeShoppingItemFromList(shoppingItem).then(() => {
+                dispatch('fetchShoppingItemList');
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+    },
 };
 
 export default actions;

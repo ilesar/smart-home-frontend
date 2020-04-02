@@ -14,6 +14,7 @@ export default class ShoppingItem extends Model {
   public static primaryKey = 'id';
 
   public groceryItem;
+  public id;
 
   public static fieldsKeys() {
     return keys(this.fields());
@@ -37,6 +38,7 @@ export default class ShoppingItem extends Model {
     return {
       id: this.increment(),
       quantity: this.string('quantity'),
+      isResolved: this.boolean(false),
       groceryItem_id: this.attr(null),
       groceryItem: this.belongsTo(GroceryItem, 'groceryItem_id'),
     };

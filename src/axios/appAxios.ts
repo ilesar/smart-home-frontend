@@ -2,7 +2,6 @@ import axios, {AxiosResponse} from 'axios';
 import { LocalStorageService } from '@/services/LocalStorageService';
 import { LocalStorageKeyNames } from '@/enums/LocalStorageKeyNames';
 import Jsona from 'jsona';
-import {TAnyKeyValueObject} from 'jsona/lib/JsonaTypes';
 
 const dataFormatter = new Jsona();
 
@@ -43,8 +42,12 @@ export const appAxios = {
     baseURL: process.env.VUE_APP_BASE_URL,
     responseType: 'json',
     dataTransformer: (response: AxiosResponse) => {
+        if (response.data === null) {
+            console.log('transfoadasdsddrmer');
+            return;
+        }
         const data = dataFormatter.deserialize(response.data);
-        // console.log('RESPONSE', data);
+
         return data;
     },
 };

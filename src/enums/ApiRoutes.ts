@@ -4,5 +4,8 @@ export const ApiRoutes = {
     getGroceryItems: '/grocery/items/',
     getGroceryItemsWithImages: '/grocery/items/?include=image&sort=id',
     addGroceryToShoppingList: '/shopping/list/items/',
-    getShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image',
+    deleteShoppingItem: '/shopping/list/items',
+    getShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=0',
+    getResolvedShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=1',
+    patchShoppingItem: '/shopping/list/items',
 };

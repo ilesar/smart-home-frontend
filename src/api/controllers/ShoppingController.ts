@@ -44,4 +44,51 @@ export default class ShoppingController {
 
     return Promise.resolve(shoppingItemResponse);
   }
+
+  public static async fetchResolved() {
+    let shoppingItemResponse;
+
+    try {
+      shoppingItemResponse = await ShoppingItem.api().get(ApiRoutes.getResolvedShoppingItems);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+
+    return Promise.resolve(shoppingItemResponse);
+  }
+
+  public static async resolveShoppingItem(shoppingItem: ShoppingItem) {
+    let shoppingItemResponse;
+
+    const requestBody = {
+      data: {
+        id: shoppingItem.id.toString(),
+        type: 'shopping_list_items',
+        attributes: {
+          isResolved: true,
+        },
+      },
+    };
+
+    try {
+      shoppingItemResponse = await ShoppingItem.api().patch(`${ApiRoutes.patchShoppingItem}/${shoppingItem.id}`, requestBody);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+
+    return Promise.resolve(shoppingItemResponse);
+  }
+
+  public static async removeShoppingItemFromList(shoppingItem: ShoppingItem) {
+    let deleteItemResponse;
+
+    try {
+      // console.log(groceryItem);
+      deleteItemResponse = await ShoppingItem.api().delete(`${ApiRoutes.deleteShoppingItem}/${shoppingItem.id}`);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+
+    return Promise.resolve(deleteItemResponse);
+  }
 }

@@ -37,14 +37,15 @@
                         <a-icon type="cloud"/>
                         <span>Namirnice</span>
                     </a-menu-item>
-<!--                    <a-menu-item-->
-<!--                            key="logout"-->
-<!--                            @click="logout()"-->
-<!--                            class="o-footer-menu-item"-->
-<!--                    >-->
-<!--                        <a-icon type="logout"/>-->
-<!--                        <span>Odjavi se</span>-->
-<!--                    </a-menu-item>-->
+                    <a-divider></a-divider>
+                    <a-menu-item
+                            key="logout"
+                            @click="logout()"
+                            class="o-footer-menu-item"
+                    >
+                        <a-icon type="logout"/>
+                        <span>Odjavi se</span>
+                    </a-menu-item>
                     <a-menu-item
                             key="menuControl"
                             style="position:absolute; bottom: 0px;"
@@ -60,7 +61,8 @@
             </a-layout-sider>
             <a-layout>
                 <a-layout-header style="background: #fff; padding: 0">
-                    <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title" subTitle="This is a subtitle" class="o-section-header" />
+                    <a-page-header style="border: 1px solid rgb(235, 237, 240)" @back="() => null" title="Title"
+                                   subTitle="This is a subtitle" class="o-section-header"/>
                 </a-layout-header>
                 <a-layout-content
                         class="content-container"
@@ -68,7 +70,6 @@
                     <slot></slot>
                 </a-layout-content>
             </a-layout>
-
         </a-layout>
     </a-layout>
 </template>

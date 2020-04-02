@@ -7,7 +7,7 @@ export default class GroceryController {
     let groceries;
 
     try {
-      groceries = await GroceryItem.api().get(ApiRoutes.getGroceryItems, {
+      groceries = await GroceryItem.api().get(ApiRoutes.getGroceryItemsWithImages, {
         save: true,
       });
     } catch (e) {

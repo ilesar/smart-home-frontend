@@ -2,11 +2,14 @@ import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
 import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
+import GroceryItemImage from '@/api/models/GroceryItemImage';
 
 export interface IGroceryItem {
    id: string;
    name: string;
-   description: string; price: string; image: string;
+   description: string;
+   price: string;
+   image: string;
 }
 
 export default class GroceryItem extends Model {
@@ -47,8 +50,7 @@ export default class GroceryItem extends Model {
       name: this.string('description'),
       description: this.string('description'),
       price: this.string('price'),
-      image: this.string('image'),
-
+      image: this.hasOne(GroceryItemImage, 'grocery_item_id'),
     };
   }
 

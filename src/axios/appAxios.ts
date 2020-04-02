@@ -44,6 +44,7 @@ export const appAxios = {
     responseType: 'json',
     dataTransformer: (response: AxiosResponse) => {
         const data = dataFormatter.deserialize(response.data);
+        console.log('FORMATTED BODY', data);
         return data;
     },
 };

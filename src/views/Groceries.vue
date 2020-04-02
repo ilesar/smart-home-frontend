@@ -4,10 +4,10 @@
             <a-list-item-meta
                     :description="item.price + ' KN'"
             >
-                <a slot="title" href="https://www.antdv.com/">{{item.name}}</a>
+                <p slot="title">{{item.name}}</p>
                 <a-avatar
                         slot="avatar"
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        :src="item.image ? item.image.image : 'testiram'"
                 />
             </a-list-item-meta>
         </a-list-item>
@@ -38,7 +38,8 @@
       GroceryController.fetchAll().then(() => {
         this.loadingOverlay.stop();
 
-        this.groceryList = GroceryItem.all();
+        this.groceryList = GroceryItem.query().with('image').all();
+        console.log(this.groceryList);
       });
     }
 

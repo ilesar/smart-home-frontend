@@ -1,16 +1,26 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
+import {AxiosError, AxiosResponse} from 'axios';
+import {ApiRoutes} from '@/enums/ApiRoutes';
 
-export interface IShoppingItem {
+export interface IGroceryItemImage {
    id: string;
-   groceryItem: string;
-   quantity: string;
+   image: string;
 }
 
-export default class ShoppingItem extends Model {
-  public static entity = 'shoppingitem';
+export default class GroceryItemImage extends Model {
+  public static entity = 'groceryitemimage';
 
   public static primaryKey = 'id';
+
+  public static apiConfig = {
+    actions: {
+      fetch: {
+        method: 'get',
+        url: ApiRoutes.refreshToken,
+      },
+    },
+  };
 
   public static fieldsKeys() {
     return keys(this.fields());
@@ -33,8 +43,9 @@ export default class ShoppingItem extends Model {
   public static fields() {
     return {
       id: this.increment(),
-      groceryItem: this.attr('asdd'),
-      quantity: this.string('quantity'),
+      image: this.string('image_url'),
+      grocery_item_id: this.attr(null),
     };
   }
+
 }

@@ -78,12 +78,12 @@
     private value = 1;
 
     public beforeMount() {
-      // this.loadingOverlay.start();
-      // GroceryController.fetchAll().then(() => {
-      //   this.loadingOverlay.stop();
-      //
-      //   this.groceryList = GroceryItem.query().with('image').limit(10).all();
-      // });
+      this.loadingOverlay.start();
+      GroceryController.fetchAll().then(() => {
+        this.loadingOverlay.stop();
+
+        this.groceryList = GroceryItem.query().with('image').limit(10).all();
+      });
     }
 
     showDrawer() {

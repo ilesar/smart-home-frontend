@@ -1,46 +1,37 @@
 <template>
-    <div class="co-popup">
-        <a-modal
-                title="Delete"
-                centered
-                v-model="visible"
-                @ok="() => visible = false"
-        >
-            <p>some contents...</p>
-            <p>some contents...</p>
-            <p>some contents...</p>
-        </a-modal>
-    </div>
+
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { EventBus } from '@/helpers/EventBusHelper';
-import { EventBusEvents } from '@/enums/EventBusEvents';
-import { PopupEvents } from '@/enums/PopupEvents';
-import { PopupEventData } from '@/interfaces/PopupEventData';
+  import {Vue, Component} from 'vue-property-decorator';
+  import {EventBus} from '@/helpers/EventBusHelper';
+  import {EventBusEvents} from '@/enums/EventBusEvents';
+  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+  import {ModalOptions} from 'ant-design-vue/types/modal';
 
-@Component({
+  @Component({
     name: 'Popup',
     components: {},
-})
-export default class Popup extends Vue {
-    private title: string = 'asds';
-    private visible: boolean = false;
-    private popupEvent: string = 'asdasdasd';
+  })
+  export default class Popup extends Vue {
 
-    private openPopup(popupEvent: string) {
-        this.popupEvent = popupEvent;
-        this.visible = true;
+    private mounted() {
+      this.attachEventBusListeners();
     }
 
-    private closePopup() {
-        this.visible = false;
-        this.popupEvent = '';
-        this.title = '';
+    private openPopup(options: ModalOptions) {
+      this.$confirm(options);
     }
 
-}
+    private attachEventBusListeners() {
+      EventBus.$on(EventBusEvents.OpenPopup, this.openDeleteShoppingItemContent);
+    }
+
+    private openDeleteShoppingItemContent(popupOptions: ModalOptions) {
+      this.openPopup(popupOptions);
+    }
+
+  }
 </script>
 
 <style lang="scss" scoped>

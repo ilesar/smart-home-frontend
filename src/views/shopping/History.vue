@@ -10,7 +10,8 @@
                         :src="item.groceryItem.image ? item.groceryItem.image.path : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Red.svg/1200px-Red.svg.png'"
                 />
             </a-list-item-meta>
-            <div>{{ new Date(item.updatedAt) }}</div>
+            <div>{{ formatDate(item.updatedAt) }}</div>
+            <a-button type="default" shape="circle" style="margin-left: 16px">i</a-button>
         </a-list-item>
     </a-list>
 </template>
@@ -19,6 +20,7 @@
   import { Component, Vue } from 'vue-property-decorator'
   import {Action, Getter} from 'vuex-class';
   import ListItem from '@/components/shopping/ListItem.vue';
+  import moment from 'moment';
 
   @Component({
     name: 'Shopping',
@@ -35,6 +37,11 @@
 
     public beforeMount() {
       this.fetchResolvedItemList();
+    }
+
+    public formatDate(dateString: string) {
+      // return moment(dateString).locale('hr').format('LL');
+      return moment(dateString).locale('hr').calendar();
     }
 
   }

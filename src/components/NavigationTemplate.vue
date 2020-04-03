@@ -29,6 +29,7 @@
                         <a-icon type="idcard"/>
                         <span>Plaćanja</span>
                     </a-menu-item>
+                    <a-divider></a-divider>
                     <a-menu-item
                             key="groceries"
                             @click="goToGroceries()"
@@ -36,6 +37,14 @@
                     >
                         <a-icon type="cloud"/>
                         <span>Namirnice</span>
+                    </a-menu-item>
+                    <a-menu-item
+                            key="recurringPayments"
+                            @click="goToRecurringItems()"
+                            class="o-footer-menu-item"
+                    >
+                        <a-icon type="reload"/>
+                        <span>Ponavljajuća plaćanja</span>
                     </a-menu-item>
                     <a-divider></a-divider>
                     <a-menu-item
@@ -88,7 +97,7 @@
   export default class NavigationTemplate extends Vue {
     private defaultSelectedKeys: string[] = [];
 
-    private collapsed: boolean = true;
+    private collapsed: boolean = false;
 
     private logout() {
       AuthController.logout().then(() => {
@@ -117,6 +126,12 @@
     private goToGroceries() {
       if (this.$route.name !== RouteNames.Groceries) {
         this.$router.push({name: RouteNames.Groceries});
+      }
+    }
+
+    private goToRecurringItems() {
+      if (this.$route.name !== RouteNames.RecurringPayments) {
+        this.$router.push({name: RouteNames.RecurringPayments});
       }
     }
 

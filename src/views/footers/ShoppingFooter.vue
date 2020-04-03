@@ -5,34 +5,41 @@
                 title="Ukupni trošak"
                 class="expense-statistic"
                 suffix="KN"
-                :value="568.08"
+                :value="shoppingListItemSum"
                 :style="{
             margin: '0 32px',
           }"
         />
-        <a-statistic
-                title="Broj proizvoda"
-                :value="34"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
-        <a-statistic
-                title="Starost košarice"
-                :value="'10 dana'"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
+<!--        <a-statistic-->
+<!--                title="Broj proizvoda"-->
+<!--                :value="shoppingListItemCount"-->
+<!--                :style="{-->
+<!--            margin: '0 32px',-->
+<!--          }"-->
+<!--        />-->
+<!--        <a-statistic-->
+<!--                title="Starost košarice"-->
+<!--                :value="shoppingListAge"-->
+<!--                :style="{-->
+<!--            margin: '0 32px',-->
+<!--          }"-->
+<!--        />-->
 
     </a-row>
 </template>
 
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+  import {Getter} from 'vuex-class';
 
   @Component
   export default class ShoppingFooter extends Vue {
+    @Getter('shopping/getShoppingListSum')
+    private shoppingListItemSum;
+    @Getter('shopping/getShoppingListItemCount')
+    private shoppingListItemCount;
+    @Getter('shopping/getShoppingListAge')
+    private shoppingListAge;
   }
 </script>
 
@@ -50,7 +57,7 @@
             }
 
             .ant-statistic-content {
-                color: map-get(map-get($settings-colors, 'primary'), 'blue');
+                //color: map-get(map-get($settings-colors, 'primary'), 'blue');
                 font-weight: 500;
             }
         }

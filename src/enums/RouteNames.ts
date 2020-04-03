@@ -6,4 +6,5 @@ export enum RouteNames {
     Groceries = 'groceries',
     Error = 'error',
     ShoppingHistory = 'shoppingHistory',
+    RecurringPayments = 'recurringPayments',
 }

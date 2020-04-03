@@ -2,7 +2,9 @@
     <div id="app">
         <template v-if="$route.meta.navigationLayout">
             <navigation-template>
-                <router-view></router-view>
+                <transition>
+                    <router-view></router-view>
+                </transition>
             </navigation-template>
         </template>
         <template v-else>

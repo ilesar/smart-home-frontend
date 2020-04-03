@@ -69,7 +69,19 @@ export const routes: RouteConfig[] = [
     components: {
       default: loadView('Groceries'),
       header: loadView('headers/GroceriesHeader')
-    }
+    },
+  },
+  {
+    path: '/recurring-payments',
+    name: RouteNames.RecurringPayments,
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
+    components: {
+      default: loadView('RecurringPayments'),
+      header: loadView('headers/RecurringPaymentsHeader')
+    },
   },
 
 ];

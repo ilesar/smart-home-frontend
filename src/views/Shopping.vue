@@ -1,3 +1,4 @@
+import { PopupType } from '@/enums/PopupType'
 <template>
     <a-list itemLayout="horizontal" :dataSource="shoppingList">
         <a-empty
@@ -9,7 +10,7 @@
         </a-empty>
         <a-list-item slot="renderItem" slot-scope="item">
             <a-list-item-meta
-                    :description="item.groceryItem.price + ' KN'"
+                    :description="`${item.quantity} ${item.quantity > 1 ? 'komada' : 'komad'} (${item.quantity * item.groceryItem.price} kn)`"
             >
                 <p slot="title">{{item.groceryItem.name}}</p>
                 <a-avatar
@@ -18,10 +19,10 @@
                 />
             </a-list-item-meta>
             <div>{{ formatDate(item.updatedAt) }}</div>
-            <a-button type="default" shape="round" icon="check" @click="markShoppingItemBought(item)"
-                      style="margin-left: 16px">Kupljeno
+            <a-button type="primary" shape="round" icon="check" @click="markShoppingItemBought(item)"
+                      style="margin-left: 16px; background: #0fc48d; border: 1px solid #0fc48d">
             </a-button>
-            <a-button type="default" shape="round" icon="delete" style="margin-left: 16px"
+            <a-button type="danger" shape="round" icon="delete" style="margin-left: 16px"
                       @click="deleteShoppingItem(item)"></a-button>
         </a-list-item>
     </a-list>
@@ -35,7 +36,9 @@
   import moment from 'moment';
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
-  import {ModalOptions} from 'ant-design-vue/types/modal';
+  import {PopupType} from '@/enums/PopupType';
+  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+  import {Icon} from 'ant-design-vue';
 
   @Component({
     name: 'Shopping',
@@ -60,32 +63,34 @@
 
     public markShoppingItemBought(model: ShoppingItem) {
       EventBus.$emit(EventBusEvents.OpenPopup, {
-        title: `Nois! Kaj fakat?`,
-        content: model.groceryItem.name,
-        okText: 'Yup',
-        // okType: 'danger',
-        cancelText: 'No',
-        onOk: () => {
-          this.resolveShoppingItem(model).then(() => {
-            model.$delete();
-          });
-        },
-      } as ModalOptions);
+        options: {
+          title: `Kupljeno?`,
+          content: model.groceryItem.name,
+          okText: 'Da',
+          cancelText: 'Ne',
+          onOk: () => {
+            this.resolveShoppingItem(model).then(() => {
+              model.$delete();
+            });
+          },
+        }
+      } as PopupDataInterface);
     }
 
     public deleteShoppingItem(model: ShoppingItem) {
       EventBus.$emit(EventBusEvents.OpenPopup, {
-        title: `Ne trebamo ovo?`,
-        content: model.groceryItem.name,
-        okText: 'Nope',
-        // okType: 'danger',
-        cancelText: 'Kajaznam',
-        onOk: () => {
-          this.removeShoppingItem(model).then(() => {
-            model.$delete();
-          });
-        },
-      } as ModalOptions);
+        options: {
+          title: `Ne trebamo ovo?`,
+          content: model.groceryItem.name,
+          okText: 'Ne',
+          cancelText: 'Ne znam',
+          onOk: () => {
+            this.removeShoppingItem(model).then(() => {
+              model.$delete();
+            });
+          },
+        }
+      } as PopupDataInterface);
 
     }
 

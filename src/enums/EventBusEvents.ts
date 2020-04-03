@@ -1,3 +1,3 @@
 export enum EventBusEvents {
-    OpenPopup = 'appOpenConfirmationPopup',
+    OpenPopup = "OpenPopup",
 }

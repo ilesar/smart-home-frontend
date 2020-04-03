@@ -8,6 +8,7 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
   import {ModalOptions} from 'ant-design-vue/types/modal';
+  import {PopupType} from '@/enums/PopupType';
 
   @Component({
     name: 'Popup',
@@ -16,19 +17,28 @@
   export default class Popup extends Vue {
 
     private mounted() {
-      this.attachEventBusListeners();
+      EventBus.$on(EventBusEvents.OpenPopup, this.resolvePopup);
     }
 
-    private openPopup(options: ModalOptions) {
-      this.$confirm(options);
+    public beforeDestroy() {
+      EventBus.$off(EventBusEvents.OpenPopup);
     }
 
-    private attachEventBusListeners() {
-      EventBus.$on(EventBusEvents.OpenPopup, this.openDeleteShoppingItemContent);
+    private resolvePopup(popupDataObject: PopupDataInterface) {
+      this.openPopup(popupDataObject.type, popupDataObject.options);
     }
 
-    private openDeleteShoppingItemContent(popupOptions: ModalOptions) {
-      this.openPopup(popupOptions);
+    private openPopup(type: string, options: ModalOptions) {
+      switch (type) {
+        case PopupType.Success:
+          this.$success(options);
+          break;
+        case PopupType.Warning:
+          this.$warning(options);
+          break;
+        default:
+          this.$confirm(options);
+      }
     }
 
   }

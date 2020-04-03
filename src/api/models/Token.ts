@@ -39,7 +39,7 @@ export default class Token extends Model {
 
     public static fields() {
         return {
-            id: this.attr(null),
+            id: this.string(null),
             access_token: this.attr(''),
             token_type: this.attr(''),
             expires_at: this.attr(''),

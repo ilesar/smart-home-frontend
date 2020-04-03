@@ -8,7 +8,7 @@
         <template v-else>
             <router-view></router-view>
         </template>
-        <Popup/>
+        <Popup v-if="$route.meta.popup" />
     </div>
 </template>
 

@@ -27,4 +27,3 @@
         margin-left: 16px;
     }
 </style>
-https://localhost:8000/api/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=true

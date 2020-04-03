@@ -36,9 +36,10 @@ export default class ShoppingItem extends Model {
 
   public static fields() {
     return {
-      id: this.increment(),
+      id: this.string(null),
       quantity: this.string('quantity'),
       isResolved: this.boolean(false),
+      updatedAt: this.string(false),
       groceryItem_id: this.attr(null),
       groceryItem: this.belongsTo(GroceryItem, 'groceryItem_id'),
     };

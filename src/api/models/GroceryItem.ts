@@ -49,7 +49,7 @@ export default class GroceryItem extends Model {
 
   public static fields() {
     return {
-      id: this.increment(),
+      id: this.string(null),
       name: this.string('description'),
       description: this.string('description'),
       price: this.string('price'),

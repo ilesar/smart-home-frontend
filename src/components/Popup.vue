@@ -1,11 +1,14 @@
 <template>
     <div class="co-popup">
         <a-modal
-            :visible="visible"
-            :footer="null"
-            :width="popupEvent === popupEvents.openAddMaterials ? '600px' : '90%'"
-            @cancel="closePopup()"
+                title="Delete"
+                centered
+                v-model="visible"
+                @ok="() => visible = false"
         >
+            <p>some contents...</p>
+            <p>some contents...</p>
+            <p>some contents...</p>
         </a-modal>
     </div>
 </template>
@@ -22,47 +25,9 @@ import { PopupEventData } from '@/interfaces/PopupEventData';
     components: {},
 })
 export default class Popup extends Vue {
-    public popupEvents: any = PopupEvents;
-    public popupData: any = null;
-    private title: string = '';
+    private title: string = 'asds';
     private visible: boolean = false;
-    private popupEvent: string = '';
-
-    private eventBusListeners() {
-        EventBus.$on(EventBusEvents.openAddProductsPopup, (eventData: PopupEventData) => {
-            this.openPopup(eventData.popupEvent);
-
-            if (eventData.data === undefined) {
-                return;
-            }
-
-            this.popupData = eventData.data;
-        });
-
-        EventBus.$on(EventBusEvents.openMaterialsPopup, (eventData: PopupEventData) => {
-            this.openPopup(eventData.popupEvent);
-
-            if (eventData.data === undefined) {
-                return;
-            }
-
-            this.popupData = eventData.data;
-        });
-
-        EventBus.$on(EventBusEvents.openMultipositionPopup, (eventData: PopupEventData) => {
-            this.openPopup(eventData.popupEvent);
-
-            if (eventData.data === undefined) {
-                return;
-            }
-
-            this.popupData = eventData.data;
-        });
-
-        EventBus.$on(EventBusEvents.closePopup, () => {
-            this.closePopup();
-        });
-    }
+    private popupEvent: string = 'asdasdasd';
 
     private openPopup(popupEvent: string) {
         this.popupEvent = popupEvent;
@@ -75,9 +40,6 @@ export default class Popup extends Vue {
         this.title = '';
     }
 
-    private mounted() {
-        this.eventBusListeners();
-    }
 }
 </script>
 

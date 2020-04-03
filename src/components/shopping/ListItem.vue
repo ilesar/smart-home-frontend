@@ -1,5 +1,5 @@
 <template>
-    <a-list-item>
+    <span class="item-wrapper">
         <a-list-item-meta
                 :description="groceryItem.price + ' KN'"
         >
@@ -11,7 +11,7 @@
         </a-list-item-meta>
         <a-button type="default" shape="round" icon="check" @click="markShoppingItemBought">Kupljeno</a-button>
         <a-button type="default" shape="round" icon="delete" style="margin-left: 16px" @click="deleteShoppingItem"></a-button>
-    </a-list-item>
+    </span>
 </template>
 
 <script lang="ts">
@@ -51,5 +51,7 @@
 </script>
 
 <style lang="scss">
-
+    .item-wrapper {
+        diplay: block;
+    }
 </style>

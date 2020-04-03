@@ -13,6 +13,8 @@ export default class GroceryItemImage extends Model {
 
   public static primaryKey = 'id';
 
+  public image;
+
   public static apiConfig = {
     actions: {
       fetch: {
@@ -46,7 +48,7 @@ export default class GroceryItemImage extends Model {
 
   public static fields() {
     return {
-      id: this.increment(),
+      id: this.string(null),
       image: this.string('image_url'),
       grocery_item_id: this.attr(null),
     };

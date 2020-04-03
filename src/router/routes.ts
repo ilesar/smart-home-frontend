@@ -6,14 +6,17 @@ export const routes: RouteConfig[] = [
   {
     path: `/${RouteNames.Login}`,
     name: RouteNames.Login,
-    component: loadView('Login'),
     components: {
+      default: loadView('Login'),
     }
   },
   {
     path: '/',
     name: RouteNames.Devices,
-    meta: {navigationLayout: true},
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
     components: {
       default: loadView('Devices'),
       header: loadView('headers/DevicesHeader')
@@ -22,7 +25,10 @@ export const routes: RouteConfig[] = [
   {
     path: '/shopping',
     name: RouteNames.Shopping,
-    meta: {navigationLayout: true},
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
     components: {
       default: loadView('Shopping'),
       header: loadView('headers/ShoppingHeader')
@@ -31,7 +37,10 @@ export const routes: RouteConfig[] = [
   {
     path: '/shopping/history',
     name: RouteNames.ShoppingHistory,
-    meta: {navigationLayout: true},
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
     components: {
       default: loadView('shopping/History'),
       header: loadView('shopping/HistoryHeader')
@@ -40,8 +49,10 @@ export const routes: RouteConfig[] = [
   {
     path: '/payments',
     name: RouteNames.Payments,
-    component: loadView('Payment'),
-    meta: {navigationLayout: true},
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
     components: {
       default: loadView('Payment'),
       header: loadView('headers/PaymentHeader')
@@ -50,8 +61,10 @@ export const routes: RouteConfig[] = [
   {
     path: '/groceries',
     name: RouteNames.Groceries,
-    component: loadView('Groceries'),
-    meta: {navigationLayout: true},
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
     components: {
       default: loadView('Groceries'),
       header: loadView('headers/GroceriesHeader')

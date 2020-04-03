@@ -10,7 +10,7 @@ const getters: GetterTree<ILocalState, {}> = {
         .query()
         .with('groceryItem.image')
         .where('isResolved', false)
-        .orderBy('id', 'desc')
+        // .orderBy('id', 'desc')
         .all();
     },
     getResolvedList(state) {
@@ -18,7 +18,7 @@ const getters: GetterTree<ILocalState, {}> = {
           .query()
           .with('groceryItem.image')
           .where('isResolved', true)
-          .orderBy('id', 'desc')
+          // .orderBy('id', 'desc')
           .all();
     },
     getGroceryItemList(state) {

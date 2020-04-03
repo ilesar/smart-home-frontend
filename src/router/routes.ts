@@ -31,7 +31,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('Shopping'),
-      header: loadView('headers/ShoppingHeader')
+      header: loadView('headers/ShoppingHeader'),
+      footer: loadView('footers/ShoppingFooter'),
     }
   },
   {

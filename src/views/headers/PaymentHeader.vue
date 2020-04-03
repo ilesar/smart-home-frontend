@@ -1,5 +1,5 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Payment" class="o-section-header"/>
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Plaćanja" class="o-section-header"/>
 </template>
 
 <script lang="ts">

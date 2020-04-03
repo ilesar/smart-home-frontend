@@ -33,9 +33,9 @@ const actions: ActionTree<ILocalState, {}> = {
             console.error(error);
         });
     },
-    async addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: GroceryItem) {
+    async addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: any) {
         return new Promise<void>(((resolve, reject) => {
-            ShoppingController.addGroceryToShoppingList(groceryItem).then(() => {
+            ShoppingController.addGroceryToShoppingList(groceryItem.item, groceryItem.quantity).then(() => {
                 dispatch('fetchShoppingItemList');
                 resolve();
             }).catch((error) => {

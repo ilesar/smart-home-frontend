@@ -69,6 +69,9 @@
                 >
                     <slot></slot>
                 </a-layout-content>
+                <a-layout-footer style="background: #fff; padding: 0">
+                    <router-view name="footer"></router-view>
+                </a-layout-footer>
             </a-layout>
         </a-layout>
     </a-layout>

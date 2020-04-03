@@ -4,14 +4,14 @@ import GroceryItem from '@/api/models/GroceryItem';
 import ShoppingItem from '@/api/models/ShoppingItem';
 
 export default class ShoppingController {
-  public static async addGroceryToShoppingList(groceryItem: GroceryItem): Promise<AxiosResponse | AxiosError> {
+  public static async addGroceryToShoppingList(groceryItem: GroceryItem, quantity: number): Promise<AxiosResponse | AxiosError> {
     let groceries;
 
     const requestBody = {
       data: {
         type: 'shopping_list_items',
         attributes: {
-          quantity: 1,
+          quantity: quantity,
         },
         relationships: {
           groceryItem: {

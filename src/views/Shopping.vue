@@ -19,10 +19,10 @@ import { PopupType } from '@/enums/PopupType'
                 />
             </a-list-item-meta>
             <div>{{ formatDate(item.updatedAt) }}</div>
-            <a-button type="primary" shape="round" icon="check" @click="markShoppingItemBought(item)"
-                      style="margin-left: 16px; background: #0fc48d; border: 1px solid #0fc48d">
+            <a-button type="default" shape="round" icon="check" @click="markShoppingItemBought(item)"
+                      style="margin-left: 16px">
             </a-button>
-            <a-button type="danger" shape="round" icon="delete" style="margin-left: 16px"
+            <a-button type="default" shape="round" icon="delete" style="margin-left: 16px"
                       @click="deleteShoppingItem(item)"></a-button>
         </a-list-item>
     </a-list>

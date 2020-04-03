@@ -55,7 +55,7 @@
                                                 :src="chosenItem ? chosenItem.image.path : 'testiram'"
                                         />
                                     </a-list-item-meta>
-                                    <a-input-number id="inputNumber" v-model="value" @change="onChange" />
+                                    <a-input-number id="inputNumber" v-model="value" />
                                     <a-button type="primary" class="add-button" @click="addItemToList">
                                         Dodaj proizvod
                                     </a-button>
@@ -121,21 +121,13 @@
       this.childVisible = false;
     }
 
-    onSearch(value) {
-      console.log('SEARCHED', value);
-    }
-
-    onChoice(value) {
-      console.log('CHOICE', value);
-    }
-
-    onChange(e) {
-      console.log('CHANGE', e);
-    }
-
     addItemToList() {
-      this.addGroceryItemToShoppingList(this.chosenItem).then(() => {
+      this.addGroceryItemToShoppingList({
+        item: this.chosenItem,
+        quantity: this.value
+      }).then(() => {
         this.childVisible = false;
+        this.value = 1;
       }).catch((error) => {
         alert(error);
       });

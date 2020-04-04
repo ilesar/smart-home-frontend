@@ -14,11 +14,6 @@
             </div>
         </a-col>
     </a-row>
-<!--    <div class="home">-->
-<!--        <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-<!--        <HelloWorldWrapper msg="Welcome to Your Vue.js App"/>-->
-<!--        <HelloWorldDuoTone msg="Welcome to Your Vue.js App"/>-->
-<!--    </div>-->
 </template>
 
 <script lang="ts">

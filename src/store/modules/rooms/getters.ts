@@ -7,12 +7,13 @@ const getters: GetterTree<ILocalState, {}> = {
   getAllRooms(state) {
     return TokenRepository.getAll();
   },
-  // getRoomById: (state) => (roomSlug: string) {
-  //   return Room
-  //     .query()
-  //     .where('slug', roomSlug)
-  //     .all();
-  // },
+  getRoomById: (state) => (roomSlug: string) => {
+    console.log('CALLED: ', roomSlug);
+    return Room
+      .query()
+      .where('slug', roomSlug)
+      .first();
+  },
 };
 
 export default getters;

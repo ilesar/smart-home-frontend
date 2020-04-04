@@ -4,6 +4,11 @@ import Login from '@/views/Login.vue';
 
 export const routes: RouteConfig[] = [
   {
+    path: `/`,
+    name: RouteNames.Home,
+    redirect: `/${RouteNames.Rooms}`,
+  },
+  {
     path: `/${RouteNames.Login}`,
     name: RouteNames.Login,
     components: {

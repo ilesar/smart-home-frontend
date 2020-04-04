@@ -23,10 +23,6 @@ export default class Room extends Model {
 
   public id;
 
-  public get slug() {
-    return StringHelper.slugify(this.name);
-  }
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -49,7 +45,12 @@ export default class Room extends Model {
     return {
       id: this.string(null),
       name: this.string('roomName'),
+      slug: this.string(null),
     };
+  }
+
+  static beforeCreate (model) {
+    model.slug = StringHelper.slugify(model.name);
   }
 
 }

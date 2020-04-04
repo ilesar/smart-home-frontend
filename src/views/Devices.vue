@@ -31,7 +31,6 @@
     },
   })
   export default class Devices extends Vue {
-    @Getter('rooms/getRoomById') private room;
     @Getter('rooms/getAllRooms') private rooms;
 
     private loadingOverlay = new LoadingOverlayHelper(this, {});
@@ -40,9 +39,6 @@
         // this.fetchRooms();
     }
 
-    private goToRoom(room: Room) {
-        this.$router.push(`${RouteNames.Rooms}/${room.slug}`);
-    }
   }
 
 </script>

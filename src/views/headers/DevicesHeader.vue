@@ -4,6 +4,9 @@
 
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+  import {Getter} from 'vuex-class';
+  import Room from '@/api/models/Room';
+  import {RouteNames} from '@/enums/RouteNames';
 
   @Component
   export default class DevicesHeader extends Vue {
@@ -11,7 +14,12 @@
     private room: Room;
 
     public beforeMount() {
-      const roomSlug: string = this.$route.params.roomSlug;
+      console.log(this.$route.params.roomSlug);
+      this.room = this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug);
+
+      if (!this.room) {
+        this.$router.push({name: RouteNames.Error});
+      }
     }
 
     public goBack() {
@@ -19,7 +27,7 @@
     }
 
     public get title() {
-      return `Uređaji u ${'asdasd'}`
+      return `Uređaji u ${this.room.name}`;
     }
   }
 </script>

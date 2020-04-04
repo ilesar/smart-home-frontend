@@ -7,9 +7,11 @@
                 <p slot="title">{{item.name}}</p>
                 <a-avatar
                         slot="avatar"
-                        :src="item.image ? item.image.path : 'testiram'"
+                        :icon="item.paymentTag"
+                        style="color: #1890ff; background: white"
                 />
             </a-list-item-meta>
+            <a-badge status="success" text="Automatizirano" v-if="item.isAutomated"/>
         </a-list-item>
     </a-list>
 </template>

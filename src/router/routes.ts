@@ -80,7 +80,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('RecurringPayments'),
-      header: loadView('headers/RecurringPaymentsHeader')
+      header: loadView('headers/RecurringPaymentsHeader'),
+      footer: loadView('footers/RecurringPaymentsFooter'),
     },
   },
 

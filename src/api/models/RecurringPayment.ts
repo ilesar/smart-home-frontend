@@ -28,6 +28,7 @@ export default class RecurringPayment extends Model {
   };
 
   public id;
+  public price;
 
   public static fieldsKeys() {
     return keys(this.fields());
@@ -52,6 +53,10 @@ export default class RecurringPayment extends Model {
       id: this.string(null),
       name: this.string('nameField'),
       price: this.number(0),
+      period: this.string(null),
+      activationTime: this.string(''),
+      paymentTag: this.string('question'),
+      isAutomated: this.boolean(false),
     };
   }
 

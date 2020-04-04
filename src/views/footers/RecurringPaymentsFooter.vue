@@ -5,7 +5,7 @@
                 title="Ukupni trošak"
                 class="expense-statistic"
                 suffix="KN"
-                :value="shoppingListItemSum"
+                :value="recurringPaymentsSum"
                 :style="{
             margin: '0 32px',
           }"
@@ -19,13 +19,9 @@
   import {Getter} from 'vuex-class';
 
   @Component
-  export default class ShoppingFooter extends Vue {
-    @Getter('shopping/getShoppingListSum')
-    private shoppingListItemSum;
-    @Getter('shopping/getShoppingListItemCount')
-    private shoppingListItemCount;
-    @Getter('shopping/getShoppingListAge')
-    private shoppingListAge;
+  export default class RecurringPaymentsFooter extends Vue {
+    @Getter('recurringpayments/getRecurringPaymentsSum')
+    private recurringPaymentsSum;
   }
 </script>
 

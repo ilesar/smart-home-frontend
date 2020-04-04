@@ -1,18 +1,23 @@
 import { GetterTree } from 'vuex';
 import ILocalState from './stateInterface';
-import ShoppingItem from '@/api/models/ShoppingItem';
-import GroceryItem from '@/api/models/GroceryItem';
-import {OrderDirection} from '@vuex-orm/core/lib/query/options';
-import moment from 'moment';
+import RecurringPayment from '@/api/models/RecurringPayment';
 
 const getters: GetterTree<ILocalState, {}> = {
   getRecurringPaymentList(state) {
-      return ShoppingItem
+      return RecurringPayment
         .query()
-        .with('groceryItem.image')
-        .where('isResolved', false)
+        .orderBy('isAutomated', 'desc')
+        .orderBy('paymentTag', 'desc')
         .all();
     },
+  getRecurringPaymentsSum(state) {
+    return RecurringPayment
+      .query()
+      .all()
+      .reduce((aggregator: number, recurringPayment: RecurringPayment) => {
+        return aggregator + parseFloat(recurringPayment.price);
+      }, 0).toFixed(2);
+  },
 };
 
 export default getters;

@@ -176,7 +176,7 @@
     }
 
     .content-container {
-        padding: 0 24px;
+        padding: 0 0 0 24px;
         background: #fff;
         overflow: scroll !important;
     }

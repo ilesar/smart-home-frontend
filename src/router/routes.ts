@@ -77,6 +77,7 @@ export const routes: RouteConfig[] = [
     meta: {
       navigationLayout: true,
       popup: true,
+      disablePadding: true,
     },
     components: {
       default: loadView('RecurringPayments'),

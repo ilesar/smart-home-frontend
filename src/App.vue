@@ -3,7 +3,7 @@
         <template v-if="$route.meta.navigationLayout">
             <navigation-template>
                 <vue-page-transition name="fade-in-right">
-                <router-view></router-view>
+                    <router-view></router-view>
                 </vue-page-transition>
             </navigation-template>
         </template>

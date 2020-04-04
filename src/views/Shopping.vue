@@ -8,7 +8,7 @@ import { PopupType } from '@/enums/PopupType'
         >
             <span slot="description">Ne treba ništa kupiti</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item">
+        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
             <a-list-item-meta
                     :description="`${item.quantity} ${item.quantity > 1 ? 'komada' : 'komad'} (${item.quantity * item.groceryItem.price} kn)`"
             >
@@ -36,9 +36,7 @@ import { PopupType } from '@/enums/PopupType'
   import moment from 'moment';
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
-  import {PopupType} from '@/enums/PopupType';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
-  import {Icon} from 'ant-design-vue';
 
   @Component({
     name: 'Shopping',

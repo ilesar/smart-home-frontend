@@ -12,4 +12,7 @@ export const ApiRoutes = {
     getRecurringPayments: '/recurring/payments/',
 
     getRooms: '/rooms/',
+
+    getExpenses: '/expenses/?include=recurringPayment',
+
 };

@@ -8,4 +8,6 @@ export const ApiRoutes = {
     getShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=0',
     getResolvedShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=1',
     patchShoppingItem: '/shopping/list/items',
+
+    getRecurringPayments: '/recurring/payments/',
 };

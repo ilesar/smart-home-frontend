@@ -69,10 +69,12 @@
                 </a-menu>
             </a-layout-sider>
             <a-layout>
+                <vue-page-transition name="fade-in-right">
                 <a-layout-header style="background: #fff; padding: 0">
                     <router-view name="header"></router-view>
 
                 </a-layout-header>
+                </vue-page-transition>
                 <a-layout-content
                         class="content-container"
                 >

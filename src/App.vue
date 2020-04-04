@@ -2,9 +2,9 @@
     <div id="app">
         <template v-if="$route.meta.navigationLayout">
             <navigation-template>
-                <transition>
-                    <router-view></router-view>
-                </transition>
+                <vue-page-transition name="fade-in-right">
+                <router-view></router-view>
+                </vue-page-transition>
             </navigation-template>
         </template>
         <template v-else>

@@ -1,6 +1,5 @@
 import { GetterTree } from 'vuex';
 import ILocalState from './stateInterface';
-import GroceryItem from '@/api/models/GroceryItem';
 import ShoppingItemRepository from '@/repositories/ShoppingItemRepository';
 
 const getters: GetterTree<ILocalState, {}> = {

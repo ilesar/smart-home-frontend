@@ -26,7 +26,7 @@
                             @click="goToPayments()"
                             class="o-footer-menu-item"
                     >
-                        <a-icon type="idcard"/>
+                        <a-icon type="dollar"/>
                         <span>Plaćanja</span>
                     </a-menu-item>
                     <a-divider></a-divider>
@@ -35,7 +35,7 @@
                             @click="goToGroceries()"
                             class="o-footer-menu-item"
                     >
-                        <a-icon type="cloud"/>
+                        <a-icon type="appstore"/>
                         <span>Namirnice</span>
                     </a-menu-item>
                     <a-menu-item

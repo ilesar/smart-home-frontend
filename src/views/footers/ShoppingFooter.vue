@@ -22,10 +22,6 @@
   export default class ShoppingFooter extends Vue {
     @Getter('shopping/getShoppingListSum')
     private shoppingListItemSum;
-    @Getter('shopping/getShoppingListItemCount')
-    private shoppingListItemCount;
-    @Getter('shopping/getShoppingListAge')
-    private shoppingListAge;
   }
 </script>
 

@@ -2,12 +2,6 @@ import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
 import GroceryItem from '@/api/models/GroceryItem';
 
-export interface IShoppingItem {
-   id: string;
-   groceryItem: string;
-   quantity: string;
-}
-
 export default class ShoppingItem extends Model {
   public static entity = 'shoppingitem';
 

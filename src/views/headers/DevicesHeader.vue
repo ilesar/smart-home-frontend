@@ -1,5 +1,5 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Sobe" class="o-section-header"/>
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" :title="title" class="o-section-header" @back="goBack"/>
 </template>
 
 <script lang="ts">
@@ -8,6 +8,19 @@
   @Component
   export default class DevicesHeader extends Vue {
 
+    private room: Room;
+
+    public beforeMount() {
+      const roomSlug: string = this.$route.params.roomSlug;
+    }
+
+    public goBack() {
+      window.history.back();
+    }
+
+    public get title() {
+      return `Uređaji u ${'asdasd'}`
+    }
   }
 </script>
 

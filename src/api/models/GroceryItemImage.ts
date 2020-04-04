@@ -3,11 +3,6 @@ import { keys } from 'lodash';
 import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 
-export interface IGroceryItemImage {
-   id: string;
-   image: string;
-}
-
 export default class GroceryItemImage extends Model {
   public static entity = 'groceryitemimage';
 

@@ -4,9 +4,11 @@ import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
+import StringHelper from '@/helpers/StringHelper';
 
-export default class RecurringPayment extends Model {
-  public static entity = 'recurringpayment';
+
+export default class Room extends Model {
+  public static entity = 'room';
 
   public static primaryKey = 'id';
 
@@ -20,7 +22,10 @@ export default class RecurringPayment extends Model {
   };
 
   public id;
-  public price;
+
+  public get slug() {
+    return StringHelper.slugify(this.name);
+  }
 
   public static fieldsKeys() {
     return keys(this.fields());
@@ -43,12 +48,7 @@ export default class RecurringPayment extends Model {
   public static fields() {
     return {
       id: this.string(null),
-      name: this.string('nameField'),
-      price: this.number(0),
-      period: this.string(null),
-      activationTime: this.string(''),
-      paymentTag: this.string('question'),
-      isAutomated: this.boolean(false),
+      name: this.string('roomName'),
     };
   }
 

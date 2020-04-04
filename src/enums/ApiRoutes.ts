@@ -10,4 +10,6 @@ export const ApiRoutes = {
     patchShoppingItem: '/shopping/list/items',
 
     getRecurringPayments: '/recurring/payments/',
+
+    getRooms: '/rooms/',
 };

@@ -5,14 +5,6 @@ import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
 
-export interface IGroceryItem {
-   id: string;
-   name: string;
-   description: string;
-   price: string;
-   image: string;
-}
-
 export default class GroceryItem extends Model {
   public static entity = 'groceryitem';
 

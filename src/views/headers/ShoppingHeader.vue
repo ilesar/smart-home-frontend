@@ -81,9 +81,9 @@
     private value = 1;
     private readonly historyRoute = RouteNames.ShoppingHistory;
 
-    @Getter('shopping/getGroceryItemList')
+    @Getter('groceries/getGroceryItemList')
     private groceryList;
-    @Action('shopping/fetchGroceryItemList')
+    @Action('groceries/fetchGroceryItemList')
     private fetchGroceryItemList;
     @Action('shopping/addGroceryItemToShoppingList')
     private addGroceryItemToShoppingList;

@@ -1,56 +1,26 @@
 import {GetterTree} from 'vuex';
 import ILocalState from './stateInterface';
 import RecurringPayment from '@/api/models/RecurringPayment';
+import RecurringPaymentRepository from '@/repositories/RecurringPaymentRepository';
 
 const getters: GetterTree<ILocalState, {}> = {
   getAllRecurringPaymentList(state) {
-    return RecurringPayment
-      .query()
-      .orderBy('isAutomated', 'desc')
-      .orderBy('paymentTag', 'desc')
-      .all();
+    return RecurringPaymentRepository.getAll();
   },
   getMonthlyRecurringPaymentList(state) {
-    return RecurringPayment
-      .query()
-      .where('period', 'month')
-      .orderBy('isAutomated', 'desc')
-      .orderBy('paymentTag', 'desc')
-      .all();
+    return RecurringPaymentRepository.getMonthly();
   },
   getYearlyRecurringPaymentList(state) {
-    return RecurringPayment
-      .query()
-      .where('period', 'year')
-      .orderBy('isAutomated', 'desc')
-      .orderBy('paymentTag', 'desc')
-      .all();
+    return RecurringPaymentRepository.getYearly();
   },
   getAllRecurringPaymentsSum(state) {
-    return RecurringPayment
-      .query()
-      .all()
-      .reduce((aggregator: number, recurringPayment: RecurringPayment) => {
-        return aggregator + parseFloat(recurringPayment.price);
-      }, 0).toFixed(2);
+    return RecurringPaymentRepository.getAllPriceSum();
   },
   getMonthlyRecurringPaymentsSum(state) {
-    return RecurringPayment
-      .query()
-      .where('period', 'month')
-      .all()
-      .reduce((aggregator: number, recurringPayment: RecurringPayment) => {
-        return aggregator + parseFloat(recurringPayment.price);
-      }, 0).toFixed(2);
+    return RecurringPaymentRepository.getMonthlyPriceSum();
   },
   getYearlyRecurringPaymentsSum(state) {
-    return RecurringPayment
-      .query()
-      .where('period', 'year')
-      .all()
-      .reduce((aggregator: number, recurringPayment: RecurringPayment) => {
-        return aggregator + parseFloat(recurringPayment.price);
-      }, 0).toFixed(2);
+    return RecurringPaymentRepository.getYearlyPriceSum();
   },
 };
 

@@ -27,12 +27,6 @@ const actions: ActionTree<ILocalState, {}> = {
         }));
 
     },
-    async fetchGroceryItemList({commit, getters}, productFormId) {
-        GroceryController.fetchAll().then(() => {
-        }).catch((error) => {
-            console.error(error);
-        });
-    },
     async addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: any) {
         return new Promise<void>(((resolve, reject) => {
             ShoppingController.addGroceryToShoppingList(groceryItem.item, groceryItem.quantity).then(() => {

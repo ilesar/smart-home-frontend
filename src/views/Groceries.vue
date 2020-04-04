@@ -27,9 +27,9 @@
 
     private loadingOverlay = new LoadingOverlayHelper(this, {});
 
-    @Getter('shopping/getGroceryItemList')
+    @Getter('groceries/getGroceryItemList')
     private groceryList;
-    @Action('shopping/fetchGroceryItemList')
+    @Action('groceries/fetchGroceryItemList')
     private fetchGroceryItemList;
 
 

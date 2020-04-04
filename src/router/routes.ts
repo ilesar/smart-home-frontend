@@ -11,8 +11,20 @@ export const routes: RouteConfig[] = [
     }
   },
   {
-    path: '/',
-    name: RouteNames.Devices,
+    path: `/${RouteNames.Rooms}`,
+    name: RouteNames.Rooms,
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
+    components: {
+      default: loadView('Rooms'),
+      header: loadView('headers/RoomsHeader')
+    }
+  },
+  {
+    path: `/${RouteNames.Rooms}/:roomSlug`,
+    name: RouteNames.Rooms,
     meta: {
       navigationLayout: true,
       popup: true,
@@ -84,6 +96,17 @@ export const routes: RouteConfig[] = [
       header: loadView('headers/RecurringPaymentsHeader'),
       footer: loadView('footers/RecurringPaymentsFooter'),
     },
+  },
+  {
+    path: `/${RouteNames.Error}`,
+    name: RouteNames.Error,
+    components: {
+      default: loadView('Error'),
+    },
+  },
+  {
+    path: `*`,
+    redirect: `/${RouteNames.Error}`,
   },
 
 ];

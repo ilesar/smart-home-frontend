@@ -1,5 +1,6 @@
 export enum RouteNames {
     Login = 'login',
+    Rooms = 'rooms',
     Devices = 'devices',
     Shopping = 'shopping',
     Payments = 'payments',

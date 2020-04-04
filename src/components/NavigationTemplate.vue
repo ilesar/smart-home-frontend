@@ -4,12 +4,12 @@
             <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider">
                 <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
                     <a-menu-item
-                            key="devices"
-                            @click="goToDevices()"
+                            key="rooms"
+                            @click="goToRooms()"
                             class="o-footer-menu-item"
                     >
-                        <a-icon type="bulb"/>
-                        <span>Uređaji</span>
+                        <a-icon type="home"/>
+                        <span>Dom</span>
                     </a-menu-item>
 
                     <a-menu-item
@@ -69,19 +69,22 @@
                 </a-menu>
             </a-layout-sider>
             <a-layout>
-                <vue-page-transition name="fade-in-right">
                 <a-layout-header style="background: #fff; padding: 0">
+                    <vue-page-transition name="fade-in-down">
                     <router-view name="header"></router-view>
-
+                    </vue-page-transition>
                 </a-layout-header>
-                </vue-page-transition>
                 <a-layout-content
                         class="content-container"
                 >
+                    <vue-page-transition name="fade-in-right">
                     <slot></slot>
+                    </vue-page-transition>
                 </a-layout-content>
                 <a-layout-footer style="background: #fff; padding: 0">
+                    <vue-page-transition name="fade-in-up">
                     <router-view name="footer"></router-view>
+                    </vue-page-transition>
                 </a-layout-footer>
             </a-layout>
         </a-layout>
@@ -107,9 +110,9 @@
       });
     }
 
-    private goToDevices() {
-      if (this.$route.name !== RouteNames.Devices) {
-        this.$router.push({name: RouteNames.Devices});
+    private goToRooms() {
+      if (this.$route.name !== RouteNames.Rooms) {
+        this.$router.push({name: RouteNames.Rooms});
       }
     }
 

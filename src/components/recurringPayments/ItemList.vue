@@ -1,6 +1,6 @@
 <template>
     <a-list itemLayout="horizontal" :dataSource="dateSource" class="item-list">
-        <a-list-item slot="renderItem" slot-scope="item">
+        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
             <a-list-item-meta
                     :description="item.price + ' KN'"
             >
@@ -12,6 +12,12 @@
                 />
             </a-list-item-meta>
             <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
+            <a-button type="default" shape="round" icon="edit" @click="() => {}"
+                      style="margin-left: 16px">
+            </a-button>
+            <a-button type="danger" shape="round" icon="delete" @click="() => {}"
+                      style="margin-left: 16px">
+            </a-button>
         </a-list-item>
     </a-list>
 </template>

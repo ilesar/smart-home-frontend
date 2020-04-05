@@ -1,6 +1,6 @@
 <template>
     <a-list itemLayout="horizontal" :dataSource="groceryList">
-        <a-list-item slot="renderItem" slot-scope="item, index">
+        <a-list-item slot="renderItem" slot-scope="item, index" style="padding-right: 24px">
             <a-list-item-meta
                     :description="item.price + ' KN'"
             >
@@ -10,6 +10,12 @@
                         :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
+            <a-button type="default" shape="round" icon="edit" @click="() => {}"
+                      style="margin-left: 16px">
+            </a-button>
+            <a-button type="danger" shape="round" icon="delete" @click="() => {}"
+                      style="margin-left: 16px">
+            </a-button>
         </a-list-item>
     </a-list>
 </template>

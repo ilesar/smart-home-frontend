@@ -1,5 +1,5 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Konfiguracija proizvoda" class="o-section-header" @back="goBack">
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" :title="title" class="o-section-header" @back="goBack">
 
     </a-page-header>
 </template>
@@ -14,17 +14,12 @@
   export default class DevicesHeader extends Vue {
     private visible: boolean = false;
 
-
-    showDrawer() {
-      this.visible = true;
-    }
-
-    onClose() {
-      this.visible = false;
-    }
-
     public get room() {
       return this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug)
+    }
+
+    public get device() {
+      return this.$store.getters['devices/getDeviceById'](this.$route.params.deviceSlug)
     }
 
     public goBack() {
@@ -32,10 +27,10 @@
     }
 
     public get title() {
-      if (!this.room) {
+      if (!this.room || !this.device) {
         return '';
       }
-      return `Uređaji u ${this.room.name}`;
+      return `${this.device.name} - ${this.room.name}`;
     }
   }
 </script>

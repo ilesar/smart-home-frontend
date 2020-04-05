@@ -11,15 +11,13 @@
   @Component
   export default class DevicesHeader extends Vue {
 
-    private room: Room;
 
     public beforeMount() {
-      console.log(this.$route.params.roomSlug);
-      this.room = this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug);
 
-      if (!this.room) {
-        this.$router.push({name: RouteNames.Error});
-      }
+    }
+
+    public get room() {
+      return this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug)
     }
 
     public goBack() {
@@ -27,6 +25,9 @@
     }
 
     public get title() {
+      if (!this.room) {
+        return '';
+      }
       return `Uređaji u ${this.room.name}`;
     }
   }

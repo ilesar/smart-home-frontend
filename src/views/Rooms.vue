@@ -3,12 +3,12 @@
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="room in rooms">
             <div class="gutter-box">
                 <a-card hoverable @click="goToRoom(room)">
-                    <a-card-meta :title="room.name" >
-<!--                        <a-avatar-->
-<!--                                slot="avatar"-->
-<!--                                icon="home"-->
-<!--                                style="color: #1890ff; background: #FFF"-->
-<!--                        />-->
+                    <a-card-meta :title="room.name" description="This is the description">
+                        <a-avatar
+                                slot="avatar"
+                                icon="home"
+                                style="color: #1890ff; background: #FFF"
+                        />
                     </a-card-meta>
                 </a-card>
             </div>

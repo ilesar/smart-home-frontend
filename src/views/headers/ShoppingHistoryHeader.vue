@@ -13,7 +13,7 @@
   import {RouteNames} from '@/enums/RouteNames';
 
   @Component
-  export default class ShoppingHeader extends Vue {
+  export default class ShoppingHistoryHeader extends Vue {
 
     public goBackToShopping() {
       this.$router.push({name: RouteNames.Shopping});

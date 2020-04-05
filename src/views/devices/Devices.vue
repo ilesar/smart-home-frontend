@@ -9,7 +9,7 @@
         </a-empty>
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="device in devices">
             <div class="gutter-box">
-                <a-card hoverable @click="" >
+                <a-card hoverable @click="goToDevice(device)">
                     <a-card-meta :title="device.name" description="This is the description">
                         <a-avatar
                                 slot="avatar"
@@ -31,6 +31,7 @@
   import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
   import Room from '@/api/models/Room';
   import {Action} from 'vuex-class';
+  import {RouteNames} from '@/enums/RouteNames';
 
   @Component({
     name: 'Devices',
@@ -53,6 +54,10 @@
 
     public get devices() {
       return this.room ? this.room.devices : [];
+    }
+
+    private goToDevice(device: Device) {
+      this.$router.push(`/${RouteNames.Rooms}/${this.room.slug}/devices/${device.slug}`);
     }
 
   }

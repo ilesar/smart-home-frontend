@@ -28,14 +28,26 @@ export const routes: RouteConfig[] = [
     }
   },
   {
-    path: `/${RouteNames.Rooms}/:roomSlug`,
-    name: RouteNames.Rooms,
+    path: `/${RouteNames.Rooms}/:roomSlug/devices/:deviceSlug`,
+    name: RouteNames.Configurations,
     meta: {
       navigationLayout: true,
       popup: true,
     },
     components: {
-      default: loadView('Devices'),
+      default: loadView('devices/DeviceConfiguration'),
+      header: loadView('headers/DeviceConfigurationHeader')
+    }
+  },
+  {
+    path: `/${RouteNames.Rooms}/:roomSlug`,
+    name: RouteNames.Devices,
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
+    components: {
+      default: loadView('devices/Devices'),
       header: loadView('headers/DevicesHeader')
     }
   },
@@ -60,8 +72,8 @@ export const routes: RouteConfig[] = [
       popup: true,
     },
     components: {
-      default: loadView('shopping/History'),
-      header: loadView('shopping/HistoryHeader')
+      default: loadView('shopping/ShoppingHistory'),
+      header: loadView('headers/ShoppingHistoryHeader')
     }
   },
   {
@@ -85,8 +97,8 @@ export const routes: RouteConfig[] = [
       popup: true,
     },
     components: {
-      default: loadView('payment/History'),
-      header: loadView('payment/HistoryHeader')
+      default: loadView('payment/PaymentHistory'),
+      header: loadView('headers/PaymentHistoryHeader')
     }
   },
   {
@@ -115,17 +127,20 @@ export const routes: RouteConfig[] = [
       footer: loadView('footers/RecurringPaymentsFooter'),
     },
   },
-  // {
-  //   path: `/${RouteNames.Error}`,
-  //   name: RouteNames.Error,
-  //   components: {
-  //     default: loadView('Error'),
-  //   },
-  // },
-  // {
-  //   path: `*`,
-  //   redirect: `/${RouteNames.Error}`,
-  // },
+  {
+    path: `/${RouteNames.Error}`,
+    name: RouteNames.Error,
+    components: {
+      default: loadView('Error'),
+    },
+    meta: {
+      navigationLayout: true,
+    },
+  },
+  {
+    path: `*`,
+    redirect: `/${RouteNames.Error}`,
+  },
 
 ];
 function loadView(view: string) {

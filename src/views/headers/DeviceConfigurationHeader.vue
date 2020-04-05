@@ -1,20 +1,6 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" :title="title" class="o-section-header" @back="goBack">
-        <template slot="extra">
-            <a-button type="default" @click="showDrawer" >
-                Predlošci
-            </a-button>
-        </template>
-        <a-drawer
-                :title="`Odaberi predložak za ${room ? room.name : ''}`"
-                placement="bottom"
-                :closable="false"
-                @close="onClose"
-                :visible="visible"
-                class="shopping-drawer"
-                :bodyStyle="{ overflow: 'auto', height: '201px' }"
-        >
-        </a-drawer>
+    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Konfiguracija proizvoda" class="o-section-header" @back="goBack">
+
     </a-page-header>
 </template>
 

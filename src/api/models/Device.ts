@@ -45,6 +45,7 @@ export default class Device extends Model {
     return {
       id: this.string(null),
       name: this.string('deviceName'),
+      slug: this.string(null),
       deviceType: this.string('deviceName'),
     };
   }

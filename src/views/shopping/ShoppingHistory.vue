@@ -35,7 +35,7 @@
       ListItem,
     },
   })
-  export default class History extends Vue {
+  export default class ShoppingHistory extends Vue {
 
     @Getter('shopping/getResolvedList')
     private resolvedList;

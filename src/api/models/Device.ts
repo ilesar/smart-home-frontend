@@ -5,11 +5,10 @@ import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
-import Device from '@/api/models/Device';
 
 
-export default class Room extends Model {
-  public static entity = 'room';
+export default class Device extends Model {
+  public static entity = 'device';
 
   public static primaryKey = 'id';
 
@@ -45,10 +44,7 @@ export default class Room extends Model {
   public static fields() {
     return {
       id: this.string(null),
-      name: this.string('roomName'),
-      slug: this.string(null),
-      device_ids: this.attr([]),
-      devices: this.hasManyBy(Device, 'device_ids'),
+      name: this.string('deviceName'),
     };
   }
 

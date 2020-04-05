@@ -51,7 +51,7 @@
     }
 
     private goToRoom(room: Room) {
-        this.$router.push(`${RouteNames.Rooms}/${room.slug}`);
+        this.$router.push(`/${RouteNames.Rooms}/${room.slug}`);
     }
   }
 

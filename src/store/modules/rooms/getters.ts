@@ -1,16 +1,16 @@
 import {GetterTree} from 'vuex';
 import ILocalState from './stateInterface';
 import Room from '@/api/models/Room';
-import TokenRepository from '@/repositories/RoomRepository';
+import RoomRepository from '@/repositories/RoomRepository';
 
 const getters: GetterTree<ILocalState, {}> = {
   getAllRooms(state) {
-    return TokenRepository.getAll();
+    return RoomRepository.getAll();
   },
   getRoomById: (state) => (roomSlug: string) => {
-    console.log('CALLED: ', roomSlug);
     return Room
       .query()
+      .with('devices')
       .where('slug', roomSlug)
       .first();
   },

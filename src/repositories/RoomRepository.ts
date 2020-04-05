@@ -5,6 +5,7 @@ export default class RoomRepository {
     public static getAll(): Room[] {
         return Room
           .query()
+          .with('devices')
           .all();
     }
 }

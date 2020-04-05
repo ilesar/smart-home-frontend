@@ -11,11 +11,12 @@ export const ApiRoutes = {
 
     getRecurringPayments: '/recurring/payments/',
 
-    getRooms: '/rooms/',
+    getRooms: '/rooms/?include=devices',
 
     getExpenses: '/expenses/?include=recurringPayment',
     patchExpense: '/expenses',
     getResolvedExpenses: '/expenses/?include=recurringPayment&filter[isResolved]=1',
+
 
 
 };

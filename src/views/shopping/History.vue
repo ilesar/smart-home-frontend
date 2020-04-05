@@ -7,7 +7,7 @@
         >
             <span slot="description">Još ništa nismo kupili</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item, index">
+        <a-list-item slot="renderItem" slot-scope="item, index" style="padding-right: 24px">
             <a-list-item-meta
                     :description="item.groceryItem.price + ' KN'"
             >

@@ -26,6 +26,7 @@ export default class RoomRepository {
       .query()
       .with('recurringPayment')
       .where('isResolved', false)
+      .orderBy('dueDate', 'asc')
       .orderBy('recurringPayment.isAutomated', 'desc')
       .orderBy('recurringPayment.paymentTag', 'desc')
       .all();

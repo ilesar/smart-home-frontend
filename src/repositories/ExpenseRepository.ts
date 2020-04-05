@@ -10,4 +10,24 @@ export default class RoomRepository {
           .orderBy('recurringPayment.paymentTag', 'desc')
           .all();
     }
+
+  public static getResolved() {
+    return Expense
+      .query()
+      .with('recurringPayment')
+      .where('isResolved', true)
+      .orderBy('recurringPayment.isAutomated', 'desc')
+      .orderBy('recurringPayment.paymentTag', 'desc')
+      .all();
+  }
+
+  public static getUnresolved() {
+    return Expense
+      .query()
+      .with('recurringPayment')
+      .where('isResolved', false)
+      .orderBy('recurringPayment.isAutomated', 'desc')
+      .orderBy('recurringPayment.paymentTag', 'desc')
+      .all();
+  }
 }

@@ -5,6 +5,7 @@ export enum RouteNames {
     Devices = 'devices',
     Shopping = 'shopping',
     Payments = 'payments',
+    PaymentHistory = 'paymentsHistory',
     Groceries = 'groceries',
     Error = 'error',
     ShoppingHistory = 'shoppingHistory',

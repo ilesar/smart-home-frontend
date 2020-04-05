@@ -14,5 +14,8 @@ export const ApiRoutes = {
     getRooms: '/rooms/',
 
     getExpenses: '/expenses/?include=recurringPayment',
+    patchExpense: '/expenses',
+    getResolvedExpenses: '/expenses/?include=recurringPayment&filter[isResolved]=1',
+
 
 };

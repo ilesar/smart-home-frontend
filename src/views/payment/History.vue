@@ -1,24 +1,24 @@
 <template>
-    <a-list itemLayout="horizontal" :dataSource="resolvedList">
+    <a-list itemLayout="horizontal" :dataSource="expenses">
         <a-empty
-                v-if="resolvedList.length === 0"
+                v-if="expenses.length === 0"
                 image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
                 :imageStyle="{height: '60px'}"
         >
-            <span slot="description">Još ništa nismo kupili</span>
+            <span slot="description">Nema izvršenih plaćanja</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item, index">
+        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
             <a-list-item-meta
-                    :description="item.groceryItem.price + ' KN'"
+                    :description="`${item.recurringPayment.price} kn`"
             >
-                <p slot="title">{{item.groceryItem.name}}</p>
+                <p slot="title">{{item.recurringPayment.name}}</p>
                 <a-avatar
                         slot="avatar"
-                        :src="item.groceryItem.image ? item.groceryItem.image.path : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Red.svg/1200px-Red.svg.png'"
+                        :icon="item.recurringPayment.paymentTag"
+                        style="color: #1890ff; background: white"
                 />
             </a-list-item-meta>
             <div>{{ formatDate(item.updatedAt) }}</div>
-            <a-button type="default" shape="circle" style="margin-left: 16px">i</a-button>
         </a-list-item>
     </a-list>
 </template>
@@ -30,24 +30,23 @@
   import moment from 'moment';
 
   @Component({
-    name: 'Shopping',
+    name: 'PaymentHistory',
     components: {
       ListItem,
     },
   })
   export default class History extends Vue {
 
-    @Getter('shopping/getResolvedList')
-    private resolvedList;
-    @Action('shopping/fetchResolvedItemList')
-    private fetchResolvedItemList;
+    @Getter('expenses/getResolvedExpenses')
+    private expenses;
+    @Action('expenses/fetchResolvedExpenses')
+    private fetchResolvedExpenses;
 
     public beforeMount() {
-      this.fetchResolvedItemList();
+      this.fetchResolvedExpenses();
     }
 
     public formatDate(dateString: string) {
-      // return moment(dateString).locale('hr').format('LL');
       return moment(dateString).locale('hr').calendar();
     }
 

@@ -5,7 +5,7 @@
                 image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
                 :imageStyle="{height: '60px'}"
         >
-            <span slot="description">Ne treba ništa kupiti</span>
+            <span slot="description">Sve plaćeno</span>
         </a-empty>
         <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
             <a-list-item-meta
@@ -19,7 +19,7 @@
                 />
             </a-list-item-meta>
             <div>{{ formatDate(item.dueDate) }}</div>
-            <a-button type="primary" shape="round" icon="check" @click="markShoppingItemBought(item)"
+            <a-button type="primary" shape="round" icon="check" @click="markExpenseResolved(item)"
                       style="margin-left: 16px">
             </a-button>
         </a-list-item>
@@ -39,43 +39,27 @@
   @Component
   export default class Payment extends Vue {
     @Action('expenses/fetchExpenses') fetchAllExpenses;
-    @Getter('expenses/getAllExpenses') expenses;
+    @Action('expenses/resolveExpense') resolveExpense;
+    @Getter('expenses/getUnresolvedExpenses') expenses;
 
     private beforeMount() {
       this.fetchAllExpenses();
     }
 
-    public markShoppingItemBought(model: Expense) {
+    public markExpenseResolved(model: Expense) {
       EventBus.$emit(EventBusEvents.OpenPopup, {
         options: {
-          title: `Kupljeno?`,
+          title: `Plaćeno?`,
           content: model.recurringPayment.name,
           okText: 'Da',
           cancelText: 'Ne',
           onOk: () => {
-            this.resolveShoppingItem(model).then(() => {
+            this.resolveExpense(model).then(() => {
               model.$delete();
             });
           },
         }
       } as PopupDataInterface);
-    }
-
-    public deleteShoppingItem(model: ShoppingItem) {
-      EventBus.$emit(EventBusEvents.OpenPopup, {
-        options: {
-          title: `Ne trebamo ovo?`,
-          content: model.recurringPayment.name,
-          okText: 'Ne',
-          cancelText: 'Ne znam',
-          onOk: () => {
-            this.removeShoppingItem(model).then(() => {
-              model.$delete();
-            });
-          },
-        }
-      } as PopupDataInterface);
-
     }
 
     public formatDate(dateString: string) {

@@ -73,7 +73,20 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('Payment'),
-      header: loadView('headers/PaymentHeader')
+      header: loadView('headers/PaymentHeader'),
+      footer: loadView('footers/PaymentFooter')
+    }
+  },
+  {
+    path: '/payments/history',
+    name: RouteNames.PaymentHistory,
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
+    components: {
+      default: loadView('payment/History'),
+      header: loadView('payment/HistoryHeader')
     }
   },
   {
@@ -102,17 +115,17 @@ export const routes: RouteConfig[] = [
       footer: loadView('footers/RecurringPaymentsFooter'),
     },
   },
-  {
-    path: `/${RouteNames.Error}`,
-    name: RouteNames.Error,
-    components: {
-      default: loadView('Error'),
-    },
-  },
-  {
-    path: `*`,
-    redirect: `/${RouteNames.Error}`,
-  },
+  // {
+  //   path: `/${RouteNames.Error}`,
+  //   name: RouteNames.Error,
+  //   components: {
+  //     default: loadView('Error'),
+  //   },
+  // },
+  // {
+  //   path: `*`,
+  //   redirect: `/${RouteNames.Error}`,
+  // },
 
 ];
 function loadView(view: string) {

@@ -49,6 +49,8 @@ export default class Expense extends Model {
       id: this.string(null),
       slug: this.string(null),
       dueDate: this.string(null),
+      isResolved: this.boolean(false),
+      updatedAt: this.string(null),
       recurringPayment_id: this.attr(null),
       recurringPayment: this.belongsTo(RecurringPayment, 'recurringPayment_id'),
     };

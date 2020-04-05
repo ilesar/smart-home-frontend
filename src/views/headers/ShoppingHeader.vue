@@ -5,7 +5,7 @@
                 <a-button type="link" @click="">Povijest kupovine</a-button>
             </router-link>
 
-            <a-button type="primary" @click="showDrawer" >
+            <a-button type="default" @click="showDrawer" >
                 Dodaj proizvod
             </a-button>
         </template>

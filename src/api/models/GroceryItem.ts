@@ -46,6 +46,8 @@ export default class GroceryItem extends Model {
       description: this.string(undefined),
       price: this.string(undefined),
       image: this.hasOne(GroceryItemImage, 'grocery_item_id'),
+      createdAt: this.string(undefined),
+      updatedAt: this.string(undefined),
     };
   }
 

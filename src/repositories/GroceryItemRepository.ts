@@ -7,7 +7,8 @@ export default class GroceryItemRepository {
         return GroceryItem
           .query()
           .with('image')
-          .limit(30)
+          .orderBy('createdAt', 'desc')
+          // .limit(30)
           .all();
     }
 }

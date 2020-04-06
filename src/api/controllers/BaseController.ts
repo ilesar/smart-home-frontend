@@ -23,6 +23,10 @@ export default class BaseController {
       return Promise.reject(e);
     }
 
+    await model.insertOrUpdate({
+      data: response.response.data,
+    });
+
     return Promise.resolve(response);
   }
 
@@ -34,6 +38,10 @@ export default class BaseController {
     } catch (e) {
       return Promise.reject(e);
     }
+
+    await model.insertOrUpdate({
+      data: response.response.data,
+    });
 
     return Promise.resolve(response);
   }

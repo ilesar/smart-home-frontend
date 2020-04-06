@@ -3,7 +3,7 @@ export const ApiRoutes = {
     RefreshToken: '/auth/refresh-token',
 
     GroceryItem: '/grocery/items',
-    GroceryItems: '/grocery/items/?include=image&sort=id&filter[isDeleted]=0',
+    GroceryItems: '/grocery/items/?include=image&sort=-updatedAt&filter[isDeleted]=0',
 
     ShoppingItem: '/shopping/list/items',
     ShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=0',

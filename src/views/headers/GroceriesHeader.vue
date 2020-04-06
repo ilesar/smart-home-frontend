@@ -31,7 +31,6 @@
         submitText: 'Spremi namirnicu',
         onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
           this.createGroceryItem(model).then(() => {
-            GroceryItem.insert({data: model});
             EventBus.$emit(EventBusEvents.CloseDrawer);
           });
         }

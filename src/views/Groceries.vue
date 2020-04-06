@@ -76,7 +76,6 @@
         submitText: 'Spremi plaćanje',
         onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
           this.updateGroceryItem(item).then(() => {
-            model.$save()
             EventBus.$emit(EventBusEvents.CloseDrawer);
           });
         }

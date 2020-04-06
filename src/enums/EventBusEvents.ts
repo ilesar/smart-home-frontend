@@ -1,3 +1,4 @@
 export enum EventBusEvents {
-    OpenPopup = "OpenPopup",
+    OpenDrawer = "OpenDrawerEvent",
+    OpenPopup = "OpenPopupEvent",
 }

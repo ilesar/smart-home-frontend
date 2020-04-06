@@ -12,7 +12,7 @@
                 />
             </a-list-item-meta>
             <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
-            <a-button type="default" shape="round" icon="edit" @click="() => {}"
+            <a-button type="default" shape="round" icon="edit" @click="openDrawer"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -25,6 +25,10 @@
 <script lang="ts">
   import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
   import RecurringPayment from '@/api/models/RecurringPayment';
+  import {EventBus} from '@/helpers/EventBusHelper';
+  import {EventBusEvents} from '@/enums/EventBusEvents';
+  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
+  import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
 
   @Component({
     name: 'ItemList',
@@ -37,6 +41,13 @@
     @Emit('on-delete')
     public deleteItem(item: RecurringPayment) {
         return item;
+    }
+
+    public openDrawer() {
+      EventBus.$emit(EventBusEvents.OpenDrawer, {
+        title: 'Uredi plaćanje',
+        component: RecurringPaymentForm.name,
+      } as DrawerDataInterface);
     }
   }
 </script>

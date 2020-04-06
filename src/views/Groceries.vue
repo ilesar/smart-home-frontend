@@ -10,7 +10,7 @@
                         :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
-            <a-button type="default" shape="round" icon="edit" @click="() => {}"
+            <a-button type="default" shape="round" icon="edit" @click="openDrawer"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -28,6 +28,8 @@
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
+  import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
 
   @Component({
     name: 'Groceries',
@@ -62,6 +64,13 @@
           },
         }
       } as PopupDataInterface);
+    }
+
+    public openDrawer() {
+      EventBus.$emit(EventBusEvents.OpenDrawer, {
+        title: 'Uredi namirnicu',
+        component: RecurringPaymentForm.name,
+      } as DrawerDataInterface);
     }
 
   }

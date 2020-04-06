@@ -9,6 +9,7 @@
             <router-view></router-view>
         </template>
         <Popup v-if="$route.meta.popup" />
+        <CrudModelDrawer />
     </div>
 </template>
 
@@ -18,20 +19,20 @@ import Popup from '@/components/Popup.vue';
 import { Component, Vue } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
 import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
-import GroceryItem from '@/api/models/GroceryItem';
-import GroceryController from '@/api/controllers/GroceryController';
+import CrudModelDrawer from '@/components/CrudModelDrawer.vue';
+import {EventBus} from '@/helpers/EventBusHelper';
+import {EventBusEvents} from '@/enums/EventBusEvents';
 
 @Component({
   name: 'App',
   components: {
+    CrudModelDrawer,
     Popup,
     NavigationTemplate,
   },
 })
 export default class App extends Vue {
   @Action('shoppingModule/getItems') private actionFoo;
-
-  private loadingOverlay = new LoadingOverlayHelper(this, {});
 
 }
 </script>

@@ -22,6 +22,7 @@ export default class RecurringPayment extends Model {
   public id;
   public price;
   public activationTimeDate;
+  public activationTime;
 
   public static fieldsKeys() {
     return keys(this.fields());

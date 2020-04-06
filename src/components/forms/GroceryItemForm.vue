@@ -11,10 +11,11 @@
             <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>
         </a-form-model-item>
         <a-form-model-item label="Cijena" prop="price" ref="price">
-            <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" />
+            <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
         </a-form-model-item>
+        <a-divider></a-divider>
         <a-form-model-item :wrapper-col="{ offset: 6 }">
-            <a-button type="primary" @click="submitButtonCallback(model)">
+            <a-button type="primary" @click="submitButtonCallback(instance, model)">
                 {{ submitButtonText }}
             </a-button>
             <a-button style="margin-left: 10px;" @click="closeForm">
@@ -27,6 +28,7 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
   import GroceryItem from '@/api/models/GroceryItem';
+  import RecurringPayment from '@/api/models/RecurringPayment';
 
   @Component({
     name: 'GroceryItemForm',
@@ -35,9 +37,9 @@
     @Prop()
     private submitButtonText!: string;
     @Prop()
-    private submitButtonCallback!: (model: GroceryItem) => void;
-
-    private model = new GroceryItem();
+    private submitButtonCallback!: (form: GroceryItemForm, model: GroceryItem) => void;
+    @Prop()
+    private model!: GroceryItem;
 
     private rules = {};
 
@@ -47,6 +49,10 @@
     @Emit('on-cancel')
     public closeForm() {
 
+    }
+
+    public get instance() {
+      return this;
     }
   }
 </script>

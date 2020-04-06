@@ -12,7 +12,7 @@
                 />
             </a-list-item-meta>
             <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
-            <a-button type="default" shape="round" icon="edit" @click="openDrawer"
+            <a-button type="default" shape="round" icon="edit" @click="openDrawer(item)"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -29,6 +29,7 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+  import moment from 'moment';
 
   @Component({
     name: 'ItemList',
@@ -43,11 +44,27 @@
         return item;
     }
 
-    public openDrawer() {
+    public openDrawer(item: RecurringPayment) {
+      item.activationTimeDate = moment(item.activationTime);
+
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Uredi plaćanje',
+        model: item,
         component: RecurringPaymentForm.name,
-      } as DrawerDataInterface);
+        submitText: 'Spremi plaćanje',
+        onSubmit: (model: RecurringPayment) => {
+          if (model.activationTimeDate) {
+            model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
+          }
+
+          console.log(model.activationTime);
+
+          this.createRecurringPayment(model).then(() => {
+            console.log('item created asdasd');
+            model.$save();
+          });
+        }
+      } as DrawerDataInterface<RecurringPayment>);
     }
   }
 </script>

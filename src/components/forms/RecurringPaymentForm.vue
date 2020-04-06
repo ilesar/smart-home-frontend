@@ -11,7 +11,7 @@
             <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv plaćanja"/>
         </a-form-model-item>
         <a-form-model-item label="Cijena" prop="price" ref="price">
-            <a-input type="number" v-model="model.price" placeholder="unesi iznos plaćanja" />
+            <a-input type="number" v-model="model.price" placeholder="unesi iznos plaćanja" addonAfter="KN" />
         </a-form-model-item>
         <a-form-model-item label="Tip plaćanja" prop="type" ref="type">
             <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
@@ -79,8 +79,8 @@
     private submitButtonText!: string;
     @Prop()
     private submitButtonCallback!: (model: GroceryItem) => void;
-
-    private model = new RecurringPayment();
+    @Prop()
+    private model!: RecurringPayment;
 
     private rules = {};
 

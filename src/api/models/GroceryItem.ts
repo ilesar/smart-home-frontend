@@ -1,9 +1,7 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
-import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
-import ShoppingItem from '@/api/models/ShoppingItem';
 
 export default class GroceryItem extends Model {
   public static entity = 'groceryitem';
@@ -20,6 +18,8 @@ export default class GroceryItem extends Model {
   };
 
   public id;
+  public name;
+  public price;
 
   public static fieldsKeys() {
     return keys(this.fields());

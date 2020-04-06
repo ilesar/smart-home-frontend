@@ -10,6 +10,7 @@
         <component
                 :is="drawerObject.component"
                 @on-cancel="closeDrawer"
+                :model="drawerObject.model"
                 :submitButtonText="drawerObject.submitText"
                 :submitButtonCallback="drawerObject.onSubmit" />
     </a-drawer>
@@ -21,21 +22,25 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
+  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
 
   @Component
   export default class CrudModelDrawer extends Vue {
     private visible: boolean = false;
-    private drawerObject: DrawerDataInterface = {};
+    private drawerObject: DrawerDataInterface<any> | {} = {};
 
     private mounted() {
       EventBus.$on(EventBusEvents.OpenDrawer, this.resolvePopup);
+      EventBus.$on(EventBusEvents.CloseDrawer, this.closeDrawer);
     }
 
     public beforeDestroy() {
       EventBus.$off(EventBusEvents.OpenDrawer);
+      EventBus.$off(EventBusEvents.CloseDrawer);
     }
 
-    private resolvePopup(drawerDataObject: DrawerDataInterface) {
+    private resolvePopup(drawerDataObject: DrawerDataInterface<any>) {
       this.drawerObject = drawerDataObject;
       this.visible = true;
     }

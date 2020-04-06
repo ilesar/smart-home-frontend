@@ -10,7 +10,7 @@
                         :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
-            <a-button type="default" shape="round" icon="edit" @click="openDrawer"
+            <a-button type="default" shape="round" icon="edit" @click="openDrawer(item)"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -28,7 +28,6 @@
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
-  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
 
@@ -46,6 +45,8 @@
     private fetchGroceryItemList;
     @Action('groceries/deleteGroceryItem')
     private deleteGroceryItem;
+    @Action('groceries/updateGroceryItem')
+    private updateGroceryItem;
 
     public beforeMount() {
       this.fetchGroceryItemList();
@@ -67,11 +68,19 @@
       } as PopupDataInterface);
     }
 
-    public openDrawer() {
+    public openDrawer(item: GroceryItem) {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Uredi namirnicu',
+        model: item,
         component: GroceryItemForm.name,
-      } as DrawerDataInterface);
+        submitText: 'Spremi plaćanje',
+        onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
+          this.updateGroceryItem(item).then(() => {
+            model.$save()
+            EventBus.$emit(EventBusEvents.CloseDrawer);
+          });
+        }
+      } as DrawerDataInterface<GroceryItem>);
     }
 
   }

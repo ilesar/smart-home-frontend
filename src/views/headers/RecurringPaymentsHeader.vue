@@ -25,22 +25,19 @@
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Novo plaćanje',
+        model: new RecurringPayment(),
         component: RecurringPaymentForm.name,
         submitText: 'Spremi plaćanje',
         onSubmit: (model: RecurringPayment) => {
           if (model.activationTimeDate) {
-            console.log('setting');
             model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
           }
 
-          console.log(model.activationTime);
-
           this.createRecurringPayment(model).then(() => {
-            console.log('item created asdasd');
             model.$save();
           });
         }
-      } as DrawerDataInterface);
+      } as DrawerDataInterface<RecurringPayment>);
     }
   }
 </script>

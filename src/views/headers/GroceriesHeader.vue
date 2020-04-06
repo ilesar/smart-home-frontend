@@ -26,17 +26,15 @@
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Nova namirnica',
+        model: new GroceryItem(),
         component: GroceryItemForm.name,
         submitText: 'Spremi namirnicu',
         onSubmit: (model: GroceryItem) => {
-          console.log('form submitted');
-          console.log(model);
           this.createGroceryItem(model).then(() => {
-            console.log('item created');
             model.$save();
           });
         }
-      } as DrawerDataInterface);
+      } as DrawerDataInterface<GroceryItem>);
     }
   }
 </script>

@@ -24,4 +24,18 @@ export default class GroceryController extends BaseController{
       },
     });
   }
+
+  public static updateOne(groceryItem: GroceryItem) {
+    return this.makePatchRequest(GroceryItem, `${ApiRoutes.createGroceryItem}/${groceryItem.id}`, {
+      data: {
+        id: groceryItem.id,
+        type: 'grocery_items',
+        attributes: {
+          name: groceryItem.name,
+          price: groceryItem.price,
+          source: 'manual',
+        },
+      },
+    });
+  }
 }

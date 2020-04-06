@@ -17,6 +17,18 @@ const actions: ActionTree<ILocalState, {}> = {
       console.error(error);
     });
   },
+  async deleteGroceryItem({commit, getters}, groceryItem: GroceryItem) {
+    GroceryController.deleteOne(groceryItem).then(() => {
+    }).catch((error) => {
+      console.error(error);
+    });
+  },
+  async updateGroceryItem({commit, getters}, groceryItem: GroceryItem) {
+    GroceryController.updateOne(groceryItem).then(() => {
+    }).catch((error) => {
+      console.error(error);
+    });
+  },
 };
 
 export default actions;

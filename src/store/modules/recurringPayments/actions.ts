@@ -17,10 +17,24 @@ const actions: ActionTree<ILocalState, {}> = {
         }));
     },
     async deleteRecurringPayment({commit, getters}, payment: RecurringPayment) {
-        RecurringPaymentsController.deleteOne(payment).then(() => {
-        }).catch((error) => {
-            console.error(error);
-        });
+        return new Promise<void>(((resolve, reject) => {
+            RecurringPaymentsController.deleteOne(payment).then(() => {
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+
+
+    },
+    async createRecurringPayment({commit, getters}, payment: RecurringPayment) {
+
+        return new Promise<void>(((resolve, reject) => {
+            RecurringPaymentsController.createOne(payment).then(() => {
+            }).catch((error) => {
+                reject(error);
+            });
+        }));
+
     },
 };
 

@@ -51,6 +51,10 @@
                     style="width: 100%;"
             />
         </a-form-model-item>
+        <a-form-model-item label="Automatizirano">
+            <a-switch v-model="model.isAutomated" />
+        </a-form-model-item>
+        <a-divider></a-divider>
         <a-form-model-item :wrapper-col="{ offset: 6 }">
             <a-button type="primary" @click="submitButtonCallback(model)">
                 {{ submitButtonText }}
@@ -75,7 +79,7 @@
     private submitButtonText!: string;
     @Prop()
     private submitButtonCallback!: (model: GroceryItem) => void;
-    
+
     private model = new RecurringPayment();
 
     private rules = {};

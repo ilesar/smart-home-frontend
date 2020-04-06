@@ -14,11 +14,13 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
-  import GroceryItem from '@/api/models/GroceryItem';
   import RecurringPayment from '@/api/models/RecurringPayment';
+  import {Action} from 'vuex-class';
 
   @Component({})
   export default class RecurringPaymentsHeader extends Vue {
+    @Action('recurringpayments/createRecurringPayment')
+    private createRecurringPayment;
 
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
@@ -26,8 +28,17 @@
         component: RecurringPaymentForm.name,
         submitText: 'Spremi plaćanje',
         onSubmit: (model: RecurringPayment) => {
-          console.log('form submitted');
-          console.log(model);
+          if (model.activationTimeDate) {
+            console.log('setting');
+            model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
+          }
+
+          console.log(model.activationTime);
+
+          this.createRecurringPayment(model).then(() => {
+            console.log('item created asdasd');
+            model.$save();
+          });
         }
       } as DrawerDataInterface);
     }

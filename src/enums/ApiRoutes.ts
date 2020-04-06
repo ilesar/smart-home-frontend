@@ -3,6 +3,7 @@ export const ApiRoutes = {
     refreshToken: '/auth/refresh-token',
     getGroceryItems: '/grocery/items/?filter[isDeleted]=0',
     patchGroceryItem: '/grocery/items',
+    createGroceryItem: '/grocery/items/',
     getGroceryItemsWithImages: '/grocery/items/?include=image&sort=id&filter[isDeleted]=0',
     addGroceryToShoppingList: '/shopping/list/items/',
     deleteShoppingItem: '/shopping/list/items',
@@ -12,6 +13,7 @@ export const ApiRoutes = {
 
     getRecurringPayments: '/recurring/payments/?filter[isDeleted]=0',
     deleteRecurringPayment: 'recurring/payments',
+    createRecurringPayment: '/recurring/payments/',
 
     getRooms: '/rooms/?include=devices',
 

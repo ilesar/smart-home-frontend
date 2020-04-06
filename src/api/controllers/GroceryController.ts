@@ -11,4 +11,17 @@ export default class GroceryController extends BaseController{
   public static deleteOne(groceryItem: GroceryItem) {
     return this.makeDeleteRequest(GroceryItem, `${ApiRoutes.patchGroceryItem}/${groceryItem.id}`);
   }
+
+  public static createOne(groceryItem: GroceryItem) {
+    return this.makePostRequest(GroceryItem, `${ApiRoutes.createGroceryItem}`, {
+      data: {
+        type: 'grocery_items',
+        attributes: {
+          name: groceryItem.name,
+          price: groceryItem.price,
+          source: 'manual',
+        },
+      },
+    });
+  }
 }

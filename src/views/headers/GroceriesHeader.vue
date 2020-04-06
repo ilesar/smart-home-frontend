@@ -15,9 +15,14 @@
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import GroceryItem from '@/api/models/GroceryItem';
   import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
+  import {Action} from 'vuex-class';
 
   @Component
   export default class GroceriesHeader extends Vue {
+    @Action('groceries/createGroceryItem')
+    private createGroceryItem;
+
+
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Nova namirnica',
@@ -26,6 +31,10 @@
         onSubmit: (model: GroceryItem) => {
           console.log('form submitted');
           console.log(model);
+          this.createGroceryItem(model).then(() => {
+            console.log('item created');
+            model.$save();
+          });
         }
       } as DrawerDataInterface);
     }

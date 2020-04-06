@@ -7,4 +7,8 @@ export default class GroceryController extends BaseController{
   public static async fetchAll(): Promise<AxiosResponse | AxiosError> {
     return this.makeGetRequest(GroceryItem, ApiRoutes.getGroceryItemsWithImages);
   }
+
+  public static deleteOne(groceryItem: GroceryItem) {
+    return this.makeDeleteRequest(GroceryItem, `${ApiRoutes.patchGroceryItem}/${groceryItem.id}`);
+  }
 }

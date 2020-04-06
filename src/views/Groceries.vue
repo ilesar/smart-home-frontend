@@ -13,7 +13,7 @@
             <a-button type="default" shape="round" icon="edit" @click="() => {}"
                       style="margin-left: 16px">
             </a-button>
-            <a-button type="danger" shape="round" icon="delete" @click="() => {}"
+            <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
                       style="margin-left: 16px">
             </a-button>
         </a-list-item>
@@ -24,6 +24,10 @@
   import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import {Action, Getter} from 'vuex-class';
+  import GroceryItem from '@/api/models/GroceryItem';
+  import {EventBus} from '@/helpers/EventBusHelper';
+  import {EventBusEvents} from '@/enums/EventBusEvents';
+  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
 
   @Component({
     name: 'Groceries',
@@ -37,10 +41,27 @@
     private groceryList;
     @Action('groceries/fetchGroceryItemList')
     private fetchGroceryItemList;
-
+    @Action('groceries/deleteGroceryItem')
+    private deleteGroceryItem;
 
     public beforeMount() {
       this.fetchGroceryItemList();
+    }
+
+    public deleteItem(model: GroceryItem) {
+      EventBus.$emit(EventBusEvents.OpenPopup, {
+        options: {
+          title: `Sigurno želiš obrisati namirnicu?`,
+          content: model.name,
+          okText: 'Da',
+          cancelText: 'Ne',
+          onOk: () => {
+            this.deleteGroceryItem(model).then(() => {
+              model.$delete();
+            });
+          },
+        }
+      } as PopupDataInterface);
     }
 
   }

@@ -15,7 +15,7 @@
             <a-button type="default" shape="round" icon="edit" @click="() => {}"
                       style="margin-left: 16px">
             </a-button>
-            <a-button type="danger" shape="round" icon="delete" @click="() => {}"
+            <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
                       style="margin-left: 16px">
             </a-button>
         </a-list-item>
@@ -23,7 +23,8 @@
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from 'vue-property-decorator';
+  import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
+  import RecurringPayment from '@/api/models/RecurringPayment';
 
   @Component({
     name: 'ItemList',
@@ -32,6 +33,11 @@
   export default class ItemList extends Vue {
     @Prop()
     private dateSource;
+
+    @Emit('on-delete')
+    public deleteItem(item: RecurringPayment) {
+        return item;
+    }
   }
 </script>
 

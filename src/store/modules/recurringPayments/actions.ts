@@ -1,18 +1,26 @@
 import { ActionTree } from 'vuex';
 import ILocalState from './stateInterface';
-import RecurringItemController from '@/api/controllers/RecurringPaymentsController';
+import GroceryItem from '@/api/models/GroceryItem';
+import GroceryController from '@/api/controllers/GroceryController';
+import RecurringPaymentsController from '@/api/controllers/RecurringPaymentsController';
+import RecurringPayment from '@/api/models/RecurringPayment';
 
 
 const actions: ActionTree<ILocalState, {}> = {
     async fetchRecurringPaymentList({commit, getters}, productFormId) {
         return new Promise<void>(((resolve, reject) => {
-            RecurringItemController.fetchAll().then(() => {
+            RecurringPaymentsController.fetchAll().then(() => {
                 resolve();
             }).catch((error) => {
                 reject(error);
             });
         }));
-
+    },
+    async deleteRecurringPayment({commit, getters}, payment: RecurringPayment) {
+        RecurringPaymentsController.deleteOne(payment).then(() => {
+        }).catch((error) => {
+            console.error(error);
+        });
     },
 };
 

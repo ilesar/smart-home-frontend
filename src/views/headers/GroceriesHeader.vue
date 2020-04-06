@@ -1,5 +1,5 @@
 <template>
-    <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Namirnice" class="o-section-header">
+    <a-page-header title="Namirnice" class="o-section-header">
         <template slot="extra">
             <a-button type="primary" @click="createItem" >
                 Nova namirnica

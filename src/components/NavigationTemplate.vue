@@ -1,7 +1,7 @@
 <template>
     <a-layout id="components-layout-demo-custom-trigger" class="o-section">
         <a-layout>
-            <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider">
+            <a-layout-sider theme="light" :trigger="null" collapsible v-model="collapsed" class="o-section-slider" v-if="!$isMobile()">
                 <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
                     <a-menu-item
                             key="rooms"
@@ -88,6 +88,34 @@
                 </a-layout-footer>
             </a-layout>
         </a-layout>
+                <a-layout-footer class="o-footer hide-on-mobile">
+                        <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">
+                            <a-menu-item
+                                    key="devices"
+                                    @click="goToRooms()"
+                                    class="o-footer-menu-item"
+
+                            >
+                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                            </a-menu-item>
+
+                            <a-menu-item
+                                    key="shopping"
+                                    @click="goToShopping()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                            </a-menu-item>
+
+                            <a-menu-item
+                                    key="payments"
+                                    @click="goToPayments()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                            </a-menu-item>
+                        </a-menu>
+                </a-layout-footer>
     </a-layout>
 </template>
 
@@ -175,13 +203,14 @@
     }
 
     .o-footer {
+        text-align: center;
         padding: 0px;
     }
 
     .content-container {
         padding: 0 0 0 24px;
         background: #fff;
-        overflow: scroll !important;
+        overflow-y: scroll !important;
     }
 
 </style>

@@ -14,6 +14,7 @@ export default class RecurringPaymentsController extends BaseController {
   }
 
   public static createOne(payment: RecurringPayment) {
+    console.log(payment);
     return this.makePostRequest(RecurringPayment, ApiRoutes.RecurringPayment, {
       data: {
         type: 'recurring_payments',

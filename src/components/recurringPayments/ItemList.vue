@@ -12,6 +12,7 @@
                 />
             </a-list-item-meta>
             <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
+            <a-badge status="error" text="Ručno" v-if="!item.isAutomated" style="padding-right: 24px"/>
             <a-button type="default" shape="round" icon="edit" @click="editItem(item)"
                       style="margin-left: 16px">
             </a-button>

@@ -22,8 +22,8 @@
         </a-form-model-item>
         <a-form-model-item label="Učestalost" prop="period" ref="period">
             <a-select v-model="model.period" placeholder="Odaberi učestalost plaćanja" defaultValue="adasd">
-                <a-select-option v-for="type in model.periods" :value="type.value">
-                    {{ type.name }}
+                <a-select-option v-for="period in model.periods" :value="period.value">
+                    {{ period.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>

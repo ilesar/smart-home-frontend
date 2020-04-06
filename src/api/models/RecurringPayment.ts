@@ -45,6 +45,8 @@ export default class RecurringPayment extends Model {
       activationTime: this.string(undefined),
       paymentTag: this.string(undefined),
       isAutomated: this.boolean(false),
+      createdAt: this.string(undefined),
+      updatedAt: this.string(undefined),
     };
   }
 
@@ -71,10 +73,6 @@ export default class RecurringPayment extends Model {
 
   public get periods() {
     return [
-      {
-        name: 'Jednom tjedno',
-        value: RecurringPaymentPeriod.Week,
-      },
       {
         name: 'Jednom mjesečno',
         value: RecurringPaymentPeriod.Month,

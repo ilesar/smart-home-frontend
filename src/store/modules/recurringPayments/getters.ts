@@ -13,6 +13,11 @@ const getters: GetterTree<ILocalState, {}> = {
   getYearlyRecurringPaymentList(state) {
     return RecurringPaymentRepository.getYearly();
   },
+  getAutomatedRecurringPaymentList(state) {
+    return RecurringPaymentRepository.getAutomated();
+  },
+
+
   getAllRecurringPaymentsSum(state) {
     return RecurringPaymentRepository.getAllPriceSum();
   },

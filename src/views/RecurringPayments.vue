@@ -1,23 +1,9 @@
 <template>
     <a-row>
-        <a-tabs defaultActiveKey="1" tabPosition="top" :animated="{inkBar: true, tabPane: true}">
-            <a-tab-pane tab="Mjesečno" key="1">
+        <a-tabs defaultActiveKey="1" type="card" tabPosition="top" :animated="{inkBar: true, tabPane: true}">
+            <a-tab-pane v-for="(tab, index) in tabs" :tab="`${tab.name} (${tab.dataSource.length})`" :key="index">
                 <ItemList
-                        :dateSource="recurringPaymentListMonth"
-                        @on-delete="deleteItem"
-                        @on-edit="editItem"
-                />
-            </a-tab-pane>
-            <a-tab-pane tab="Godišnje" key="2">
-                <ItemList
-                        :dateSource="recurringPaymentListYear"
-                        @on-delete="deleteItem"
-                        @on-edit="editItem"
-                />
-            </a-tab-pane>
-            <a-tab-pane tab="Sve" key="3">
-                <ItemList
-                        :dateSource="recurringPaymentListAll"
+                        :dateSource="tab.dataSource"
                         @on-delete="deleteItem"
                         @on-edit="editItem"
                 />
@@ -30,12 +16,10 @@
   import {Component, Vue} from 'vue-property-decorator';
   import {Action, Getter} from 'vuex-class';
   import ItemList from '@/components/recurringPayments/ItemList.vue';
-  import GroceryItem from '@/api/models/GroceryItem';
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
   import RecurringPayment from '@/api/models/RecurringPayment';
-  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import moment from 'moment';
@@ -51,6 +35,9 @@
     private recurringPaymentListMonth;
     @Getter('recurringpayments/getYearlyRecurringPaymentList')
     private recurringPaymentListYear;
+    @Getter('recurringpayments/getAutomatedRecurringPaymentList')
+    private recurringPaymentListAutomated;
+
     @Action('recurringpayments/fetchRecurringPaymentList')
     private fetchRecurringPaymentList;
     @Action('recurringpayments/updateRecurringPayment')
@@ -89,6 +76,10 @@
         submitText: 'Spremi plaćanje',
         onSubmit: (model: RecurringPayment) => {
           if (model.activationTimeDate) {
+            console.log('changing date');
+            console.log(model.activationTime);
+            console.log(model.activationTimeDate);
+            console.log(model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss'));
             model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
           }
 
@@ -99,7 +90,26 @@
       } as DrawerDataInterface<RecurringPayment>);
     }
 
-
+    public get tabs() {
+      return [
+        {
+          name: 'Sve',
+          dataSource: this.recurringPaymentListAll,
+        },
+        {
+          name: 'Mjesečno',
+          dataSource: this.recurringPaymentListMonth,
+        },
+        {
+          name: 'Godišnje',
+          dataSource: this.recurringPaymentListYear,
+        },
+        {
+          name: 'Automatizirano',
+          dataSource: this.recurringPaymentListAutomated,
+        },
+      ];
+    }
 
   }
 </script>

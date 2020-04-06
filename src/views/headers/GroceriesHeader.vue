@@ -12,15 +12,21 @@
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import {EventBus} from '@/helpers/EventBusHelper';
   import {EventBusEvents} from '@/enums/EventBusEvents';
-  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+  import GroceryItem from '@/api/models/GroceryItem';
+  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
 
   @Component
   export default class GroceriesHeader extends Vue {
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Nova namirnica',
-        component: RecurringPaymentForm.name,
+        component: GroceryItemForm.name,
+        submitText: 'Spremi namirnicu',
+        onSubmit: (model: GroceryItem) => {
+          console.log('form submitted');
+          console.log(model);
+        }
       } as DrawerDataInterface);
     }
   }

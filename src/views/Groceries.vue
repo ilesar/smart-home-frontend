@@ -30,6 +30,7 @@
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
 
   @Component({
     name: 'Groceries',
@@ -69,7 +70,7 @@
     public openDrawer() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Uredi namirnicu',
-        component: RecurringPaymentForm.name,
+        component: GroceryItemForm.name,
       } as DrawerDataInterface);
     }
 

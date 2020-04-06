@@ -1,13 +1,17 @@
 <template>
     <a-drawer
-            :title="drawerTitle"
+            :title="drawerObject.title"
             placement="right"
             :closable="false"
             @close="closeDrawer"
             :visible="visible"
             width="50vw"
     >
-        <component :is="drawerComponent" @on-cancel="closeDrawer" />
+        <component
+                :is="drawerObject.component"
+                @on-cancel="closeDrawer"
+                :submitButtonText="drawerObject.submitText"
+                :submitButtonCallback="drawerObject.onSubmit" />
     </a-drawer>
 </template>
 
@@ -21,8 +25,7 @@
   @Component
   export default class CrudModelDrawer extends Vue {
     private visible: boolean = false;
-    private drawerComponent = null;
-    private drawerTitle: string = '';
+    private drawerObject: DrawerDataInterface = {};
 
     private mounted() {
       EventBus.$on(EventBusEvents.OpenDrawer, this.resolvePopup);
@@ -33,8 +36,7 @@
     }
 
     private resolvePopup(drawerDataObject: DrawerDataInterface) {
-      this.drawerComponent = drawerDataObject.component;
-      this.drawerTitle = drawerDataObject.title;
+      this.drawerObject = drawerDataObject;
       this.visible = true;
     }
 

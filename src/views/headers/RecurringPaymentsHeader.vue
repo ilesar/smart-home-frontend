@@ -14,6 +14,8 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
+  import GroceryItem from '@/api/models/GroceryItem';
+  import RecurringPayment from '@/api/models/RecurringPayment';
 
   @Component({})
   export default class RecurringPaymentsHeader extends Vue {
@@ -22,6 +24,11 @@
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Novo plaćanje',
         component: RecurringPaymentForm.name,
+        submitText: 'Spremi plaćanje',
+        onSubmit: (model: RecurringPayment) => {
+          console.log('form submitted');
+          console.log(model);
+        }
       } as DrawerDataInterface);
     }
   }

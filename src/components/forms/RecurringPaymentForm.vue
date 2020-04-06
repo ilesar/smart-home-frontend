@@ -52,8 +52,8 @@
             />
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ offset: 6 }">
-            <a-button type="primary" @click="() => {}">
-                Stvori plaćanje
+            <a-button type="primary" @click="submitButtonCallback(model)">
+                {{ submitButtonText }}
             </a-button>
             <a-button style="margin-left: 10px;" @click="closeForm">
                 Odustani
@@ -65,11 +65,17 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
   import RecurringPayment from '@/api/models/RecurringPayment';
+  import GroceryItem from '@/api/models/GroceryItem';
 
   @Component({
     name: 'RecurringPaymentForm',
   })
   export default class RecurringPaymentForm extends Vue {
+    @Prop()
+    private submitButtonText!: string;
+    @Prop()
+    private submitButtonCallback!: (model: GroceryItem) => void;
+    
     private model = new RecurringPayment();
 
     private rules = {};

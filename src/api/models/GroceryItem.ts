@@ -42,9 +42,9 @@ export default class GroceryItem extends Model {
   public static fields() {
     return {
       id: this.string(null),
-      name: this.string('description'),
-      description: this.string('description'),
-      price: this.string('price'),
+      name: this.string(undefined),
+      description: this.string(undefined),
+      price: this.string(undefined),
       image: this.hasOne(GroceryItemImage, 'grocery_item_id'),
     };
   }

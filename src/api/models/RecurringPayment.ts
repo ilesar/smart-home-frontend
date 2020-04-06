@@ -44,11 +44,11 @@ export default class RecurringPayment extends Model {
   public static fields() {
     return {
       id: this.string(null),
-      name: this.string('nameField'),
-      price: this.number(0),
-      period: this.string(null),
-      activationTime: this.string(''),
-      paymentTag: this.string('question'),
+      name: this.string(null),
+      price: this.number(undefined),
+      period: this.string(undefined),
+      activationTime: this.string(undefined),
+      paymentTag: this.string(undefined),
       isAutomated: this.boolean(false),
     };
   }

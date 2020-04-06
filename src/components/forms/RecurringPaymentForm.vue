@@ -8,30 +8,46 @@
             :wrapper-col="wrapperCol"
     >
         <a-form-model-item label="Naziv" prop="name" ref="name">
-            <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" />
+            <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv plaćanja"/>
         </a-form-model-item>
         <a-form-model-item label="Cijena" prop="price" ref="price">
-            <a-input type="number" v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" />
+            <a-input type="number" v-model="model.price" placeholder="unesi iznos plaćanja" />
         </a-form-model-item>
         <a-form-model-item label="Tip plaćanja" prop="type" ref="type">
-            <a-select v-model="model.paymentTag" placeholder="please select your zone">
-                <a-select-option value="shanghai">
-                    Zone one
+            <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
+                <a-select-option value="car">
+                    Auto
                 </a-select-option>
-                <a-select-option value="beijing">
-                    Zone two
+                <a-select-option value="home">
+                    Kuća
+                </a-select-option>
+                <a-select-option value="medicine-box">
+                    Zdravlje
+                </a-select-option>
+                <a-select-option value="bank">
+                    Banka
                 </a-select-option>
             </a-select>
         </a-form-model-item>
         <a-form-model-item label="Učestalost" prop="period" ref="period">
-            <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" />
+            <a-select v-model="model.period" placeholder="Odaberi učestalost plaćanja" defaultValue="adasd">
+                <a-select-option value="adasd">
+                    Jednom tjedno
+                </a-select-option>
+                <a-select-option value="beijing">
+                    Jednom mjesečno
+                </a-select-option>
+                <a-select-option value="beijasdasding">
+                    Jednom godišnje
+                </a-select-option>
+            </a-select>
         </a-form-model-item>
         <a-form-model-item label="Trenutak aktivacije" prop="activationTime" ref="activationTime">
             <a-date-picker
                     v-model="model.activationTimeDate"
                     show-time
                     type="date"
-                    placeholder="Pick a date"
+                    placeholder="Odaberi datum kada je potrebno izvršiti plaćanje"
                     style="width: 100%;"
             />
         </a-form-model-item>
@@ -54,20 +70,12 @@
     name: 'RecurringPaymentForm',
   })
   export default class RecurringPaymentForm extends Vue {
-    private _model: RecurringPayment;
+    private model = new RecurringPayment();
 
     private rules = {};
 
     private labelCol = { span: 6 };
     private wrapperCol = { span: 18 };
-
-    public get model() {
-      if (this._model === undefined) {
-        this._model = new RecurringPayment();
-      }
-
-      return this._model;
-    }
 
     @Emit('on-cancel')
     public closeForm() {

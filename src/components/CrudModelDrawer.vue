@@ -3,11 +3,11 @@
             :title="drawerTitle"
             placement="right"
             :closable="false"
-            @close="onClose"
+            @close="closeDrawer"
             :visible="visible"
             width="50vw"
     >
-        <component :is="drawerComponent" @on-close="onClose" />
+        <component :is="drawerComponent" @on-cancel="closeDrawer" />
     </a-drawer>
 </template>
 
@@ -21,7 +21,7 @@
   @Component
   export default class CrudModelDrawer extends Vue {
     private visible: boolean = false;
-    private drawerComponent: Component = null;
+    private drawerComponent = null;
     private drawerTitle: string = '';
 
     private mounted() {
@@ -38,7 +38,7 @@
       this.visible = true;
     }
 
-    onClose() {
+    closeDrawer() {
       this.visible = false;
     }
 

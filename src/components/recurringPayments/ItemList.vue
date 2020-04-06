@@ -12,7 +12,7 @@
                 />
             </a-list-item-meta>
             <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
-            <a-button type="default" shape="round" icon="edit" @click="openDrawer(item)"
+            <a-button type="default" shape="round" icon="edit" @click="editItem(item)"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -44,27 +44,9 @@
         return item;
     }
 
-    public openDrawer(item: RecurringPayment) {
-      item.activationTimeDate = moment(item.activationTime);
-
-      EventBus.$emit(EventBusEvents.OpenDrawer, {
-        title: 'Uredi plaćanje',
-        model: item,
-        component: RecurringPaymentForm.name,
-        submitText: 'Spremi plaćanje',
-        onSubmit: (model: RecurringPayment) => {
-          if (model.activationTimeDate) {
-            model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
-          }
-
-          console.log(model.activationTime);
-
-          this.createRecurringPayment(model).then(() => {
-            console.log('item created asdasd');
-            model.$save();
-          });
-        }
-      } as DrawerDataInterface<RecurringPayment>);
+    @Emit('on-edit')
+    public editItem(item: RecurringPayment) {
+      return item;
     }
   }
 </script>

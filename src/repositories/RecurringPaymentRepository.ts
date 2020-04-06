@@ -2,14 +2,14 @@ import Token from '@/api/models/Token';
 import RecurringPayment from '@/api/models/RecurringPayment';
 
 export default class RecurringPaymentRepository {
-    public static getAll(): RecurringPayment {
+    public static getAll(): RecurringPayment[] {
         return RecurringPayment
           .query()
           .orderBy('isAutomated', 'desc')
           .orderBy('paymentTag', 'desc')
           .all();
     }
-    public static getMonthly(): RecurringPayment {
+    public static getMonthly(): RecurringPayment[] {
         return RecurringPayment
           .query()
           .where('period', 'month')
@@ -17,7 +17,7 @@ export default class RecurringPaymentRepository {
           .orderBy('paymentTag', 'desc')
           .all();
     }
-    public static getYearly(): RecurringPayment {
+    public static getYearly(): RecurringPayment[] {
         return RecurringPayment
           .query()
           .where('period', 'year')
@@ -25,7 +25,7 @@ export default class RecurringPaymentRepository {
           .orderBy('paymentTag', 'desc')
           .all();
     }
-    public static getAllPriceSum(): RecurringPayment {
+    public static getAllPriceSum(): string {
         return RecurringPayment
           .query()
           .all()
@@ -33,7 +33,7 @@ export default class RecurringPaymentRepository {
               return aggregator + parseFloat(recurringPayment.price);
           }, 0).toFixed(2);
     }
-    public static getMonthlyPriceSum(): RecurringPayment {
+    public static getMonthlyPriceSum(): string {
         return RecurringPayment
           .query()
           .where('period', 'month')
@@ -42,7 +42,7 @@ export default class RecurringPaymentRepository {
               return aggregator + parseFloat(recurringPayment.price);
           }, 0).toFixed(2);
     }
-    public static getYearlyPriceSum(): RecurringPayment {
+    public static getYearlyPriceSum(): string {
         return RecurringPayment
           .query()
           .where('period', 'year')

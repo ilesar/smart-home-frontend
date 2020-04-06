@@ -73,7 +73,7 @@
         title: 'Uredi namirnicu',
         model: item,
         component: GroceryItemForm.name,
-        submitText: 'Spremi plaćanje',
+        submitText: 'Spremi',
         onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
           this.updateGroceryItem(item).then(() => {
             EventBus.$emit(EventBusEvents.CloseDrawer);

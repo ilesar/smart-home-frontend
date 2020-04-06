@@ -5,18 +5,21 @@
                 <ItemList
                         :dateSource="recurringPaymentListMonth"
                         @on-delete="deleteItem"
+                        @on-edit="editItem"
                 />
             </a-tab-pane>
             <a-tab-pane tab="Godišnje" key="2">
                 <ItemList
                         :dateSource="recurringPaymentListYear"
                         @on-delete="deleteItem"
+                        @on-edit="editItem"
                 />
             </a-tab-pane>
             <a-tab-pane tab="Sve" key="3">
                 <ItemList
                         :dateSource="recurringPaymentListAll"
                         @on-delete="deleteItem"
+                        @on-edit="editItem"
                 />
             </a-tab-pane>
         </a-tabs>
@@ -32,6 +35,10 @@
   import {EventBusEvents} from '@/enums/EventBusEvents';
   import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
   import RecurringPayment from '@/api/models/RecurringPayment';
+  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
+  import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+  import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
+  import moment from 'moment';
 
   @Component({
     name: 'RecurringPayments',
@@ -46,6 +53,8 @@
     private recurringPaymentListYear;
     @Action('recurringpayments/fetchRecurringPaymentList')
     private fetchRecurringPaymentList;
+    @Action('recurringpayments/updateRecurringPayment')
+    private updateRecurringPayment;
     @Action('recurringpayments/deleteRecurringPayment')
     private deleteRecurringPayment;
 
@@ -69,6 +78,29 @@
         }
       } as PopupDataInterface);
     }
+
+    public editItem(item: RecurringPayment) {
+      item.activationTimeDate = moment(item.activationTime);
+
+      EventBus.$emit(EventBusEvents.OpenDrawer, {
+        title: 'Uredi plaćanje',
+        model: item,
+        component: RecurringPaymentForm.name,
+        submitText: 'Spremi plaćanje',
+        onSubmit: (model: RecurringPayment) => {
+          if (model.activationTimeDate) {
+            model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
+          }
+
+          this.updateRecurringPayment(model).then(() => {
+            EventBus.$emit(EventBusEvents.CloseDrawer);
+          });
+        }
+      } as DrawerDataInterface<RecurringPayment>);
+    }
+
+
+
   }
 </script>
 

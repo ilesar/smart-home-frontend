@@ -15,30 +15,15 @@
         </a-form-model-item>
         <a-form-model-item label="Tip plaćanja" prop="type" ref="type">
             <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
-                <a-select-option value="car">
-                    Auto
-                </a-select-option>
-                <a-select-option value="home">
-                    Kuća
-                </a-select-option>
-                <a-select-option value="medicine-box">
-                    Zdravlje
-                </a-select-option>
-                <a-select-option value="bank">
-                    Banka
+                <a-select-option v-for="type in model.types" :value="type.value">
+                    {{ type.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>
         <a-form-model-item label="Učestalost" prop="period" ref="period">
             <a-select v-model="model.period" placeholder="Odaberi učestalost plaćanja" defaultValue="adasd">
-                <a-select-option value="adasd">
-                    Jednom tjedno
-                </a-select-option>
-                <a-select-option value="beijing">
-                    Jednom mjesečno
-                </a-select-option>
-                <a-select-option value="beijasdasding">
-                    Jednom godišnje
+                <a-select-option v-for="type in model.periods" :value="type.value">
+                    {{ type.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>

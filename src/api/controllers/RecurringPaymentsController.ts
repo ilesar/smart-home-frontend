@@ -14,9 +14,26 @@ export default class RecurringPaymentsController extends BaseController {
   }
 
   public static createOne(payment: RecurringPayment) {
-    console.log('inside', payment);
     return this.makePostRequest(RecurringPayment, ApiRoutes.RecurringPayment, {
       data: {
+        type: 'recurring_payments',
+        attributes: {
+          name: payment.name,
+          price: payment.price,
+          period: payment.period,
+          activationTime: payment.activationTime,
+          paymentTag: payment.paymentTag,
+          isAutomated: payment.isAutomated,
+        },
+      },
+    });
+  }
+
+  public static updateOne(payment: RecurringPayment) {
+    console.log('patchings')
+    return this.makePatchRequest(RecurringPayment, `${ApiRoutes.RecurringPayment}/${payment.id}`, {
+      data: {
+        id: payment.id,
         type: 'recurring_payments',
         attributes: {
           name: payment.name,

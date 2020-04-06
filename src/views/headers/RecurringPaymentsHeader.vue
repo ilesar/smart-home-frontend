@@ -1,7 +1,7 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Ponavljajuća plaćanja" class="o-section-header">
         <template slot="extra">
-            <a-button type="primary" @click="openDrawer()" >
+            <a-button type="primary" @click="createItem()" >
                 Novo plaćanje
             </a-button>
         </template>
@@ -17,24 +17,24 @@
   import RecurringPayment from '@/api/models/RecurringPayment';
   import {Action} from 'vuex-class';
 
-  @Component({})
+  @Component
   export default class RecurringPaymentsHeader extends Vue {
     @Action('recurringpayments/createRecurringPayment')
     private createRecurringPayment;
 
-    public openDrawer() {
+    public createItem() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Novo plaćanje',
         model: new RecurringPayment(),
         component: RecurringPaymentForm.name,
-        submitText: 'Spremi plaćanje',
+        submitText: 'Spremi',
         onSubmit: (model: RecurringPayment) => {
           if (model.activationTimeDate) {
             model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
           }
 
           this.createRecurringPayment(model).then(() => {
-            model.$save();
+            EventBus.$emit(EventBusEvents.CloseDrawer);
           });
         }
       } as DrawerDataInterface<RecurringPayment>);

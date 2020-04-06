@@ -1,9 +1,8 @@
-import { Model, BelongsTo } from '@vuex-orm/core';
-import { keys } from 'lodash';
-import {AxiosError, AxiosResponse} from 'axios';
+import {Model, BelongsTo} from '@vuex-orm/core';
+import {keys} from 'lodash';
 import {ApiRoutes} from '@/enums/ApiRoutes';
-import GroceryItemImage from '@/api/models/GroceryItemImage';
-import ShoppingItem from '@/api/models/ShoppingItem';
+import {RecurringPaymentType} from '@/enums/RecurringPaymentType';
+import {RecurringPaymentPeriod} from '@/enums/RecurringPaymentPeriod';
 
 export default class RecurringPayment extends Model {
   public static entity = 'recurringpayment';
@@ -18,15 +17,6 @@ export default class RecurringPayment extends Model {
       },
     },
   };
-
-  public id;
-  public price;
-  public activationTimeDate;
-  public activationTime;
-  public name;
-  public period;
-  public paymentTag;
-  public isAutomated;
 
   public static fieldsKeys() {
     return keys(this.fields());
@@ -57,5 +47,52 @@ export default class RecurringPayment extends Model {
       isAutomated: this.boolean(false),
     };
   }
+
+  public get types() {
+    return [
+      {
+        name: 'Auto',
+        value: RecurringPaymentType.Car,
+      },
+      {
+        name: 'Kuća',
+        value: RecurringPaymentType.HouseHold,
+      },
+      {
+        name: 'Zdravlje',
+        value: RecurringPaymentType.Health,
+      },
+      {
+        name: 'Banka',
+        value: RecurringPaymentType.Bank,
+      },
+    ];
+  }
+
+  public get periods() {
+    return [
+      {
+        name: 'Jednom tjedno',
+        value: RecurringPaymentPeriod.Week,
+      },
+      {
+        name: 'Jednom mjesečno',
+        value: RecurringPaymentPeriod.Month,
+      },
+      {
+        name: 'Jednom godišnje',
+        value: RecurringPaymentPeriod.Year,
+      },
+    ];
+  }
+
+  public id;
+  public price;
+  public activationTimeDate;
+  public activationTime;
+  public name;
+  public period;
+  public paymentTag;
+  public isAutomated;
 
 }

@@ -1,7 +1,7 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Namirnice" class="o-section-header">
         <template slot="extra">
-            <a-button type="primary" @click="openDrawer" >
+            <a-button type="primary" @click="createItem" >
                 Nova namirnica
             </a-button>
         </template>
@@ -23,12 +23,12 @@
     private createGroceryItem;
 
 
-    public openDrawer() {
+    public createItem() {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Nova namirnica',
         model: new GroceryItem(),
         component: GroceryItemForm.name,
-        submitText: 'Spremi namirnicu',
+        submitText: 'Spremi',
         onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
           this.createGroceryItem(model).then(() => {
             EventBus.$emit(EventBusEvents.CloseDrawer);

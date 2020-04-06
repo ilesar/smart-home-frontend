@@ -43,7 +43,7 @@ export const appAxios = {
     responseType: 'json',
     dataTransformer: (response: AxiosResponse) => {
         if (response.data === null) {
-            console.log('transfoadasdsddrmer');
+            console.warn('EMPTY RESPONSE');
             return;
         }
         const data = dataFormatter.deserialize(response.data);

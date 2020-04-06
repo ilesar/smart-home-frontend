@@ -10,7 +10,7 @@ export const ApiRoutes = {
     ResolvedShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=1',
     addGroceryToShoppingList: '/shopping/list/items',
 
-    RecurringPayment: '/recurring/payments?filter[isDeleted]=0',
+    RecurringPayment: '/recurring/payments',
     RecurringPayments: '/recurring/payments?filter[isDeleted]=0',
 
     Rooms: '/rooms?include=devices',

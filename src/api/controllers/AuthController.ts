@@ -9,7 +9,7 @@ export default class AuthController {
     let refreshedToken;
 
     try {
-      refreshedToken = await Token.api().post(ApiRoutes.refreshToken, {});
+      refreshedToken = await Token.api().post(ApiRoutes.RefreshToken, {});
     } catch (e) {
       return Promise.reject(e);
     }
@@ -30,7 +30,7 @@ export default class AuthController {
     };
 
     try {
-      responseObject = await Token.api().post(ApiRoutes.login, requestBody);
+      responseObject = await Token.api().post(ApiRoutes.Login, requestBody);
     } catch (e) {
       return Promise.reject(e);
     }

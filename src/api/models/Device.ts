@@ -16,7 +16,7 @@ export default class Device extends Model {
     actions: {
       fetch: {
         method: 'get',
-        url: ApiRoutes.refreshToken,
+        url: ApiRoutes.RefreshToken,
       },
     },
   };

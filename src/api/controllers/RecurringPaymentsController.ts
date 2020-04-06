@@ -6,16 +6,16 @@ import GroceryItem from '@/api/models/GroceryItem';
 
 export default class RecurringPaymentsController extends BaseController {
   public static async fetchAll(): Promise<AxiosResponse | AxiosError> {
-    return this.makeGetRequest(RecurringPayment, ApiRoutes.getRecurringPayments);
+    return this.makeGetRequest(RecurringPayment, ApiRoutes.RecurringPayments);
   }
 
   public static deleteOne(payment: RecurringPayment) {
-    return this.makeDeleteRequest(RecurringPayment, `${ApiRoutes.deleteRecurringPayment}/${payment.id}`);
+    return this.makeDeleteRequest(RecurringPayment, `${ApiRoutes.RecurringPayment}/${payment.id}`);
   }
 
   public static createOne(payment: RecurringPayment) {
     console.log('inside', payment);
-    return this.makePostRequest(RecurringPayment, ApiRoutes.createRecurringPayment, {
+    return this.makePostRequest(RecurringPayment, ApiRoutes.RecurringPayment, {
       data: {
         type: 'recurring_payments',
         attributes: {

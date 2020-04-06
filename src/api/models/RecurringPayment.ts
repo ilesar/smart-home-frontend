@@ -14,7 +14,7 @@ export default class RecurringPayment extends Model {
     actions: {
       fetch: {
         method: 'get',
-        url: ApiRoutes.refreshToken,
+        url: ApiRoutes.RefreshToken,
       },
     },
   };
@@ -23,6 +23,10 @@ export default class RecurringPayment extends Model {
   public price;
   public activationTimeDate;
   public activationTime;
+  public name;
+  public period;
+  public paymentTag;
+  public isAutomated;
 
   public static fieldsKeys() {
     return keys(this.fields());

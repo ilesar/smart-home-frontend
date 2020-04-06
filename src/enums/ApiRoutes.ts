@@ -1,25 +1,28 @@
 export const ApiRoutes = {
-    login: '/auth/login',
-    refreshToken: '/auth/refresh-token',
-    getGroceryItems: '/grocery/items/?filter[isDeleted]=0',
-    patchGroceryItem: '/grocery/items',
-    createGroceryItem: '/grocery/items',
-    getGroceryItemsWithImages: '/grocery/items/?include=image&sort=id&filter[isDeleted]=0',
-    addGroceryToShoppingList: '/shopping/list/items/',
-    deleteShoppingItem: '/shopping/list/items',
-    getShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=0',
-    getResolvedShoppingItems: '/shopping/list/items/?include=groceryItem,groceryItem.image&filter[isResolved]=1',
-    patchShoppingItem: '/shopping/list/items',
+    Login: '/auth/login',
+    RefreshToken: '/auth/refresh-token',
 
-    getRecurringPayments: '/recurring/payments/?filter[isDeleted]=0',
-    deleteRecurringPayment: 'recurring/payments',
-    createRecurringPayment: '/recurring/payments/',
+    GroceryItem: '/grocery/items',
+    GroceryItems: '/grocery/items/?include=image&sort=id&filter[isDeleted]=0',
 
-    getRooms: '/rooms/?include=devices',
+    ShoppingItem: '/shopping/list/items',
+    ShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=0',
+    ResolvedShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=1',
+    addGroceryToShoppingList: '/shopping/list/items',
 
-    getExpenses: '/expenses/?include=recurringPayment',
-    patchExpense: '/expenses',
-    getResolvedExpenses: '/expenses/?include=recurringPayment&filter[isResolved]=1',
+    RecurringPayment: '/recurring/payments?filter[isDeleted]=0',
+    RecurringPayments: '/recurring/payments?filter[isDeleted]=0',
+
+    Rooms: '/rooms?include=devices',
+
+    Expense: '/expenses',
+    Expenses: '/expenses?include=recurringPayment',
+    ResolvedExpenses: '/expenses?include=recurringPayment&filter[isResolved]=1',
+
+
+
+
+
 
 
 };

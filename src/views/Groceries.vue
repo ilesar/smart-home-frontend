@@ -10,7 +10,7 @@
                         :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
-            <a-button type="default" shape="round" icon="edit" @click="openDrawer(item)"
+            <a-button type="default" shape="round" icon="edit" @click="editItem(item)"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -68,7 +68,7 @@
       } as PopupDataInterface);
     }
 
-    public openDrawer(item: GroceryItem) {
+    public editItem(item: GroceryItem) {
       EventBus.$emit(EventBusEvents.OpenDrawer, {
         title: 'Uredi namirnicu',
         model: item,

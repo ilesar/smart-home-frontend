@@ -7,15 +7,15 @@ import Expense from '@/api/models/Expense';
 
 export default class ExpenseController extends BaseController{
   public static async fetchAll(): Promise<AxiosResponse | AxiosError> {
-    return this.makeGetRequest(Expense, ApiRoutes.getExpenses);
+    return this.makeGetRequest(Expense, ApiRoutes.Expenses);
   }
 
   public static async fetchResolved(): Promise<AxiosResponse | AxiosError> {
-    return this.makeGetRequest(Expense, ApiRoutes.getResolvedExpenses);
+    return this.makeGetRequest(Expense, ApiRoutes.ResolvedExpenses);
   }
 
   public static resolveExpense(expense: Expense) {
-    return this.makePatchRequest(Expense, `${ApiRoutes.patchExpense}/${expense.id}`, {
+    return this.makePatchRequest(Expense, `${ApiRoutes.Expense}/${expense.id}`, {
       data: {
         id: expense.id.toString(),
         type: 'expenses',

@@ -5,15 +5,15 @@ import BaseController from '@/api/controllers/BaseController';
 
 export default class GroceryController extends BaseController{
   public static async fetchAll(): Promise<AxiosResponse | AxiosError> {
-    return this.makeGetRequest(GroceryItem, ApiRoutes.getGroceryItemsWithImages);
+    return this.makeGetRequest(GroceryItem, ApiRoutes.GroceryItems);
   }
 
   public static deleteOne(groceryItem: GroceryItem) {
-    return this.makeDeleteRequest(GroceryItem, `${ApiRoutes.patchGroceryItem}/${groceryItem.id}`);
+    return this.makeDeleteRequest(GroceryItem, `${ApiRoutes.GroceryItem}/${groceryItem.id}`);
   }
 
   public static createOne(groceryItem: GroceryItem) {
-    return this.makePostRequest(GroceryItem, `${ApiRoutes.createGroceryItem}`, {
+    return this.makePostRequest(GroceryItem, `${ApiRoutes.GroceryItem}`, {
       data: {
         type: 'grocery_items',
         attributes: {
@@ -26,7 +26,7 @@ export default class GroceryController extends BaseController{
   }
 
   public static updateOne(groceryItem: GroceryItem) {
-    return this.makePatchRequest(GroceryItem, `${ApiRoutes.createGroceryItem}/${groceryItem.id}`, {
+    return this.makePatchRequest(GroceryItem, `${ApiRoutes.GroceryItem}/${groceryItem.id}`, {
       data: {
         id: groceryItem.id,
         type: 'grocery_items',

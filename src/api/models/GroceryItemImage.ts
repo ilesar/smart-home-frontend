@@ -14,7 +14,7 @@ export default class GroceryItemImage extends Model {
     actions: {
       fetch: {
         method: 'get',
-        url: ApiRoutes.refreshToken,
+        url: ApiRoutes.RefreshToken,
       },
     },
   };

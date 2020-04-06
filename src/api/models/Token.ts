@@ -12,12 +12,13 @@ export interface IToken {
 
 export default class Token extends Model {
     public static entity: string = 'tokens';
+    public access_token;
 
     public static apiConfig = {
         actions: {
             fetch: {
                 method: 'get',
-                url: ApiRoutes.refreshToken,
+                url: ApiRoutes.RefreshToken,
             },
         },
     };

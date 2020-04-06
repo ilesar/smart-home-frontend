@@ -18,7 +18,7 @@ export default class Expense extends Model {
     actions: {
       fetch: {
         method: 'get',
-        url: ApiRoutes.refreshToken,
+        url: ApiRoutes.RefreshToken,
       },
     },
   };

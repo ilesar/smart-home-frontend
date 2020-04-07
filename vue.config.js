@@ -14,5 +14,5 @@ module.exports = {
         prependData: `@import "@/assets/scss/style.scss";`
       }
     }
-  }
+  },
 }

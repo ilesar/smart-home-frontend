@@ -88,7 +88,7 @@
                 </a-layout-footer>
             </a-layout>
         </a-layout>
-                <a-layout-footer class="o-footer hide-on-mobile">
+                <a-layout-footer class="o-footer" v-if="$isMobile()">
                         <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">
                             <a-menu-item
                                     key="devices"

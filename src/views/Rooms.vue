@@ -3,7 +3,7 @@
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="room in rooms">
             <div class="gutter-box">
                 <a-card hoverable @click="goToRoom(room)">
-                    <a-card-meta :title="room.name" description="This is the description">
+                    <a-card-meta :title="room.name" :description="roomDescription(room)">
                         <a-avatar
                                 slot="avatar"
                                 icon="home"
@@ -52,6 +52,10 @@
 
     private goToRoom(room: Room) {
         this.$router.push(`/${RouteNames.Rooms}/${room.slug}`);
+    }
+
+    public roomDescription(room: Room) {
+        return `${room.devices.length} uređaj${room.devices.length > 1 || room.devices.length === 0 ? 'a' : ''}`;
     }
   }
 

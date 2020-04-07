@@ -14,6 +14,8 @@
             <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
         </a-form-model-item>
         <a-divider></a-divider>
+        <Camera></Camera>
+        <a-divider></a-divider>
         <a-form-model-item :wrapper-col="{ offset: 6 }">
             <a-button type="primary" @click="submitButtonCallback(instance, model)">
                 {{ submitButtonText }}
@@ -28,10 +30,13 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
   import GroceryItem from '@/api/models/GroceryItem';
-  import RecurringPayment from '@/api/models/RecurringPayment';
+  import Camera from '@/components/Camera';
 
   @Component({
     name: 'GroceryItemForm',
+    components: {
+      Camera,
+    }
   })
   export default class GroceryItemForm extends Vue {
     @Prop()

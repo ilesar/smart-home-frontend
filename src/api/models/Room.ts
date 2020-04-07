@@ -1,9 +1,6 @@
 import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
-import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
-import GroceryItemImage from '@/api/models/GroceryItemImage';
-import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
 import Device from '@/api/models/Device';
 
@@ -23,6 +20,7 @@ export default class Room extends Model {
   };
 
   public id;
+  public devices;
 
   public static fieldsKeys() {
     return keys(this.fields());

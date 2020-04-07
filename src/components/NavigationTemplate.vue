@@ -89,14 +89,14 @@
             </a-layout>
         </a-layout>
                 <a-layout-footer class="o-footer" v-if="$isMobile()">
-                        <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav">
+                        <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav" >
                             <a-menu-item
                                     key="devices"
                                     @click="goToRooms()"
                                     class="o-footer-menu-item"
 
                             >
-                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
+                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', margin: '0', padding: '8px 4px' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -104,7 +104,7 @@
                                     @click="goToShopping()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
+                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -112,7 +112,22 @@
                                     @click="goToPayments()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
+                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
+                            </a-menu-item>
+                            <a-menu-item
+                                    key="groceriess"
+                                    @click="goToGroceries()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="appstore" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
+                            </a-menu-item>
+
+                            <a-menu-item
+                                    key="payments"
+                                    @click="goToRecurringItems()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="reload" :style="{ fontSize: '30px', position: 'relative', top: '4px', margin: '0', color: '#1890ff' }"/>
                             </a-menu-item>
                         </a-menu>
                 </a-layout-footer>
@@ -211,7 +226,7 @@
     .content-container {
         padding: 0 0 0 24px;
         background: #fff;
-        overflow-y: scroll !important;
+        overflow-y: auto !important;
     }
 
 </style>

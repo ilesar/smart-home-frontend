@@ -46,4 +46,10 @@ export default class App extends Vue {
         color: #2c3e50;
         height: 100%;
     }
+
+    @media only screen and (max-width: 576px) {
+        #app {
+            zoom: 0.8;
+        }
+    }
 </style>

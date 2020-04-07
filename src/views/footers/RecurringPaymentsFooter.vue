@@ -10,15 +10,15 @@
             margin: '0 32px',
           }"
         />
-        <a-statistic
-                title="Godišnji troškovi"
-                class="expense-statistic"
-                suffix="KN"
-                :value="recurringPaymentsSumYearly"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
+<!--        <a-statistic-->
+<!--                title="Godišnji troškovi"-->
+<!--                class="expense-statistic"-->
+<!--                suffix="KN"-->
+<!--                :value="recurringPaymentsSumYearly"-->
+<!--                :style="{-->
+<!--            margin: '0 32px',-->
+<!--          }"-->
+<!--        />-->
         <a-statistic
                 title="Ukupni godišnji trošak"
                 class="expense-statistic"
@@ -28,14 +28,14 @@
             margin: '0 32px',
           }"
         />
-        <a-statistic
-                title="Prosječni mjesečni trošak"
-                class="expense-statistic"
-                suffix="KN"
-                :value="(parseFloat(recurringPaymentsSumMonthly) + parseFloat(recurringPaymentsSumYearly) / 12).toFixed(2)"
-                :style="{
-            margin: '0 32px',
-          }"
+<!--        <a-statistic-->
+<!--                title="Prosječni mjesečni trošak"-->
+<!--                class="expense-statistic"-->
+<!--                suffix="KN"-->
+<!--                :value="(parseFloat(recurringPaymentsSumMonthly) + parseFloat(recurringPaymentsSumYearly) / 12).toFixed(2)"-->
+<!--                :style="{-->
+<!--            margin: '0 32px',-->
+<!--          }"-->
         />
 
     </a-row>
@@ -72,6 +72,7 @@
 
             .ant-statistic-content {
                 font-weight: 500;
+
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <a-row :gutter="16" style="padding-right: 24px">
+    <a-row :gutter="16" :style="{paddingRight: $isMobile ? '0px' : '24px', margin: '0px'}">
         <a-empty
                 v-if="devices.length === 0"
                 image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
@@ -9,12 +9,12 @@
         </a-empty>
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="device in devices">
             <div class="gutter-box">
-                <a-card hoverable @click="goToDevice(device)">
+                <a-card hoverable @click="goToDevice(device)" body-style="padding: 24px 24px 24px 16px">
                     <a-card-meta :title="device.name" description="This is the description">
                         <a-avatar
                                 slot="avatar"
                                 :icon="device.deviceType"
-                                style="background: #FFF; color: #1890ff"
+                                style="background: #FFF; color: #1890ff; margin-top: 3px; margin-right: 5px"
                         />
                     </a-card-meta>
                 </a-card>

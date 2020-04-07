@@ -21,7 +21,7 @@ export default class ShoppingItemRepository {
           .where('isResolved', false)
           .all();
     }
-    public static getUnresolvedPriceSum(): number {
+    public static getUnresolvedPriceSum(): string {
         return ShoppingItem
           .query()
           .with('groceryItem.image')
@@ -29,6 +29,6 @@ export default class ShoppingItemRepository {
           .all()
           .reduce((aggregator: number, shoppingItem: ShoppingItem) => {
               return aggregator + parseFloat(shoppingItem.quantity) * shoppingItem.groceryItem.price;
-          }, 0);
+          }, 0).toFixed(2);
     }
 }

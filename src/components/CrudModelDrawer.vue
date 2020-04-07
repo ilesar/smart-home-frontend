@@ -5,7 +5,7 @@
             :closable="false"
             @close="closeDrawer"
             :visible="visible"
-            width="50vw"
+            :width="$isMobile() ? '100vw' : '50vw'"
     >
         <component
                 :is="drawerObject.component"

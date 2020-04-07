@@ -1,6 +1,6 @@
 <template>
     <a-list itemLayout="horizontal" :dataSource="dateSource" class="item-list">
-        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
+        <a-list-item slot="renderItem" slot-scope="item" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '24px' : '0px'}">
             <a-list-item-meta
                     :description="item.price + ' KN'"
             >
@@ -11,10 +11,10 @@
                         style="color: #1890ff; background: white"
                 />
             </a-list-item-meta>
-            <a-badge status="success" text="Automatizirano" v-if="item.isAutomated" style="padding-right: 24px"/>
-            <a-badge status="error" text="Ručno" v-if="!item.isAutomated" style="padding-right: 24px"/>
+            <a-badge status="success" :text="$isMobile() ? '' : 'Automatizirano'" v-if="item.isAutomated" :style="{paddingRight: $isMobile() ? '16px' : '24px'}"/>
+            <a-badge status="error" :text="$isMobile() ? '' : 'Ručno'" v-if="!item.isAutomated" :style="{paddingRight: $isMobile() ? '16px' : '24px'}"/>
             <a-button type="default" shape="round" icon="edit" @click="editItem(item)"
-                      style="margin-left: 16px">
+                      :style="{marginLeft: $isMobile() ? '0px' : '16px'}">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
                       style="margin-left: 16px">
@@ -58,6 +58,6 @@
     }
     .item-list {
         height: calc(100% - 236px);
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 </style>

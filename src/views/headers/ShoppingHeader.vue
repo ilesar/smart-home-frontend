@@ -1,7 +1,7 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240);" title="Kupovina" class="o-section-header">
         <template slot="extra" :style="`${$isMobile() ? 'padding: 0' : ''}`">
-            <router-link :to="{name: historyRoute }" v-if="!$isMobile()">
+            <router-link :to="{name: historyRoute }">
                 <a-button type="link" @click="">Povijest kupovine</a-button>
             </router-link>
 
@@ -15,8 +15,8 @@
                 :closable="false"
                 @close="onClose"
                 :visible="visible"
-                class="shopping-drawer"
-                :bodyStyle="{ overflow: 'auto', height: '201px' }"
+                wrap-class-name="shopping-item-drawer"
+                :bodyStyle="{ overflow: 'auto', height: 'calc(100% - 55px)' }"
         >
             <a-list itemLayout="horizontal" :dataSource="groceryList">
                 <a-list-item slot="renderItem" slot-scope="item, index">
@@ -42,7 +42,7 @@
                     :closable="false"
                     @close="onChildrenDrawerClose"
                     :visible="childVisible"
-                    class="shopping-drawer"
+                    wrap-class-name="shopping-item-choice-drawer"
                     :bodyStyle="{ overflow: 'auto', height: '201px' }"
             >
                                 <a-list-item>
@@ -55,9 +55,9 @@
                                                 :src="chosenItem ? chosenItem.image.path : 'testiram'"
                                         />
                                     </a-list-item-meta>
-                                    <a-input-number id="inputNumber" v-model="value" />
+                                    <a-input-number id="inputNumber" v-model="value"  />
                                     <a-button type="primary" class="add-button" @click="addItemToList">
-                                        Dodaj proizvod
+                                        <a-icon type="check"></a-icon>
                                     </a-button>
                                 </a-list-item>
             </a-drawer>
@@ -138,5 +138,23 @@
 <style lang="scss">
     .add-button {
         margin-left: 16px;
+    }
+
+    .ant-drawer.shopping-item-drawer > .ant-drawer-content-wrapper {
+        height: 70% !important;
+    }
+
+    .ant-drawer.shopping-item-choice-drawer > .ant-drawer-content-wrapper {
+        height: 20% !important;
+    }
+
+    @media only screen and (max-width: 576px) {
+        .ant-drawer.shopping-item-drawer > .ant-drawer-content-wrapper {
+            zoom: 0.8;
+        }
+
+        .ant-drawer.shopping-item-choice-drawer > .ant-drawer-content-wrapper {
+            zoom: 0.8;
+        }
     }
 </style>

@@ -8,7 +8,7 @@ import { PopupType } from '@/enums/PopupType'
         >
             <span slot="description">Ne treba ništa kupiti</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
+        <a-list-item slot="renderItem" slot-scope="item" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '16px' : '0px'}">
             <a-list-item-meta
                     :description="`${item.quantity} ${item.quantity > 1 ? 'komada' : 'komad'} (${item.quantity * item.groceryItem.price} kn)`"
             >
@@ -18,7 +18,7 @@ import { PopupType } from '@/enums/PopupType'
                         :src="item.groceryItem.image ? item.groceryItem.image.path : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Red.svg/1200px-Red.svg.png'"
                 />
             </a-list-item-meta>
-            <div>{{ formatDate(item.updatedAt) }}</div>
+            <div v-if="!$isMobile()">{{ formatDate(item.updatedAt) }}</div>
             <a-button type="primary" shape="round" icon="check" @click="markShoppingItemBought(item)"
                       style="margin-left: 16px">
             </a-button>

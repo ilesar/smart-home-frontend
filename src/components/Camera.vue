@@ -1,23 +1,30 @@
 <template>
-    <span>
-        <video autoplay width="100%" ref="video"></video>
-        <a-button type="primary" @click="takePhoto">TAKE PHOTO</a-button>
-        <h2>Captured Image</h2>
-        <figure class="figure" style="width: 100%">
-            <img :src="image" class="img-responsive" style="width: 100%"/>
+    <div style="float:left; width: 100%; margin-bottom: 24px;">
+        <figure class="figure" style="position: absolute;">
+            <img :src="image" class="img-responsive" style="width: calc(100% - 24px); z-index: 999"/>
         </figure>
-    </span>
+        <video autoplay width="100%" ref="video" style="margin-bottom: 16px"></video>
+        <a-row type="flex" style="align-items: center;justify-content: center;" :gutter="16" class="gutter-row">
+            <a-button type="primary" @click="takePhoto" :disabled="image !== null" class="gutter-box"><a-icon type="camera"></a-icon></a-button>
+            <a-button type="default" @click="() => { this.image = null}" :disabled="image === null" class="gutter-box"><a-icon type="reload"></a-icon></a-button>
+        </a-row>
+
+    </div>
 
 </template>
 
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
 
-  @Component
+  @Component({
+    name: 'Camera',
+  })
   export default class Camera extends Vue {
 
     private cameraObject;
     private image: string = null;
+    private context = null;
+    private canvas = null;
 
     mounted() {
       console.log('MOUNTING CAMERA...');
@@ -91,21 +98,40 @@
     }
 
     getCanvas() {
-      let video = this.$refs.video;
-      if (!this.ctx) {
-        let canvas = document.createElement('canvas');
+      let video = this.$refs.video as HTMLVideoElement;
+      this.createCanvasFromVideo(video);
+
+      const {context, canvas} = this;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      return canvas;
+    }
+
+    private createCanvasFromVideo(video: HTMLVideoElement) {
+      let canvas;
+
+      if (!this.context) {
+        canvas = document.createElement('canvas');
+
         canvas.height = video.videoHeight;
         canvas.width = video.videoWidth;
+
         this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d');
       }
-      const {ctx, canvas} = this;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
       return canvas;
     }
   }
 </script>
 
 <style lang="scss">
-
+    .gutter-example >>> .ant-row > div {
+        background: transparent;
+        border: 0;
+    }
+    .gutter-box {
+        /*background: #00a0e9;*/
+        margin: 0 5px;
+    }
 </style>

@@ -2,7 +2,7 @@ import Room from '@/api/models/Room';
 import Expense from '@/api/models/Expense';
 
 export default class RoomRepository {
-    public static getAll(): Room[] {
+    public static getAll(): Expense[] {
         return Expense
           .query()
           .with('recurringPayment')
@@ -11,7 +11,7 @@ export default class RoomRepository {
           .all();
     }
 
-  public static getResolved() {
+  public static getResolved(): Expense[] {
     return Expense
       .query()
       .with('recurringPayment')
@@ -21,7 +21,7 @@ export default class RoomRepository {
       .all();
   }
 
-  public static getUnresolved() {
+  public static getUnresolved(): Expense[] {
     return Expense
       .query()
       .with('recurringPayment')

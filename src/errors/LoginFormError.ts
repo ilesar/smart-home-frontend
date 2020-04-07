@@ -1,3 +1,6 @@
 export default class LoginFormError extends Error {
-  public formattedErrors: any;
+  public formattedErrors: {
+    email: string,
+    password: string,
+  };
 }

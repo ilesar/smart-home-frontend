@@ -7,12 +7,12 @@ module.exports = {
       background_color: '#FFFFFF'
     }
   },
-  css: {
-    sourceMap: true,
-    loaderOptions: {
-      scss: {
-        prependData: `@import "@/assets/scss/style.scss";`
-      }
-    }
-  },
+  // css: {
+  //   sourceMap: true,
+  //   loaderOptions: {
+  //     scss: {
+  //       prependData: `@import "@/assets/scss/style.scss";`
+  //     }
+  //   }
+  // },
 }

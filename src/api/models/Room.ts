@@ -21,6 +21,7 @@ export default class Room extends Model {
 
   public id;
   public devices;
+  public slug;
 
   public static fieldsKeys() {
     return keys(this.fields());

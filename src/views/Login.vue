@@ -23,7 +23,7 @@
 <style lang="scss" scoped>
     .co-login {
         display: flex;
-        height: 100vh;
+        height: 100%;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -42,7 +42,7 @@
 
         &__message {
             margin-bottom: 16px;
-            color: $black;
+            color: #000;
         }
 
         &__additional-info {

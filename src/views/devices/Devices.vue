@@ -32,6 +32,7 @@
   import Room from '@/api/models/Room';
   import {Action} from 'vuex-class';
   import {RouteNames} from '@/enums/RouteNames';
+  import Device from '@/api/models/Device';
 
   @Component({
     name: 'Devices',

@@ -4,16 +4,10 @@
                   data-test="login-submit"
                   html-type="submit"
                   class="co-login__button"
+                  :loading="isPending"
                   :disabled="isPending">
             {{'Prijavi se'}}
         </a-button>
-        <div
-                class="co-login__spinner-wrapper"
-        >
-            <a-spin
-                    v-if="isPending === true"
-            />
-        </div>
     </a-form-item>
 </template>
 

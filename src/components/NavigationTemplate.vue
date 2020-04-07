@@ -75,7 +75,7 @@
                     </vue-page-transition>
                 </a-layout-header>
                 <a-layout-content
-                        class="content-container"
+                        class="content-container" :style="`${$isMobile() ? 'padding: 0' : ''}`"
                 >
                     <vue-page-transition name="fade-in-right">
                     <slot></slot>
@@ -96,7 +96,7 @@
                                     class="o-footer-menu-item"
 
                             >
-                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -104,7 +104,7 @@
                                     @click="goToShopping()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -112,7 +112,7 @@
                                     @click="goToPayments()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px' }"/>
+                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '20px', position: 'relative', top: '4px', margin: '0' }"/>
                             </a-menu-item>
                         </a-menu>
                 </a-layout-footer>
@@ -189,7 +189,7 @@
 
 <style scoped lang="scss">
     .o-section {
-        height: 100vh;
+        height: 100%;
 
         &-nav {
             /*height:100vh;*/
@@ -205,6 +205,7 @@
     .o-footer {
         text-align: center;
         padding: 0px;
+        border-top: 1px solid #1890ff;
     }
 
     .content-container {

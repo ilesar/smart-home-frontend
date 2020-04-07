@@ -13,7 +13,6 @@
         <a-form-model-item label="Cijena" prop="price" ref="price">
             <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
         </a-form-model-item>
-        <a-divider></a-divider>
         <Camera></Camera>
         <a-divider></a-divider>
         <a-form-model-item :wrapper-col="{ offset: 6 }">
@@ -30,7 +29,7 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
   import GroceryItem from '@/api/models/GroceryItem';
-  import Camera from '@/components/Camera';
+  import Camera from '@/components/Camera.vue';
 
   @Component({
     name: 'GroceryItemForm',

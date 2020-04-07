@@ -54,9 +54,6 @@
     @Getter('recurringpayments/getYearlyRecurringPaymentsSum')
     private recurringPaymentsSumYearly;
 
-    public get realYearlyExpenseSum() {
-      return 12 * parseFloat(recurringPaymentsSumMonthly) + parseFloat(recurringPaymentsSumYearly);
-    }
   }
 </script>
 
@@ -74,7 +71,6 @@
             }
 
             .ant-statistic-content {
-                //color: map-get(map-get($settings-colors, 'primary'), 'blue');
                 font-weight: 500;
             }
         }

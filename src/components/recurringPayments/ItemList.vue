@@ -57,7 +57,7 @@
         margin-bottom: 0px !important;
     }
     .item-list {
-        height: calc(100vh - 236px);
+        height: calc(100% - 236px);
         overflow-y: scroll;
     }
 </style>

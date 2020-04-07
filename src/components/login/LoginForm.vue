@@ -53,7 +53,7 @@ export default class LoginForm extends Vue {
 
     return this.errors.password;
   }
-  public errors = [];
+  public errors: any = {};
 
   // private httpRequestStarted: boolean = false;
   private requiredFieldNames = ['username', 'password'];
@@ -111,7 +111,7 @@ export default class LoginForm extends Vue {
 
         &__forgot-password {
             margin-bottom: 8px;
-            color: $mid-blue;
+            color: #1890ff;
         }
 
     }

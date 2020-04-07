@@ -1,5 +1,5 @@
 <template>
-    <a-row type="flex" class="footer-wrapper">
+    <a-row type="flex" class="footer-wrapper" v-if="shoppingListItemSum > 0">
         <a-divider style="margin-top: 0px"></a-divider>
         <a-statistic
                 title="Ukupni trošak"

@@ -5,7 +5,7 @@
                 <a-button type="link" @click="">Povijest kupovine</a-button>
             </router-link>
 
-            <a-button type="default" @click="showDrawer" >
+            <a-button type="default" @click="showDrawer">
                 Dodaj proizvod
             </a-button>
         </template>
@@ -37,7 +37,6 @@
                 </a-list-item>
             </a-list>
             <a-drawer
-                    title="Količina"
                     placement="bottom"
                     :closable="false"
                     @close="onChildrenDrawerClose"
@@ -45,21 +44,24 @@
                     wrap-class-name="shopping-item-choice-drawer"
                     :bodyStyle="{ overflow: 'auto', height: '201px' }"
             >
-                                <a-list-item>
-                                    <a-list-item-meta
-                                            :description="chosenItem ? chosenItem.price + ' KN': ''"
-                                    >
-                                        <span slot="title">{{chosenItem ? chosenItem.name : ''}}</span>
-                                        <a-avatar
-                                                slot="avatar"
-                                                :src="chosenItem ? chosenItem.image.path : 'testiram'"
-                                        />
-                                    </a-list-item-meta>
-                                    <a-input-number id="inputNumber" v-model="value"  />
-                                    <a-button type="primary" class="add-button" @click="addItemToList">
-                                        <a-icon type="check"></a-icon>
-                                    </a-button>
-                                </a-list-item>
+                <a-list-item style="margin-bottom: 16px;">
+                    <a-list-item-meta
+                            :description="chosenItem ? chosenItem.price + ' KN': ''"
+                    >
+                        <span slot="title">{{chosenItem ? chosenItem.name : ''}}</span>
+                        <a-avatar
+                                slot="avatar"
+                                :src="chosenItem ? chosenItem.image.path : 'testiram'"
+                        />
+                    </a-list-item-meta>
+                </a-list-item>
+                <div style="float: right">
+                    <a-input-number id="inputNumber" v-model="value" size="large" :min="1" />
+                    <a-button type="primary" class="add-button" @click="addItemToList">
+                        <a-icon type="check"></a-icon>Dodaj
+                    </a-button>
+                </div>
+
             </a-drawer>
         </a-drawer>
     </a-page-header>
@@ -145,7 +147,7 @@
     }
 
     .ant-drawer.shopping-item-choice-drawer > .ant-drawer-content-wrapper {
-        height: 20% !important;
+        height: 25% !important;
     }
 
     @media only screen and (max-width: 576px) {

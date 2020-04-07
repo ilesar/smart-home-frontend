@@ -75,15 +75,15 @@
                     </vue-page-transition>
                 </a-layout-header>
                 <a-layout-content
-                        class="content-container" :style="`${$isMobile() ? 'padding: 0' : ''}`"
+                        class="content-container" :style="{padding: $isMobile() ? '0' : '24px'}"
                 >
-                    <vue-page-transition name="fade-in-right">
+                    <vue-page-transition name="fade-in-down">
                     <slot></slot>
                     </vue-page-transition>
                 </a-layout-content>
                 <a-layout-footer style="background: #fff; padding: 0">
-                    <vue-page-transition name="fade-in-up">
-                    <router-view name="footer"></router-view>
+                    <vue-page-transition name="fade-in-up" >
+                    <router-view name="footer" ></router-view>
                     </vue-page-transition>
                 </a-layout-footer>
             </a-layout>
@@ -123,7 +123,7 @@
                             </a-menu-item>
 
                             <a-menu-item
-                                    key="payments"
+                                    key="recurringItems"
                                     @click="goToRecurringItems()"
                                     class="o-footer-menu-item"
                             >
@@ -227,6 +227,10 @@
         padding: 0 0 0 24px;
         background: #fff;
         overflow-y: auto !important;
+    }
+
+    .content-container::-webkit-scrollbar {
+        display: none !important;
     }
 
 </style>

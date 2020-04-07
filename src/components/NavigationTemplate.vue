@@ -81,7 +81,7 @@
                     <slot></slot>
                     </vue-page-transition>
                 </a-layout-content>
-                <a-layout-footer style="background: #fff; padding: 0">
+                <a-layout-footer style="background: #FFF; padding: 0">
                     <vue-page-transition name="fade-in-up" >
                     <router-view name="footer" ></router-view>
                     </vue-page-transition>
@@ -89,14 +89,14 @@
             </a-layout>
         </a-layout>
                 <a-layout-footer class="o-footer" v-if="$isMobile()">
-                        <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav" >
+                        <a-menu theme="light" mode="horizontal" :defaultSelectedKeys="['1']" class="o-footer-nav" style="background: #1890ff !important;">
                             <a-menu-item
                                     key="devices"
                                     @click="goToRooms()"
                                     class="o-footer-menu-item"
 
                             >
-                                <a-icon type="home" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', margin: '0', padding: '8px 4px' }"/>
+                                <a-icon type="home" :style="{ fontSize: '30px', position: 'relative', top: '2px', margin: '0', padding: '16px 4px', color: '#FFF' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -104,7 +104,7 @@
                                     @click="goToShopping()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="shopping" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
+                                <a-icon type="shopping" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>
                             </a-menu-item>
 
                             <a-menu-item
@@ -112,23 +112,23 @@
                                     @click="goToPayments()"
                                     class="o-footer-menu-item"
                             >
-                                <a-icon type="dollar" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
+                                <a-icon type="dollar" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>
                             </a-menu-item>
-                            <a-menu-item
-                                    key="groceriess"
-                                    @click="goToGroceries()"
-                                    class="o-footer-menu-item"
-                            >
-                                <a-icon type="appstore" theme="twoTone" :style="{ fontSize: '30px', position: 'relative', top: '4px', padding: '8px 4px' }"/>
-                            </a-menu-item>
+<!--                            <a-menu-item-->
+<!--                                    key="groceriess"-->
+<!--                                    @click="goToGroceries()"-->
+<!--                                    class="o-footer-menu-item"-->
+<!--                            >-->
+<!--                                <a-icon type="appstore" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>-->
+<!--                            </a-menu-item>-->
 
-                            <a-menu-item
-                                    key="recurringItems"
-                                    @click="goToRecurringItems()"
-                                    class="o-footer-menu-item"
-                            >
-                                <a-icon type="reload" :style="{ fontSize: '30px', position: 'relative', top: '4px', margin: '0', color: '#1890ff' }"/>
-                            </a-menu-item>
+<!--                            <a-menu-item-->
+<!--                                    key="recurringItems"-->
+<!--                                    @click="goToRecurringItems()"-->
+<!--                                    class="o-footer-menu-item"-->
+<!--                            >-->
+<!--                                <a-icon type="reload" :style="{ fontSize: '30px', position: 'relative', top: '1px', margin: '0', color: '#FFF' }"/>-->
+<!--                            </a-menu-item>-->
                         </a-menu>
                 </a-layout-footer>
     </a-layout>

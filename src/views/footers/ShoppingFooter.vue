@@ -1,5 +1,5 @@
 <template>
-    <a-row type="flex" class="footer-wrapper" v-if="shoppingListItemSum > 0">
+    <a-row type="flex" class="footer-wrapper" v-if="shoppingListItemSum > 0" style="background: #1890ff">
         <a-divider style="margin-top: 0px"></a-divider>
         <a-statistic
                 title="Ukupni trošak"
@@ -35,12 +35,13 @@
 
         .expense-statistic {
             .ant-statistic-title {
-
+                color: #FFF;
             }
 
             .ant-statistic-content {
                 //color: map-get(map-get($settings-colors, 'primary'), 'blue');
                 font-weight: 500;
+                color: #FFF;
             }
         }
     }

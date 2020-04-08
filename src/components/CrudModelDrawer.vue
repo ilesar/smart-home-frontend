@@ -1,19 +1,39 @@
 <template>
-    <a-drawer
-            :title="drawerObject.title"
-            placement="right"
-            :closable="false"
-            @close="closeDrawer"
-            :visible="visible"
-            :width="$isMobile() ? '100vw' : '50vw'"
-    >
-        <component
-                :is="drawerObject.component"
-                @on-cancel="closeDrawer"
-                :model="drawerObject.model"
-                :submitButtonText="drawerObject.submitText"
-                :submitButtonCallback="drawerObject.onSubmit" />
-    </a-drawer>
+    <div>
+        <a-drawer
+                v-if="!$isMobile()"
+                :title="drawerObject.title"
+                placement="right"
+                :closable="false"
+                @close="closeDrawer"
+                :visible="visible"
+                :width="$isMobile() ? '100vw' : '50vw'"
+        >
+            <component
+                    :is="drawerObject.component"
+                    @on-cancel="closeDrawer"
+                    :model="drawerObject.model"
+                    :submitButtonText="drawerObject.submitText"
+                    :submitButtonCallback="drawerObject.onSubmit" />
+        </a-drawer>
+        <a-drawer
+                v-if="$isMobile()"
+                :title="drawerObject.title"
+                placement="right"
+                :closable="false"
+                @close="closeDrawer"
+                :visible="visible"
+                :width="$isMobile() ? '100vw' : '50vw'"
+                body-style="padding: 0px"
+        >
+            <component
+                    :is="drawerObject.component"
+                    @on-cancel="closeDrawer"
+                    :model="drawerObject.model"
+                    :submitButtonText="drawerObject.submitText"
+                    :submitButtonCallback="drawerObject.onSubmit" />
+        </a-drawer>
+    </div>
 </template>
 
 <script lang="ts">

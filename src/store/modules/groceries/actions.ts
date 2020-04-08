@@ -6,26 +6,22 @@ import GroceryItem from '@/api/models/GroceryItem';
 
 const actions: ActionTree<ILocalState, {}> = {
   async fetchGroceryItemList({commit, getters}) {
-    GroceryController.fetchAll().then(() => {
-    }).catch((error) => {
+    return GroceryController.fetchAll().catch((error) => {
       console.error(error);
     });
   },
   async createGroceryItem({commit, getters}, groceryItem: GroceryItem) {
-    GroceryController.createOne(groceryItem).then(() => {
-    }).catch((error) => {
+    GroceryController.createOne(groceryItem).catch((error) => {
       console.error(error);
     });
   },
   async updateGroceryItem({commit, getters}, groceryItem: GroceryItem) {
-    GroceryController.updateOne(groceryItem).then(() => {
-    }).catch((error) => {
+    GroceryController.updateOne(groceryItem).catch((error) => {
       console.error(error);
     });
   },
   async deleteGroceryItem({commit, getters}, groceryItem: GroceryItem) {
-    GroceryController.deleteOne(groceryItem).then(() => {
-    }).catch((error) => {
+    GroceryController.deleteOne(groceryItem).catch((error) => {
       console.error(error);
     });
   },

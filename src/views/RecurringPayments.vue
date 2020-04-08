@@ -23,6 +23,7 @@
   import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
   import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
   import moment from 'moment';
+  import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
 
   @Component({
     name: 'RecurringPayments',
@@ -45,8 +46,9 @@
     @Action('recurringpayments/deleteRecurringPayment')
     private deleteRecurringPayment;
 
+    private loadingOverlay = new LoadingOverlayHelper(this, {});
 
-    public beforeMount() {
+    public created() {
       this.fetchRecurringPaymentList();
     }
 

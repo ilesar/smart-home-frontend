@@ -114,21 +114,21 @@
                             >
                                 <a-icon type="dollar" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>
                             </a-menu-item>
-<!--                            <a-menu-item-->
-<!--                                    key="groceriess"-->
-<!--                                    @click="goToGroceries()"-->
-<!--                                    class="o-footer-menu-item"-->
-<!--                            >-->
-<!--                                <a-icon type="appstore" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>-->
-<!--                            </a-menu-item>-->
+                            <a-menu-item
+                                    key="groceriess"
+                                    @click="goToGroceries()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="appstore" :style="{ fontSize: '30px', position: 'relative', top: '2px', padding: '16px 4px', color: '#FFF' }"/>
+                            </a-menu-item>
 
-<!--                            <a-menu-item-->
-<!--                                    key="recurringItems"-->
-<!--                                    @click="goToRecurringItems()"-->
-<!--                                    class="o-footer-menu-item"-->
-<!--                            >-->
-<!--                                <a-icon type="reload" :style="{ fontSize: '30px', position: 'relative', top: '1px', margin: '0', color: '#FFF' }"/>-->
-<!--                            </a-menu-item>-->
+                            <a-menu-item
+                                    key="recurringItems"
+                                    @click="goToRecurringItems()"
+                                    class="o-footer-menu-item"
+                            >
+                                <a-icon type="reload" :style="{ fontSize: '30px', position: 'relative', top: '1px', margin: '0', color: '#FFF' }"/>
+                            </a-menu-item>
                         </a-menu>
                 </a-layout-footer>
     </a-layout>

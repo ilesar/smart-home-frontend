@@ -1,6 +1,6 @@
 <template>
     <a-list itemLayout="horizontal" :dataSource="groceryList">
-        <a-list-item slot="renderItem" slot-scope="item, index" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '24px' : '0px'}">
+        <a-list-item slot="renderItem" slot-scope="item, index" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '16px' : '0px'}">
             <a-list-item-meta
                     :description="item.price + ' KN'"
             >
@@ -48,7 +48,7 @@
     @Action('groceries/updateGroceryItem')
     private updateGroceryItem;
 
-    public beforeMount() {
+    public async created() {
       this.fetchGroceryItemList();
     }
 

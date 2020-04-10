@@ -15,14 +15,14 @@
         </a-form-model-item>
         <a-form-model-item label="Tip plaćanja" prop="type" ref="type">
             <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
-                <a-select-option v-for="type in model.types" :value="type.value">
+                <a-select-option v-for="type in model.types" :value="type.value" :key="model.id">
                     {{ type.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>
         <a-form-model-item label="Učestalost" prop="period" ref="period">
             <a-select v-model="model.period" placeholder="Odaberi učestalost plaćanja" defaultValue="adasd">
-                <a-select-option v-for="period in model.periods" :value="period.value">
+                <a-select-option v-for="period in model.periods" :value="period.value" :key="model.id">
                     {{ period.name }}
                 </a-select-option>
             </a-select>

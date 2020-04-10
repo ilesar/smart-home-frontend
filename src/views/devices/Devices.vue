@@ -7,7 +7,7 @@
         >
             <span slot="description">Nema uređaja u ovoj sobi</span>
         </a-empty>
-        <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="device in devices">
+        <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="device in devices" :key="device.id">
             <div class="gutter-box">
                 <a-card hoverable @click="goToDevice(device)" :body-style="{padding: '24px 24px 24px 16px'}">
                     <a-card-meta :title="device.name" description="This is the description">

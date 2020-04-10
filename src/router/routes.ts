@@ -13,7 +13,7 @@ export const routes: RouteConfig[] = [
     name: RouteNames.Login,
     components: {
       default: loadView('Login'),
-    }
+    },
   },
   {
     path: `/${RouteNames.Rooms}`,
@@ -24,8 +24,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('Rooms'),
-      header: loadView('headers/RoomsHeader')
-    }
+      header: loadView('headers/RoomsHeader'),
+    },
   },
   {
     path: `/${RouteNames.Rooms}/:roomSlug/devices/:deviceSlug`,
@@ -36,8 +36,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('devices/DeviceConfiguration'),
-      header: loadView('headers/DeviceConfigurationHeader')
-    }
+      header: loadView('headers/DeviceConfigurationHeader'),
+    },
   },
   {
     path: `/${RouteNames.Rooms}/:roomSlug`,
@@ -48,8 +48,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('devices/Devices'),
-      header: loadView('headers/DevicesHeader')
-    }
+      header: loadView('headers/DevicesHeader'),
+    },
   },
   {
     path: '/shopping',
@@ -62,7 +62,7 @@ export const routes: RouteConfig[] = [
       default: loadView('Shopping'),
       header: loadView('headers/ShoppingHeader'),
       footer: loadView('footers/ShoppingFooter'),
-    }
+    },
   },
   {
     path: '/shopping/history',
@@ -73,8 +73,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('shopping/ShoppingHistory'),
-      header: loadView('headers/ShoppingHistoryHeader')
-    }
+      header: loadView('headers/ShoppingHistoryHeader'),
+    },
   },
   {
     path: '/payments',
@@ -86,8 +86,8 @@ export const routes: RouteConfig[] = [
     components: {
       default: loadView('Payment'),
       header: loadView('headers/PaymentHeader'),
-      footer: loadView('footers/PaymentFooter')
-    }
+      footer: loadView('footers/PaymentFooter'),
+    },
   },
   {
     path: '/payments/history',
@@ -98,8 +98,8 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('payment/PaymentHistory'),
-      header: loadView('headers/PaymentHistoryHeader')
-    }
+      header: loadView('headers/PaymentHistoryHeader'),
+    },
   },
   {
     path: '/groceries',
@@ -110,7 +110,7 @@ export const routes: RouteConfig[] = [
     },
     components: {
       default: loadView('Groceries'),
-      header: loadView('headers/GroceriesHeader')
+      header: loadView('headers/GroceriesHeader'),
     },
   },
   {

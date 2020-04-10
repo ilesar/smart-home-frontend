@@ -27,48 +27,48 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import {Action, Getter} from 'vuex-class';
-  import ShoppingItem from '@/api/models/ShoppingItem';
-  import {EventBus} from '@/helpers/EventBusHelper';
-  import {EventBusEvents} from '@/enums/EventBusEvents';
-  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
-  import moment from 'moment';
-  import Expense from '@/api/models/Expense';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {Action, Getter} from 'vuex-class';
+import ShoppingItem from '@/api/models/ShoppingItem';
+import {EventBus} from '@/helpers/EventBusHelper';
+import {EventBusEvents} from '@/enums/EventBusEvents';
+import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+import moment from 'moment';
+import Expense from '@/api/models/Expense';
 
-  @Component
-  export default class Payment extends Vue {
-    @Action('expenses/fetchExpenses') fetchAllExpenses;
-    @Action('expenses/resolveExpense') resolveExpense;
-    @Getter('expenses/getUnresolvedExpenses') expenses;
+@Component
+export default class Payment extends Vue {
+  @Action('expenses/fetchExpenses') public fetchAllExpenses;
+  @Action('expenses/resolveExpense') public resolveExpense;
+  @Getter('expenses/getUnresolvedExpenses') public expenses;
 
-    private beforeMount() {
-      this.fetchAllExpenses();
-    }
-
-    public markExpenseResolved(model: Expense) {
-      EventBus.$emit(EventBusEvents.OpenPopup, {
-        options: {
-          title: `Plaćeno?`,
-          content: model.recurringPayment.name,
-          okText: 'Da',
-          cancelText: 'Ne',
-          onOk: () => {
-            this.resolveExpense(model).then(() => {
-              model.$delete();
-            });
-          },
-        }
-      } as PopupDataInterface);
-    }
-
-    public formatDate(dateString: string) {
-      return moment(dateString).locale('hr').fromNow();;
-    }
-
+  public markExpenseResolved(model: Expense) {
+    EventBus.$emit(EventBusEvents.OpenPopup, {
+      options: {
+        title: `Plaćeno?`,
+        content: model.recurringPayment.name,
+        okText: 'Da',
+        cancelText: 'Ne',
+        onOk: () => {
+          this.resolveExpense(model).then(() => {
+            model.$delete();
+          });
+        },
+      },
+    } as PopupDataInterface);
   }
+
+  public formatDate(dateString: string) {
+    return moment(dateString).locale('hr').fromNow();
+  }
+
+  private beforeMount() {
+    this.fetchAllExpenses();
+  }
+
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

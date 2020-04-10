@@ -21,9 +21,6 @@ export default class Device extends Model {
     },
   };
 
-  public id;
-  public slug;
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -51,8 +48,11 @@ export default class Device extends Model {
     };
   }
 
-  static beforeCreate (model) {
+  public static beforeCreate(model) {
     model.slug = StringHelper.slugify(model.name);
   }
+
+  public id;
+  public slug;
 
 }

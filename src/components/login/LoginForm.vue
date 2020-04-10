@@ -31,11 +31,11 @@ import LoginFormError from '@/errors/LoginFormError';
 export default class LoginForm extends Vue {
 
   public get form() {
-    if (this._form === undefined) {
-      this._form = this.$form.createForm(this, {name: 'login_form'} as IformCreateOption);
+    if (this.formObject === undefined) {
+      this.formObject = this.$form.createForm(this, {name: 'login_form'} as IformCreateOption);
     }
 
-    return this._form;
+    return this.formObject;
   }
 
   public get emailError() {
@@ -58,7 +58,7 @@ export default class LoginForm extends Vue {
   // private httpRequestStarted: boolean = false;
   private requiredFieldNames = ['username', 'password'];
   private isPending: boolean = false;
-  private _form;
+  private formObject;
 
   public handleSubmit(event: Event) {
     event.preventDefault();

@@ -7,11 +7,6 @@ export default class ShoppingItem extends Model {
 
   public static primaryKey = 'id';
 
-  public groceryItem;
-  public id;
-  public quantity;
-  public createdAt;
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -41,4 +36,9 @@ export default class ShoppingItem extends Model {
       groceryItem: this.belongsTo(GroceryItem, 'groceryItem_id'),
     };
   }
+
+  public groceryItem;
+  public id;
+  public quantity;
+  public createdAt;
 }

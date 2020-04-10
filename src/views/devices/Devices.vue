@@ -24,45 +24,44 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import HelloWorld from '@/components/home/HelloWorld.vue';
-  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
-  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
-  import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
-  import Room from '@/api/models/Room';
-  import {Action} from 'vuex-class';
-  import {RouteNames} from '@/enums/RouteNames';
-  import Device from '@/api/models/Device';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import HelloWorld from '@/components/home/HelloWorld.vue';
+import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
+import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
+import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
+import Room from '@/api/models/Room';
+import {Action} from 'vuex-class';
+import {RouteNames} from '@/enums/RouteNames';
+import Device from '@/api/models/Device';
 
-  @Component({
-    name: 'Devices',
-    components: {
-      HelloWorldDuoTone,
-      HelloWorldWrapper,
-      HelloWorld,
-    },
-  })
-  export default class Devices extends Vue {
-    @Action('rooms/fetchRooms') private fetchRooms;
+@Component({
+  name: 'Devices',
+  components: {
+    HelloWorldDuoTone,
+    HelloWorldWrapper,
+    HelloWorld,
+  },
+})
+export default class Devices extends Vue {
+  @Action('rooms/fetchRooms') private fetchRooms;
 
-    public beforeMount() {
-        this.fetchRooms();
-    }
-
-    public get room() {
-      return this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug)
-    }
-
-    public get devices() {
-      return this.room ? this.room.devices : [];
-    }
-
-    private goToDevice(device: Device) {
-      this.$router.push(`/${RouteNames.Rooms}/${this.room.slug}/devices/${device.slug}`);
-    }
-
+  public beforeMount() {
+      this.fetchRooms();
   }
 
+  public get room() {
+    return this.$store.getters['rooms/getRoomById'](this.$route.params.roomSlug);
+  }
+
+  public get devices() {
+    return this.room ? this.room.devices : [];
+  }
+
+  private goToDevice(device: Device) {
+    this.$router.push(`/${RouteNames.Rooms}/${this.room.slug}/devices/${device.slug}`);
+  }
+
+}
 </script>
 
 <style lang="scss" scoped>

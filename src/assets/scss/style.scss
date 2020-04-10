@@ -1,9 +1,35 @@
-.ant-page-header-heading-extra {
-  width: auto;
-  float: right;
-  padding-top: 0px;
+html, body {
+  display: none;
+  background: red;
+  color: red;
 }
 
-html button {
-  touch-action: manipulation;
+
+#app {
+  display: none;
 }
+
+//button {
+//  display: none;
+//}
+
+@media (max-width: 576px) {
+  span.ant-page-header-heading-extra {
+    display: none !important;
+    padding: 0 !important;
+    width: auto !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  span.ant-page-header-heading-extra {
+    display: none !important;
+    padding: 0 !important;
+    width: auto !important;
+  }
+}
+
+//
+//html button {
+//  touch-action: manipulation;
+//}

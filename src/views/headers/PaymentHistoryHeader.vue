@@ -17,7 +17,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .add-button {
         margin-left: 16px;
     }

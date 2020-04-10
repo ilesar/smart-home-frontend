@@ -17,10 +17,6 @@ export default class GroceryItem extends Model {
     },
   };
 
-  public id;
-  public name;
-  public price;
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -50,5 +46,9 @@ export default class GroceryItem extends Model {
       updatedAt: this.string(undefined),
     };
   }
+
+  public id;
+  public name;
+  public price;
 
 }

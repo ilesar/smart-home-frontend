@@ -8,7 +8,7 @@ import Antd from 'ant-design-vue';
 const Loading = require('vue-loading-overlay');
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VuePageTransition from 'vue-page-transition';
-import VueMobileDetection from "vue-mobile-detection";
+import VueMobileDetection from 'vue-mobile-detection';
 
 
 // import './registerServiceWorker';

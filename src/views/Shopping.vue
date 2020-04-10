@@ -29,73 +29,73 @@ import { PopupType } from '@/enums/PopupType'
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
-  import {Action, Getter} from 'vuex-class';
-  import ListItem from '@/components/shopping/ListItem.vue';
-  import ShoppingItem from '@/api/models/ShoppingItem';
-  import moment from 'moment';
-  import {EventBus} from '@/helpers/EventBusHelper';
-  import {EventBusEvents} from '@/enums/EventBusEvents';
-  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+import {Component, Vue} from 'vue-property-decorator';
+import {Action, Getter} from 'vuex-class';
+import ListItem from '@/components/shopping/ListItem.vue';
+import ShoppingItem from '@/api/models/ShoppingItem';
+import moment from 'moment';
+import {EventBus} from '@/helpers/EventBusHelper';
+import {EventBusEvents} from '@/enums/EventBusEvents';
+import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
 
-  @Component({
-    name: 'Shopping',
-    components: {
-      ListItem,
-    },
-  })
-  export default class Shopping extends Vue {
+@Component({
+  name: 'Shopping',
+  components: {
+    ListItem,
+  },
+})
+export default class Shopping extends Vue {
 
-    @Getter('shopping/getShoppingList')
-    private shoppingList;
-    @Action('shopping/fetchShoppingItemList')
-    private fetchShoppingList;
-    @Action('shopping/resolveShoppingItem')
-    private resolveShoppingItem;
-    @Action('shopping/removeShoppingItem')
-    private removeShoppingItem;
+  @Getter('shopping/getShoppingList')
+  private shoppingList;
+  @Action('shopping/fetchShoppingItemList')
+  private fetchShoppingList;
+  @Action('shopping/resolveShoppingItem')
+  private resolveShoppingItem;
+  @Action('shopping/removeShoppingItem')
+  private removeShoppingItem;
 
-    public beforeMount() {
-      this.fetchShoppingList();
-    }
-
-    public markShoppingItemBought(model: ShoppingItem) {
-      EventBus.$emit(EventBusEvents.OpenPopup, {
-        options: {
-          title: `Kupljeno?`,
-          content: model.groceryItem.name,
-          okText: 'Da',
-          cancelText: 'Ne',
-          onOk: () => {
-            this.resolveShoppingItem(model).then(() => {
-              model.$delete();
-            });
-          },
-        }
-      } as PopupDataInterface);
-    }
-
-    public deleteShoppingItem(model: ShoppingItem) {
-      EventBus.$emit(EventBusEvents.OpenPopup, {
-        options: {
-          title: `Ne trebamo ovo?`,
-          content: model.groceryItem.name,
-          okText: 'Ne',
-          cancelText: 'Ne znam',
-          onOk: () => {
-            this.removeShoppingItem(model).then(() => {
-              model.$delete();
-            });
-          },
-        }
-      } as PopupDataInterface);
-
-    }
-
-    public formatDate(dateString: string) {
-      return moment(dateString).locale('hr').calendar();
-    }
+  public beforeMount() {
+    this.fetchShoppingList();
   }
+
+  public markShoppingItemBought(model: ShoppingItem) {
+    EventBus.$emit(EventBusEvents.OpenPopup, {
+      options: {
+        title: `Kupljeno?`,
+        content: model.groceryItem.name,
+        okText: 'Da',
+        cancelText: 'Ne',
+        onOk: () => {
+          this.resolveShoppingItem(model).then(() => {
+            model.$delete();
+          });
+        },
+      },
+    } as PopupDataInterface);
+  }
+
+  public deleteShoppingItem(model: ShoppingItem) {
+    EventBus.$emit(EventBusEvents.OpenPopup, {
+      options: {
+        title: `Ne trebamo ovo?`,
+        content: model.groceryItem.name,
+        okText: 'Ne',
+        cancelText: 'Ne znam',
+        onOk: () => {
+          this.removeShoppingItem(model).then(() => {
+            model.$delete();
+          });
+        },
+      },
+    } as PopupDataInterface);
+
+  }
+
+  public formatDate(dateString: string) {
+    return moment(dateString).locale('hr').calendar();
+  }
+}
 </script>
 
 <style lang="scss" scoped>

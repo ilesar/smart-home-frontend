@@ -1,6 +1,6 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240);" title="Kupovina" class="o-section-header">
-        <template slot="extra" :style="`${$isMobile() ? 'padding: 0' : ''}`">
+        <div slot="extra" class="extra-fields" :style="`${$isMobile() ? 'padding: 0' : ''}`">
             <router-link :to="{name: historyRoute }">
                 <a-button type="link" @click="">Povijest kupovine</a-button>
             </router-link>
@@ -8,7 +8,7 @@
             <a-button type="default" @click="showDrawer">
                 Dodaj proizvod
             </a-button>
-        </template>
+        </div>
         <a-drawer
                 title="Odaberi proizvod sa liste"
                 placement="bottom"
@@ -56,9 +56,10 @@
                     </a-list-item-meta>
                 </a-list-item>
                 <div style="float: right">
-                    <a-input-number id="inputNumber" v-model="value" size="large" :min="1" />
+                    <a-input-number id="inputNumber" v-model="value" size="large" :min="1"/>
                     <a-button type="primary" class="add-button" @click="addItemToList">
-                        <a-icon type="check"></a-icon>Dodaj
+                        <a-icon type="check"></a-icon>
+                        Dodaj
                     </a-button>
                 </div>
 
@@ -69,78 +70,83 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
-  import {Action, Getter} from 'vuex-class';
-  import {RouteNames} from '@/enums/RouteNames';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
+import {Action, Getter} from 'vuex-class';
+import {RouteNames} from '@/enums/RouteNames';
 
-  @Component
-  export default class ShoppingHeader extends Vue {
-    private visible: boolean = false;
-    private childVisible: boolean = false;
-    private loadingOverlay = new LoadingOverlayHelper(this, {});
-    private chosenItem = null;
-    private value = 1;
-    private readonly historyRoute = RouteNames.ShoppingHistory;
+@Component
+export default class ShoppingHeader extends Vue {
+  private visible: boolean = false;
+  private childVisible: boolean = false;
+  private loadingOverlay = new LoadingOverlayHelper(this, {});
+  private chosenItem = null;
+  private value = 1;
+  private readonly historyRoute = RouteNames.ShoppingHistory;
 
-    @Getter('groceries/getGroceryItemList')
-    private groceryList;
-    @Action('groceries/fetchGroceryItemList')
-    private fetchGroceryItemList;
-    @Action('shopping/addGroceryItemToShoppingList')
-    private addGroceryItemToShoppingList;
-    @Getter('shopping/getShoppingList')
-    private shoppingList;
+  @Getter('groceries/getGroceryItemList')
+  private groceryList;
+  @Action('groceries/fetchGroceryItemList')
+  private fetchGroceryItemList;
+  @Action('shopping/addGroceryItemToShoppingList')
+  private addGroceryItemToShoppingList;
+  @Getter('shopping/getShoppingList')
+  private shoppingList;
 
 
-    public beforeMount() {
-      this.fetchGroceryItemList();
-    }
-
-    shoppingEstimate() {
-      console.log(this.groceryList);
-      return this.shoppingList.reduce((aggregator, groceryItem) => {
-        console.log(parseFloat(groceryItem.price));
-        return aggregator + parseFloat(groceryItem.price);
-
-      }, 0);
-    }
-
-    showDrawer() {
-      this.visible = true;
-    }
-
-    onClose() {
-      this.visible = false;
-    }
-
-    showChildrenDrawer(index) {
-      this.chosenItem = this.groceryList[index];
-      this.childVisible = true;
-    }
-
-    onChildrenDrawerClose() {
-      this.childVisible = false;
-    }
-
-    addItemToList() {
-      this.addGroceryItemToShoppingList({
-        item: this.chosenItem,
-        quantity: this.value
-      }).then(() => {
-        this.childVisible = false;
-        this.value = 1;
-      }).catch((error) => {
-        alert(error);
-      });
-    }
+  public beforeMount() {
+    this.fetchGroceryItemList();
   }
+
+  public shoppingEstimate() {
+    console.log(this.groceryList);
+    return this.shoppingList.reduce((aggregator, groceryItem) => {
+      console.log(parseFloat(groceryItem.price));
+      return aggregator + parseFloat(groceryItem.price);
+
+    }, 0);
+  }
+
+  public showDrawer() {
+    this.visible = true;
+  }
+
+  public onClose() {
+    this.visible = false;
+  }
+
+  public showChildrenDrawer(index) {
+    this.chosenItem = this.groceryList[index];
+    this.childVisible = true;
+  }
+
+  public onChildrenDrawerClose() {
+    this.childVisible = false;
+  }
+
+  public addItemToList() {
+    this.addGroceryItemToShoppingList({
+      item: this.chosenItem,
+      quantity: this.value,
+    }).then(() => {
+      this.childVisible = false;
+      this.value = 1;
+    }).catch((error) => {
+      alert(error);
+    });
+  }
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .add-button {
         margin-left: 16px;
     }
+
+    /*.ant-page-header-heading-extra {*/
+    /*    padding: 0 !important;*/
+    /*    width: auto !important;*/
+    /*}*/
 
     .ant-drawer.shopping-item-drawer > .ant-drawer-content-wrapper {
         height: 70% !important;

@@ -19,10 +19,6 @@ export default class Room extends Model {
     },
   };
 
-  public id;
-  public devices;
-  public slug;
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -51,8 +47,12 @@ export default class Room extends Model {
     };
   }
 
-  static beforeCreate (model) {
+  public static beforeCreate(model) {
     model.slug = StringHelper.slugify(model.name);
   }
+
+  public id;
+  public devices;
+  public slug;
 
 }

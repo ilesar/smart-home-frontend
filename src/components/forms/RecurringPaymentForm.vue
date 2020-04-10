@@ -44,7 +44,7 @@
             <a-button type="primary" @click="submitButtonCallback(model)">
                 {{ submitButtonText }}
             </a-button>
-            <a-button style="margin-left: 10px;" @click="closeForm">
+            <a-button style="margin-left: 10px;" @click="$emit('on-cancel')">
                 Odustani
             </a-button>
         </a-form-model-item>
@@ -72,13 +72,13 @@
     private labelCol = { span: 6 };
     private wrapperCol = { span: 18 };
 
-    @Emit('on-cancel')
-    public closeForm() {
-
-    }
+    // @Emit('on-cancel')
+    // public closeForm() {
+    //     console.log
+    // }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

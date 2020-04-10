@@ -15,42 +15,42 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import ShoppingItem from '@/api/models/ShoppingItem';
-  import {Action} from 'vuex-class';
-  import GroceryItem from '@/api/models/GroceryItem';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import ShoppingItem from '@/api/models/ShoppingItem';
+import {Action} from 'vuex-class';
+import GroceryItem from '@/api/models/GroceryItem';
 
-  @Component
-  export default class ListItem extends Vue {
-    @Action('shopping/resolveShoppingItem')
-    private resolveShoppingItem;
-    @Action('shopping/removeShoppingItem')
-    private removeShoppingItem;
+@Component
+export default class ListItem extends Vue {
+  @Action('shopping/resolveShoppingItem')
+  private resolveShoppingItem;
+  @Action('shopping/removeShoppingItem')
+  private removeShoppingItem;
 
-    @Prop()
-    private model!: ShoppingItem;
-    private groceryItem!: GroceryItem;
+  @Prop()
+  private model!: ShoppingItem;
+  private groceryItem!: GroceryItem;
 
-    private beforeMount() {
-      this.groceryItem = this.model.groceryItem;
-    }
-
-    public markShoppingItemBought() {
-      this.resolveShoppingItem(this.model).then(() => {
-        this.model.$delete();
-      });
-    }
-
-    public deleteShoppingItem() {
-      this.removeShoppingItem(this.model).then(() => {
-        console.log('FULFILED');
-        this.model.$delete();
-      });
-    }
+  public markShoppingItemBought() {
+    this.resolveShoppingItem(this.model).then(() => {
+      this.model.$delete();
+    });
   }
+
+  public deleteShoppingItem() {
+    this.removeShoppingItem(this.model).then(() => {
+      console.log('FULFILED');
+      this.model.$delete();
+    });
+  }
+
+  private beforeMount() {
+    this.groceryItem = this.model.groceryItem;
+  }
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .item-wrapper {
         diplay: block;
     }

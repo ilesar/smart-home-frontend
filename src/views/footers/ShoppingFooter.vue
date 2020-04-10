@@ -2,14 +2,14 @@
     <a-row type="flex" class="footer-wrapper" v-if="shoppingListItemSum > 0" style="background: #1890ff">
         <a-divider style="margin-top: 0px"></a-divider>
         <a-statistic
-                title="Ukupni trošak"
                 class="expense-statistic"
                 suffix="KN"
                 :value="shoppingListItemSum"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
+                :valueStyle="{color: '#FFF'}"
+                :style="{margin: '0 32px'}"
+        >
+            <div slot="title" style="color: #FFF">Ukupni trošak</div>
+        </a-statistic>
 
     </a-row>
 </template>
@@ -25,7 +25,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .footer-wrapper {
         padding-bottom:24px;
 

@@ -31,7 +31,7 @@ export default class RecurringPaymentsController extends BaseController {
   }
 
   public static updateOne(payment: RecurringPayment) {
-    console.log('patchings')
+    console.log('patchings');
     return this.makePatchRequest(RecurringPayment, `${ApiRoutes.RecurringPayment}/${payment.id}`, {
       data: {
         id: payment.id,

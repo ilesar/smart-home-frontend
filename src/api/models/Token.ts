@@ -12,7 +12,6 @@ export interface IToken {
 
 export default class Token extends Model {
     public static entity: string = 'tokens';
-    public access_token;
 
     public static apiConfig = {
         actions: {
@@ -46,6 +45,8 @@ export default class Token extends Model {
             expires_at: this.attr(''),
         };
     }
+    // tslint:disable-next-line:variable-name
+    public access_token;
 
 
 

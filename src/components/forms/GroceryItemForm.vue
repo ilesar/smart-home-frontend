@@ -19,7 +19,7 @@
             <a-button type="primary" @click="submitButtonCallback(instance, model)">
                 {{ submitButtonText }}
             </a-button>
-            <a-button style="margin-left: 10px;" @click="closeForm">
+            <a-button style="margin-left: 10px;" @click="$emit('on-cancel')">
                 Odustani
             </a-button>
         </a-form-model-item>
@@ -27,40 +27,40 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
-  import GroceryItem from '@/api/models/GroceryItem';
-  import Camera from '@/components/Camera.vue';
+import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
+import GroceryItem from '@/api/models/GroceryItem';
+import Camera from '@/components/Camera.vue';
 
-  @Component({
-    name: 'GroceryItemForm',
-    components: {
-      Camera,
-    }
-  })
-  export default class GroceryItemForm extends Vue {
-    @Prop()
-    private submitButtonText!: string;
-    @Prop()
-    private submitButtonCallback!: (form: GroceryItemForm, model: GroceryItem) => void;
-    @Prop()
-    private model!: GroceryItem;
+@Component({
+  name: 'GroceryItemForm',
+  components: {
+    Camera,
+  },
+})
+export default class GroceryItemForm extends Vue {
+  @Prop()
+  private submitButtonText!: string;
+  @Prop()
+  private submitButtonCallback!: (form: GroceryItemForm, model: GroceryItem) => void;
+  @Prop()
+  private model!: GroceryItem;
 
-    private rules = {};
+  private rules = {};
 
-    private labelCol = { span: 6 };
-    private wrapperCol = { span: 18 };
+  private labelCol = { span: 6 };
+  private wrapperCol = { span: 18 };
 
-    @Emit('on-cancel')
-    public closeForm() {
+  // @Emit('on-cancel')
+  // public closeForm() {
+  //
+  // }
 
-    }
-
-    public get instance() {
-      return this;
-    }
+  public get instance() {
+    return this;
   }
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

@@ -21,68 +21,68 @@
 </template>
 
 <script lang="ts">
-  import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import {Action, Getter} from 'vuex-class';
-  import GroceryItem from '@/api/models/GroceryItem';
-  import {EventBus} from '@/helpers/EventBusHelper';
-  import {EventBusEvents} from '@/enums/EventBusEvents';
-  import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
-  import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
-  import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
+import {LoadingOverlayHelper} from '@/helpers/LoadingOverlayHelper';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {Action, Getter} from 'vuex-class';
+import GroceryItem from '@/api/models/GroceryItem';
+import {EventBus} from '@/helpers/EventBusHelper';
+import {EventBusEvents} from '@/enums/EventBusEvents';
+import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
+import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
+import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
 
-  @Component({
-    name: 'Groceries',
-    components: {},
-  })
-  export default class Groceries extends Vue {
+@Component({
+  name: 'Groceries',
+  components: {},
+})
+export default class Groceries extends Vue {
 
-    private loadingOverlay = new LoadingOverlayHelper(this, {});
+  private loadingOverlay = new LoadingOverlayHelper(this, {});
 
-    @Getter('groceries/getGroceryItemList')
-    private groceryList;
-    @Action('groceries/fetchGroceryItemList')
-    private fetchGroceryItemList;
-    @Action('groceries/deleteGroceryItem')
-    private deleteGroceryItem;
-    @Action('groceries/updateGroceryItem')
-    private updateGroceryItem;
+  @Getter('groceries/getGroceryItemList')
+  private groceryList;
+  @Action('groceries/fetchGroceryItemList')
+  private fetchGroceryItemList;
+  @Action('groceries/deleteGroceryItem')
+  private deleteGroceryItem;
+  @Action('groceries/updateGroceryItem')
+  private updateGroceryItem;
 
-    public async created() {
-      this.fetchGroceryItemList();
-    }
-
-    public deleteItem(model: GroceryItem) {
-      EventBus.$emit(EventBusEvents.OpenPopup, {
-        options: {
-          title: `Sigurno želiš obrisati namirnicu?`,
-          content: model.name,
-          okText: 'Da',
-          cancelText: 'Ne',
-          onOk: () => {
-            this.deleteGroceryItem(model).then(() => {
-              model.$delete();
-            });
-          },
-        }
-      } as PopupDataInterface);
-    }
-
-    public editItem(item: GroceryItem) {
-      EventBus.$emit(EventBusEvents.OpenDrawer, {
-        title: 'Uredi namirnicu',
-        model: item,
-        component: GroceryItemForm.name,
-        submitText: 'Spremi',
-        onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
-          this.updateGroceryItem(item).then(() => {
-            EventBus.$emit(EventBusEvents.CloseDrawer);
-          });
-        }
-      } as DrawerDataInterface<GroceryItem>);
-    }
-
-
+  public async created() {
+    this.fetchGroceryItemList();
   }
+
+  public deleteItem(model: GroceryItem) {
+    EventBus.$emit(EventBusEvents.OpenPopup, {
+      options: {
+        title: `Sigurno želiš obrisati namirnicu?`,
+        content: model.name,
+        okText: 'Da',
+        cancelText: 'Ne',
+        onOk: () => {
+          this.deleteGroceryItem(model).then(() => {
+            model.$delete();
+          });
+        },
+      },
+    } as PopupDataInterface);
+  }
+
+  public editItem(item: GroceryItem) {
+    EventBus.$emit(EventBusEvents.OpenDrawer, {
+      title: 'Uredi namirnicu',
+      model: item,
+      component: GroceryItemForm.name,
+      submitText: 'Spremi',
+      onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
+        this.updateGroceryItem(item).then(() => {
+          EventBus.$emit(EventBusEvents.CloseDrawer);
+        });
+      },
+    } as DrawerDataInterface<GroceryItem>);
+  }
+
+
+}
 </script>
 

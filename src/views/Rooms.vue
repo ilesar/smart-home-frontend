@@ -17,48 +17,47 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-  import HelloWorld from '@/components/home/HelloWorld.vue';
-  import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
-  import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
-  import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
-  import {
-    State,
-    Getter,
-    Action,
-    Mutation,
-    namespace,
-  } from 'vuex-class';
-  import {RouteNames} from '@/enums/RouteNames';
-  import Room from '@/api/models/Room';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import HelloWorld from '@/components/home/HelloWorld.vue';
+import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
+import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
+import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
+import {
+  State,
+  Getter,
+  Action,
+  Mutation,
+  namespace,
+} from 'vuex-class';
+import {RouteNames} from '@/enums/RouteNames';
+import Room from '@/api/models/Room';
 
-  @Component({
-    name: 'Devices',
-    components: {
-      HelloWorldDuoTone,
-      HelloWorldWrapper,
-      HelloWorld,
-    },
-  })
-  export default class Rooms extends Vue {
-    @Action('rooms/fetchRooms') private fetchRooms;
-    @Getter('rooms/getAllRooms') private rooms;
+@Component({
+  name: 'Devices',
+  components: {
+    HelloWorldDuoTone,
+    HelloWorldWrapper,
+    HelloWorld,
+  },
+})
+export default class Rooms extends Vue {
+  @Action('rooms/fetchRooms') private fetchRooms;
+  @Getter('rooms/getAllRooms') private rooms;
 
-    private loadingOverlay = new LoadingOverlayHelper(this, {});
+  private loadingOverlay = new LoadingOverlayHelper(this, {});
 
-    public beforeMount() {
-        this.fetchRooms();
-    }
-
-    private goToRoom(room: Room) {
-        this.$router.push(`/${RouteNames.Rooms}/${room.slug}`);
-    }
-
-    public roomDescription(room: Room) {
-        return `${room.devices.length} uređaj${room.devices.length > 1 || room.devices.length === 0 ? 'a' : ''}`;
-    }
+  public beforeMount() {
+      this.fetchRooms();
   }
 
+  public roomDescription(room: Room) {
+      return `${room.devices.length} uređaj${room.devices.length > 1 || room.devices.length === 0 ? 'a' : ''}`;
+  }
+
+  private goToRoom(room: Room) {
+      this.$router.push(`/${RouteNames.Rooms}/${room.slug}`);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

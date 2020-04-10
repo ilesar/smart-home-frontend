@@ -2,42 +2,23 @@
     <a-row type="flex" class="footer-wrapper" style="background: #1890ff">
         <a-divider style="margin-top: 0px"></a-divider>
         <a-statistic
-                title="Mjesečni troškovi"
                 class="expense-statistic"
                 suffix="KN"
                 :value="recurringPaymentsSumMonthly"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
-<!--        <a-statistic-->
-<!--                title="Godišnji troškovi"-->
-<!--                class="expense-statistic"-->
-<!--                suffix="KN"-->
-<!--                :value="recurringPaymentsSumYearly"-->
-<!--                :style="{-->
-<!--            margin: '0 32px',-->
-<!--          }"-->
-<!--        />-->
+                :valueStyle="{color: '#FFF'}"
+                :style="{margin: '0 32px'}"
+        >
+            <div slot="title" style="color: #FFF">Mjesečni troškovi</div>
+        </a-statistic>
         <a-statistic
-                title="Ukupni godišnji trošak"
                 class="expense-statistic"
                 suffix="KN"
+                :valueStyle="{color: '#FFF'}"
                 :value="(12 * parseFloat(recurringPaymentsSumMonthly) + parseFloat(recurringPaymentsSumYearly)).toFixed(2)"
-                :style="{
-            margin: '0 32px',
-          }"
-        />
-<!--        <a-statistic-->
-<!--                title="Prosječni mjesečni trošak"-->
-<!--                class="expense-statistic"-->
-<!--                suffix="KN"-->
-<!--                :value="(parseFloat(recurringPaymentsSumMonthly) + parseFloat(recurringPaymentsSumYearly) / 12).toFixed(2)"-->
-<!--                :style="{-->
-<!--            margin: '0 32px',-->
-<!--          }"-->
-        />
-
+                :style="{margin: '0 32px'}"
+        >
+            <div slot="title" style="color: #FFF">Ukupni godišnji trošak</div>
+        </a-statistic>
     </a-row>
 </template>
 
@@ -57,7 +38,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .footer-wrapper {
         padding-bottom:24px;
 

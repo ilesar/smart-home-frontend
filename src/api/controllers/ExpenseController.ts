@@ -5,7 +5,7 @@ import BaseController from '@/api/controllers/BaseController';
 import Room from '@/api/models/Room';
 import Expense from '@/api/models/Expense';
 
-export default class ExpenseController extends BaseController{
+export default class ExpenseController extends BaseController {
   public static async fetchAll(): Promise<AxiosResponse | AxiosError> {
     return this.makeGetRequest(Expense, ApiRoutes.Expenses);
   }

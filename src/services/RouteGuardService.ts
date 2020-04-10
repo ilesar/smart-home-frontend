@@ -42,8 +42,8 @@ export class RouteGuardService {
         await AuthController
           .refreshToken()
           .then((responseObject: any) => {
-              const token: Token = TokenRepository.getToken();
-              LocalStorageService.save(LocalStorageKeyNames.token, token.access_token);
+              tokenRefreshed = TokenRepository.getToken();
+              LocalStorageService.save(LocalStorageKeyNames.token, tokenRefreshed.access_token);
           })
           .catch((error: Error) => {
               console.error(error);

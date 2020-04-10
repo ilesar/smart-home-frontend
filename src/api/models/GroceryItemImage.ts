@@ -4,11 +4,13 @@ import {AxiosError, AxiosResponse} from 'axios';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 
 export default class GroceryItemImage extends Model {
+
+  public get path() {
+    return this.image;
+  }
   public static entity = 'groceryitemimage';
 
   public static primaryKey = 'id';
-
-  public image;
 
   public static apiConfig = {
     actions: {
@@ -21,10 +23,6 @@ export default class GroceryItemImage extends Model {
 
   public static fieldsKeys() {
     return keys(this.fields());
-  }
-
-  public get path() {
-    return this.image;
   }
 
   public static relationFields() {
@@ -48,5 +46,7 @@ export default class GroceryItemImage extends Model {
       grocery_item_id: this.attr(null),
     };
   }
+
+  public image;
 
 }

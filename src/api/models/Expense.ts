@@ -23,9 +23,6 @@ export default class Expense extends Model {
     },
   };
 
-  public id;
-  public recurringPayment;
-
   public static fieldsKeys() {
     return keys(this.fields());
   }
@@ -55,4 +52,7 @@ export default class Expense extends Model {
       recurringPayment: this.belongsTo(RecurringPayment, 'recurringPayment_id'),
     };
   }
+
+  public id;
+  public recurringPayment;
 }

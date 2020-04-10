@@ -24,33 +24,33 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
-  import {Action, Getter} from 'vuex-class';
-  import ListItem from '@/components/shopping/ListItem.vue';
-  import moment from 'moment';
+import { Component, Vue } from 'vue-property-decorator';
+import {Action, Getter} from 'vuex-class';
+import ListItem from '@/components/shopping/ListItem.vue';
+import moment from 'moment';
 
-  @Component({
-    name: 'PaymentHistory',
-    components: {
-      ListItem,
-    },
-  })
-  export default class History extends Vue {
+@Component({
+  name: 'PaymentHistory',
+  components: {
+    ListItem,
+  },
+})
+export default class History extends Vue {
 
-    @Getter('expenses/getResolvedExpenses')
-    private expenses;
-    @Action('expenses/fetchResolvedExpenses')
-    private fetchResolvedExpenses;
+  @Getter('expenses/getResolvedExpenses')
+  private expenses;
+  @Action('expenses/fetchResolvedExpenses')
+  private fetchResolvedExpenses;
 
-    public beforeMount() {
-      this.fetchResolvedExpenses();
-    }
-
-    public formatDate(dateString: string) {
-      return moment(dateString).locale('hr').calendar();
-    }
-
+  public beforeMount() {
+    this.fetchResolvedExpenses();
   }
+
+  public formatDate(dateString: string) {
+    return moment(dateString).locale('hr').calendar();
+  }
+
+}
 </script>
 
 <style lang="scss" scoped>

@@ -26,7 +26,10 @@ export default class ShoppingController extends BaseController {
   }
 
   // todo: move this to GroceryItemController
-  public static async addGroceryToShoppingList(groceryItem: GroceryItem, quantity: number): Promise<AxiosResponse | AxiosError> {
+  public static async addGroceryToShoppingList(
+    groceryItem: GroceryItem,
+    quantity: number,
+  ): Promise<AxiosResponse | AxiosError> {
 
     return this.makePostRequest(GroceryItem, ApiRoutes.ShoppingItem, {
       data: {

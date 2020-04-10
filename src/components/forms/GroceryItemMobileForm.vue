@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <a-steps  :current="currentStep" class="grocery-steps" direction="vertical" style="padding: 24px 0 16px 0">
-            <a-step title="Fotkaj" description="Test description"/>
-            <a-step title="Provjeri"/>
-            <a-step title="Ispuni"/>
-        </a-steps>
+    <div class="mobile-form">
+        <div class="steps-wrapper">
+            <a-steps  :current="currentStep" progressDot class="grocery-steps" >
+                <a-step title="Fotkaj"/>
+                <a-step title="Provjeri"/>
+                <a-step title="Ispuni"/>
+            </a-steps>
+        </div>
         <div class="steps-content" v-if="currentStep === 2">
             <a-form-model
                     ref="ruleForm"
@@ -13,7 +15,9 @@
                     layout="vertical"
                     :label-col="labelCol"
                     :wrapper-col="wrapperCol"
+                    style="padding: 24px"
             >
+                <img :src="image" class="image-preview"/>
                 <a-form-model-item label="Naziv" prop="name" ref="name">
                     <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>
                 </a-form-model-item>
@@ -21,16 +25,18 @@
                     <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
                 </a-form-model-item>
                 <a-divider></a-divider>
-                <a-form-model-item :wrapper-col="{ offset: 6 }">
+                <a-form-model-item :wrapper-col="{ }">
                     <a-button type="primary" @click="submitButtonCallback(instance, model)">
                         {{ submitButtonText }}
                     </a-button>
-                    <a-button style="margin-left: 10px;" @click="previous">
-                        Odustani
+                    <a-button style="margin-left: 10px;" @click="onPhotoRetaken">
+                        Ipak druga fotka
                     </a-button>
                 </a-form-model-item>
             </a-form-model>
         </div>
+        <Camera class="cam-view" @on-photo="onPhotoTaken" @on-retake-photo="onPhotoRetaken" @on-confirm-photo="onPhotoConfirm" v-if="currentStep !== 2"></Camera>
+        <a-button type="danger" @click="$emit('on-cancel')" class="cancel-button">Odustani</a-button>
 <!--        <div class="steps-action">-->
 <!--            <a-button v-if="currentStep < steps.length - 1" type="primary" @click="next">-->
 <!--                Next-->
@@ -123,17 +129,27 @@ export default class GroceryItemMobileForm extends Vue {
 </script>
 
 <style lang="scss" scoped>
-    /*.ant-steps-item {*/
-    /*    width: 50px;*/
-    /*}*/
+    .mobile-form {
+        text-align: center;
+    }
+    .steps-wrapper {
+        text-align: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 30px 20px 30px;
+    }
 
-    /*.grocery-steps {*/
-    /*    width: calc(100vw);*/
-    /*    !*padding: 30px 0;*!*/
-    /*    zoom: 0.9;*/
-    /*}*/
+    .grocery-steps {
+        width: 100vw;
+        zoom: 0.9;
+    }
 
-    /*.ant-drawer-body {*/
-    /*    width: 100vw;*/
-    /*}*/
+    .cam-view {
+        margin-bottom: 16px;
+    }
+
+    .image-preview {
+        width: 30vw;
+    }
 </style>

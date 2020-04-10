@@ -10,7 +10,7 @@
             <a-button type="default" @click="retakePhoto" :disabled="image === null" class="camera-button" style="margin-right: 16px">
                 <a-icon type="reload"></a-icon>
             </a-button>
-            <a-button type="primary" @click="$emit('on-confirm-photo')" :disabled="image === null" class="camera-button">
+            <a-button type="primary" @click="confirmPhoto" :disabled="image === null" class="camera-button">
                 <a-icon type="check"></a-icon>
             </a-button>
         </a-row>
@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
+import {off} from 'element-ui/src/utils/dom';
 
 @Component({
   name: 'Camera',
@@ -62,6 +63,11 @@ export default class Camera extends Vue {
     this.image = null;
   }
 
+  @Emit('on-confirm-photo')
+  public confirmPhoto() {
+    return this.image;
+  }
+
   // @Emit('on-confirm-photo')
   // public confirmPhoto(images) {
   // }
@@ -71,7 +77,13 @@ export default class Camera extends Vue {
     this.createCanvasFromVideo(video);
 
     const {context, canvas} = this;
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    console.log(video.getBoundingClientRect().width);
+    console.log(video.getBoundingClientRect().height);
+    console.log(Math.round((video.getBoundingClientRect().height - video.getBoundingClientRect().width) * 0.3));
+    const offset = Math.round((window.innerWidth) * 0.3);
+    context.drawImage(video, 0, offset, canvas.width, canvas.width,0, 0, canvas.width, canvas.width);
 
     return canvas;
   }
@@ -136,7 +148,7 @@ export default class Camera extends Vue {
     if (!this.context) {
       canvas = document.createElement('canvas');
 
-      canvas.height = video.videoHeight;
+      canvas.height = video.videoWidth;
       canvas.width = video.videoWidth;
 
       this.canvas = canvas;
@@ -149,30 +161,21 @@ export default class Camera extends Vue {
 </script>
 
 <style lang="scss" scoped>
-    .gutter-example > > > .ant-row > div {
-        background: transparent;
-        border: 0;
-    }
-
-    .gutter-box {
-        /*background: #00a0e9;*/
-        margin: 0 5px;
-    }
 
     .video-wrapper {
         width: 100%;
         /*clip-path: circle(60px at center);*/
-        height: calc(100vw - 48px);
-        position: absolute;
+        height: 100vw;
+        position: relative;
         overflow: hidden;
 
         video {
-            margin-top: -50%;
+            margin-top: -30vw;
         }
     }
 
     .photo-element {
-        margin-top: -50%;
+        //margin-top: -50%;
     }
 
     .camera-controls {

@@ -24,7 +24,7 @@
                 @close="closeDrawer"
                 :visible="visible"
                 width="100vw"
-                :body-style="{ padding: '0px'}"
+                :body-style="{ padding: '0px', width: '100vw'}"
         >
             <component
                     :is="drawerObject.component"

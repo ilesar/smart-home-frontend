@@ -1,36 +1,14 @@
-html, body {
-  display: none;
-  background: red;
-  color: red;
-  margin-left: 300px;
-}
-
-
-#app {
-  display: none;
-}
-
 //button {
 //  display: none;
 //}
 
-@media (max-width: 576px) {
-  span.ant-page-header-heading-extra {
-    display: none !important;
-    padding: 0 !important;
-    width: auto !important;
-  }
+span.ant-page-header-heading-extra {
+  padding: 0;
+  width: auto;
+  float: right;
 }
 
-@media only screen and (max-width: 576px) {
-  span.ant-page-header-heading-extra {
-    display: none !important;
-    padding: 0 !important;
-    width: auto !important;
-  }
-}
 
-//
-//html button {
-//  touch-action: manipulation;
-//}
+html button {
+  touch-action: manipulation;
+}

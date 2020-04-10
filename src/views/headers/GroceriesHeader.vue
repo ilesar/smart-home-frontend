@@ -54,7 +54,10 @@ export default class GroceriesHeader extends Vue {
           model.imageId = response.response.data.data.id;
 
           this.createGroceryItem(model).then(() => {
-            // EventBus.$emit(EventBusEvents.CloseDrawer);
+            EventBus.$emit(EventBusEvents.CloseDrawer);
+          }).catch((error) => {
+            console.log('ERROR CUST');
+            console.error(error);
           });
         });
       },

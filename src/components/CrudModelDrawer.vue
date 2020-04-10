@@ -18,7 +18,7 @@
         </a-drawer>
         <a-drawer
                 v-if="$isMobile()"
-                :title="drawerObject.title"
+                :title="drawerObject ? drawerObject.title: ''"
                 placement="right"
                 :closable="false"
                 @close="closeDrawer"
@@ -27,11 +27,11 @@
                 :body-style="{ padding: '0px', width: '100vw'}"
         >
             <component
-                    :is="drawerObject.component"
+                    :is="drawerObject ? drawerObject.component : ''"
                     @on-cancel="closeDrawer"
-                    :model="drawerObject.model"
-                    :submitButtonText="drawerObject.submitText"
-                    :submitButtonCallback="drawerObject.onSubmit" />
+                    :model="drawerObject ? drawerObject.model : ''"
+                    :submitButtonText="drawerObject ? drawerObject.submitText : ''"
+                    :submitButtonCallback="drawerObject ? drawerObject.onSubmit : ''" />
         </a-drawer>
     </div>
 </template>
@@ -57,6 +57,9 @@ export default class CrudModelDrawer extends Vue {
 
   public closeDrawer() {
     this.visible = false;
+    setTimeout(() => {
+      this.drawerObject = null;
+    }, 500);
   }
 
   public created() {
@@ -85,8 +88,8 @@ export default class CrudModelDrawer extends Vue {
   }
 
   private resolvePopup(drawerDataObject: DrawerDataInterface<any>) {
-    this.drawerObject = drawerDataObject;
     this.visible = true;
+    this.drawerObject = drawerDataObject;
   }
 }
 </script>

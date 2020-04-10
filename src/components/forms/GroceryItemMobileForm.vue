@@ -26,7 +26,7 @@
                 </a-form-model-item>
                 <a-divider></a-divider>
                 <a-form-model-item :wrapper-col="{ }">
-                    <a-button type="primary" @click="submitButtonCallback(instance, model)">
+                    <a-button type="primary" @click="onSubmit(model)">
                         {{ submitButtonText }}
                     </a-button>
                     <a-button style="margin-left: 10px;" @click="onPhotoRetaken">
@@ -44,6 +44,9 @@
 import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
 import GroceryItem from '@/api/models/GroceryItem';
 import Camera from '@/components/Camera.vue';
+import {call} from 'vuex-pathify';
+import {Form} from 'ant-design-vue';
+import {FormModel} from 'ant-design-vue/types/form-model/form';
 
 @Component({
   name: 'GroceryItemMobileForm',
@@ -60,7 +63,6 @@ export default class GroceryItemMobileForm extends Vue {
   private model!: GroceryItem;
 
   private image = null;
-  private rules = {};
   private currentStep = 0;
   private labelCol = { span: 6 };
   private wrapperCol = { span: 18 };
@@ -97,12 +99,44 @@ export default class GroceryItemMobileForm extends Vue {
     ];
   }
 
+  public get rules() {
+    return {
+      name: [
+        { required: true, message: 'Upiši naziv proizvoda', trigger: 'blur' },
+        { min: 3, message: 'Napiši malo više od 3 slova', trigger: 'blur' },
+      ],
+      price: [
+        { required: true, message: 'Upiši cijenu', trigger: 'blur' },
+        { validator: (rule, value, callback) => {
+          if (value < 3) {
+            callback(new Error());
+          } else {
+            callback();
+          }
+          }, message: 'A bar 4 kn', trigger: 'blur' }
+      ],
+    }
+  }
+
   public next() {
     this.currentStep++;
   }
 
   public previous() {
     this.currentStep--;
+  }
+
+  public onSubmit(model: GroceryItem) {
+    const form = this.$refs['ruleForm'];
+
+    form.validate((valid: boolean) => {
+        if (valid) {
+          this.submitButtonCallback(this, model);
+        } else {
+          console.log('FORM ERROR');
+          return false;
+        }
+    });
   }
 }
 </script>

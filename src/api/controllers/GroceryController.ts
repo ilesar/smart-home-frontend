@@ -14,13 +14,22 @@ export default class GroceryController extends BaseController {
   }
 
   public static createOne(groceryItem: GroceryItem) {
-    return this.makePostRequest(GroceryItem, `${ApiRoutes.GroceryItem}`, {
+    console.log('CREATING');
+    return this.makePostRequest(GroceryItem, `${ApiRoutes.GroceryItem}?include=image`, {
       data: {
         type: 'grocery_items',
         attributes: {
           name: groceryItem.name,
           price: groceryItem.price,
           source: 'manual',
+        },
+        relationships: {
+          image: {
+            data: {
+              type: 'images',
+              id: groceryItem.imageId,
+            }
+          },
         },
       },
     });

@@ -58,5 +58,4 @@ export default class BaseController {
 
     return Promise.resolve(response);
   }
-
 }

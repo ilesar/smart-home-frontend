@@ -25,6 +25,8 @@ import GroceryItemMobileForm from '@/components/forms/GroceryItemMobileForm.vue'
 export default class GroceriesHeader extends Vue {
   @Action('groceries/createGroceryItem')
   private createGroceryItem;
+  @Action('images/upload')
+  private uploadImage;
 
 
   public createItem() {
@@ -48,8 +50,12 @@ export default class GroceriesHeader extends Vue {
       component: GroceryItemMobileForm.name,
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemMobileForm, model: GroceryItem) => {
-        this.createGroceryItem(model).then(() => {
-          EventBus.$emit(EventBusEvents.CloseDrawer);
+        this.uploadImage(model.uploadedImage).then((response) => {
+          model.imageId = response.response.data.data.id;
+
+          this.createGroceryItem(model).then(() => {
+            // EventBus.$emit(EventBusEvents.CloseDrawer);
+          });
         });
       },
     } as DrawerDataInterface<GroceryItem>);

@@ -19,7 +19,7 @@ export const ApiRoutes = {
     Expenses: '/expenses?include=recurringPayment',
     ResolvedExpenses: '/expenses?include=recurringPayment&filter[isResolved]=1',
 
-
+    Image: '/images',
 
 
 

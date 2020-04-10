@@ -17,7 +17,7 @@
                     :wrapper-col="wrapperCol"
                     style="padding: 24px"
             >
-                <img :src="image" class="image-preview"/>
+                <img :src="model.uploadedImage" class="image-preview"/>
                 <a-form-model-item label="Naziv" prop="name" ref="name">
                     <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>
                 </a-form-model-item>
@@ -37,22 +37,6 @@
         </div>
         <Camera class="cam-view" @on-photo="onPhotoTaken" @on-retake-photo="onPhotoRetaken" @on-confirm-photo="onPhotoConfirm" v-if="currentStep !== 2"></Camera>
         <a-button type="danger" @click="$emit('on-cancel')" class="cancel-button">Odustani</a-button>
-<!--        <div class="steps-action">-->
-<!--            <a-button v-if="currentStep < steps.length - 1" type="primary" @click="next">-->
-<!--                Next-->
-<!--            </a-button>-->
-<!--            <a-button-->
-<!--                    v-if="currentStep == steps.length - 1"-->
-<!--                    type="primary"-->
-<!--                    @click="$message.success('Processing complete!')"-->
-<!--            >-->
-<!--                Done-->
-<!--            </a-button>-->
-<!--            <a-button v-if="currentStep>0" style="margin-left: 8px" @click="previous">-->
-<!--                Previous-->
-<!--            </a-button>-->
-<!--        </div>-->
-<!--        <Camera @on-photo="onPhotoTaken" @on-retake-photo="onPhotoRetaken" @on-confirm-photo="onPhotoConfirm" v-if="currentStep !== 2"></Camera>-->
     </div>
 </template>
 
@@ -81,11 +65,6 @@ export default class GroceryItemMobileForm extends Vue {
   private labelCol = { span: 6 };
   private wrapperCol = { span: 18 };
 
-  // @Emit('on-cancel')
-  // public closeForm() {
-  //
-  // }
-
   public get instance() {
     return this;
   }
@@ -99,7 +78,7 @@ export default class GroceryItemMobileForm extends Vue {
   }
 
   public onPhotoConfirm(image) {
-    this.image = image;
+    this.model.uploadedImage = image;
     this.currentStep = 2;
   }
 

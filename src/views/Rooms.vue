@@ -67,6 +67,6 @@ export default class Rooms extends Vue {
     }
     .gutter-box {
         /*background: #00a0e9;*/
-        padding: 8px 0;
+        padding: 4px 0;
     }
 </style>

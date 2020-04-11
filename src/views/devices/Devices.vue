@@ -1,5 +1,5 @@
 <template>
-    <a-row :gutter="16" :style="{paddingRight: $isMobile ? '0px' : '24px', margin: '0px'}">
+    <a-row :style="{paddingRight: $isMobile ? '0px' : '24px', margin: '0 24px'}">
         <a-empty
                 v-if="devices.length === 0"
                 image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
@@ -71,7 +71,7 @@ export default class Devices extends Vue {
     }
     .gutter-box {
         /*background: #00a0e9;*/
-        padding: 5px 0;
+        padding: 4px 0;
     }
 
 </style>

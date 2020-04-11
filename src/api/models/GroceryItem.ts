@@ -2,6 +2,7 @@ import { Model, BelongsTo } from '@vuex-orm/core';
 import { keys } from 'lodash';
 import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
+import base = Mocha.reporters.base;
 
 export default class GroceryItem extends Model {
   public static entity = 'groceryitem';
@@ -50,6 +51,7 @@ export default class GroceryItem extends Model {
   public id;
   public name;
   public price;
+  public imageForUploadBase64: string;
   public imageForUpload: File;
   public imageId: string;
 

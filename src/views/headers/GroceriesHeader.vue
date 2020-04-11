@@ -36,8 +36,15 @@ export default class GroceriesHeader extends Vue {
       component: GroceryItemForm.name,
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
-        this.createGroceryItem(model).then(() => {
-          EventBus.$emit(EventBusEvents.CloseDrawer);
+        this.uploadImage(model.imageForUpload).then((response) => {
+          model.imageId = response.response.data.data.id;
+
+          this.createGroceryItem(model).then(() => {
+            EventBus.$emit(EventBusEvents.CloseDrawer);
+          }).catch((error) => {
+            console.log('ERROR CUST');
+            console.error(error);
+          });
         });
       },
     } as DrawerDataInterface<GroceryItem>);

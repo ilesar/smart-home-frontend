@@ -17,7 +17,9 @@
                     :wrapper-col="wrapperCol"
                     style="padding: 24px"
             >
-                <img :src="model.imageForUpload" class="image-preview"/>
+                <a-form-model-item label="Slika" prop="image" ref="image">
+                    <img :src="model.imageForUploadBase64" class="image-preview"/>
+                </a-form-model-item>
                 <a-form-model-item label="Naziv" prop="name" ref="name">
                     <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>
                 </a-form-model-item>
@@ -33,6 +35,7 @@
                         Ipak druga fotka
                     </a-button>
                 </a-form-model-item>
+
             </a-form-model>
         </div>
         <Camera class="cam-view" @on-photo="onPhotoTaken" @on-retake-photo="onPhotoRetaken" @on-confirm-photo="onPhotoConfirm" v-if="currentStep !== 2"></Camera>
@@ -62,7 +65,6 @@ export default class GroceryItemMobileForm extends Vue {
   @Prop()
   private model!: GroceryItem;
 
-  private image = null;
   private currentStep = 0;
   private labelCol = { span: 6 };
   private wrapperCol = { span: 18 };
@@ -84,6 +86,7 @@ export default class GroceryItemMobileForm extends Vue {
       .then(res => res.blob())
       .then(blob => new File([blob], "testupload", { type: 'image/png'}));
 
+    this.model.imageForUploadBase64 = imageBase64;
     this.model.imageForUpload = image;
     this.currentStep = 2;
   }
@@ -118,6 +121,15 @@ export default class GroceryItemMobileForm extends Vue {
             callback();
           }
           }, message: 'A bar 4 kn', trigger: 'blur' }
+      ],
+      image: [
+        { validator: (rule, value, callback) => {
+            if (!this.model.imageForUploadBase64) {
+              callback(new Error());
+            } else {
+              callback();
+            }
+          }, message: 'Moraš fotkati nešto', trigger: 'change' }
       ],
     }
   }

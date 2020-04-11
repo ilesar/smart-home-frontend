@@ -18,6 +18,10 @@ html button {
   overflow-y: auto !important;
 }
 
-.content-container::-webkit-scrollbar {
-  display: none !important;
+.ant-tabs-tabpane {
+  height: 100%;
 }
+
+//.content-container::-webkit-scrollbar {
+//  display: none !important;
+//}

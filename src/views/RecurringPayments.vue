@@ -1,6 +1,6 @@
 <template>
     <a-row>
-        <a-tabs defaultActiveKey="1" type="card" tabPosition="top" :animated="{inkBar: true, tabPane: true}">
+        <a-tabs defaultActiveKey="1" type="card" tabPosition="top" :animated="{inkBar: true, tabPane: true}" style="height: auto">
             <a-tab-pane v-for="(tab, index) in tabs" :tab="`${tab.name} (${tab.dataSource.length})`" :key="index">
                 <ItemList
                         :dateSource="tab.dataSource"

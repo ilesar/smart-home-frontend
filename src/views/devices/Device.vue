@@ -1,5 +1,9 @@
 <template>
-    <p>{{device ? device.name : ''}} - {{room ? room.name : ''}}</p>
+    <div style="padding: 24px; text-align: center">
+        <a-icon :type="device.deviceType" class="device-icon" style="background: #FFF; color: #1890ff; margin-bottom: 16px"/>
+        <h2>{{device ? device.name : ''}}</h2>
+        <h1>{{room ? room.name : ''}}</h1>
+    </div>
 </template>
 
 <script lang="ts">
@@ -8,7 +12,7 @@ import {Action} from 'vuex-class';
 import {RouteNames} from '@/enums/RouteNames';
 
 @Component({
-  name: 'DeviceConfiguration',
+  name: 'Device.vue',
   components: {
 
   },
@@ -31,6 +35,8 @@ export default class DeviceConfiguration extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+    .device-icon {
+        font-size: 50vw;
+    }
 
 </style>

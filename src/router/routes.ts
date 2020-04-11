@@ -29,14 +29,14 @@ export const routes: RouteConfig[] = [
   },
   {
     path: `/${RouteNames.Rooms}/:roomSlug/devices/:deviceSlug`,
-    name: RouteNames.Configurations,
+    name: RouteNames.Device,
     meta: {
       navigationLayout: true,
       popup: true,
     },
     components: {
-      default: loadView('devices/DeviceConfiguration'),
-      header: loadView('headers/DeviceConfigurationHeader'),
+      default: loadView('devices/Device'),
+      header: loadView('headers/DeviceHeader'),
     },
   },
   {

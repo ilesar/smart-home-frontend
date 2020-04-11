@@ -10,5 +10,5 @@ export enum RouteNames {
     Error = 'error',
     ShoppingHistory = 'shoppingHistory',
     RecurringPayments = 'recurringPayments',
-    Configurations = 'cofigurations',
+    Device = 'device',
 }

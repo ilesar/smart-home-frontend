@@ -6,22 +6,16 @@ import RecurringPayment from '@/api/models/RecurringPayment';
 
 const actions: ActionTree<ILocalState, {}> = {
   async fetchRecurringPaymentList({commit, getters}, productFormId) {
-    return RecurringPaymentsController.fetchAll().catch((error) => {
-      console.error(error);
-    });
+    return RecurringPaymentsController.fetchAll();
   },
   async createRecurringPayment({commit, getters}, payment: RecurringPayment) {
     return RecurringPaymentsController.createOne(payment);
   },
   async updateRecurringPayment({commit, getters}, payment: RecurringPayment) {
-    RecurringPaymentsController.updateOne(payment).catch((error) => {
-      console.error(error);
-    });
+    return RecurringPaymentsController.updateOne(payment);
   },
   async deleteRecurringPayment({commit, getters}, payment: RecurringPayment) {
-    RecurringPaymentsController.deleteOne(payment).catch((error) => {
-      console.error(error);
-    });
+    return RecurringPaymentsController.deleteOne(payment);
   },
 };
 

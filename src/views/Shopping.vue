@@ -8,7 +8,7 @@ import { PopupType } from '@/enums/PopupType'
         >
             <span slot="description">Ne treba ništa kupiti</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '16px' : '0px'}">
+        <a-list-item slot="renderItem" slot-scope="item" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '24px' : '0px'}">
             <a-list-item-meta
                     :description="`${item.quantity} ${item.quantity > 1 ? 'komada' : 'komad'} (${item.quantity * item.groceryItem.price} kn)`"
             >

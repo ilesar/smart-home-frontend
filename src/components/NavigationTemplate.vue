@@ -75,7 +75,7 @@
                     </vue-page-transition>
                 </a-layout-header>
                 <a-layout-content
-                        class="content-container" :style="{padding: $isMobile() ? '0' : '24px'}"
+                        class="content-container" :style="{padding: $isMobile() ? '0' : '0 0 0 24px'}"
                 >
                     <vue-page-transition name="fade-in-down">
                     <slot></slot>
@@ -223,14 +223,5 @@
         border-top: 1px solid #1890ff;
     }
 
-    .content-container {
-        padding: 0 0 0 24px;
-        background: #fff;
-        overflow-y: auto !important;
-    }
-
-    .content-container::-webkit-scrollbar {
-        display: none !important;
-    }
 
 </style>

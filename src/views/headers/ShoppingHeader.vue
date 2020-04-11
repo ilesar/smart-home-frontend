@@ -2,10 +2,10 @@
     <a-page-header style="border: 1px solid rgb(235, 237, 240);" title="Kupovina" class="o-section-header">
         <div slot="extra" class="extra-fields" :style="`${$isMobile() ? 'padding: 0' : ''}`">
             <router-link :to="{name: historyRoute }">
-                <a-button type="link" @click="">Povijest kupovine</a-button>
+                <a-button type="default" @click="">Povijest kupovine</a-button>
             </router-link>
 
-            <a-button type="default" @click="showDrawer">
+            <a-button type="primary" @click="showDrawer" style="margin-left: 16px">
                 Dodaj proizvod
             </a-button>
         </div>

@@ -14,21 +14,21 @@
         <a-form-model-item label="Cijena" prop="price" ref="price">
             <a-input type="number" v-model="model.price" placeholder="unesi iznos plaćanja" addonAfter="KN" />
         </a-form-model-item>
-        <a-form-model-item label="Tip plaćanja" prop="paymentType" ref="paymentType">
+        <a-form-model-item label="Tip plaćanja" prop="paymentTag" ref="paymentTag">
             <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
-                <a-select-option v-for="type in model.types" :value="type.value" :key="model.id">
-                    {{ type.name }}
+                <a-select-option v-for="modelType in model.types" :value="modelType.value" :key="modelType.name">
+                    {{ modelType.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>
         <a-form-model-item label="Učestalost" prop="period" ref="period">
             <a-select v-model="model.period" placeholder="Odaberi učestalost plaćanja" defaultValue="adasd">
-                <a-select-option v-for="period in model.periods" :value="period.value" :key="model.id">
+                <a-select-option v-for="period in model.periods" :value="period.value" :key="period.name">
                     {{ period.name }}
                 </a-select-option>
             </a-select>
         </a-form-model-item>
-        <a-form-model-item label="Trenutak aktivacije" prop="activationTime" ref="activationTime">
+        <a-form-model-item label="Trenutak aktivacije" prop="activationTimeDate" ref="activationTimeDate">
             <a-date-picker
                     v-model="model.activationTimeDate"
                     show-time
@@ -88,11 +88,11 @@
     public get rules() {
       return {
         name: [
-          { required: true, message: 'Upiši naziv proizvoda', trigger: 'blur' },
-          { min: 3, message: 'Napiši malo više od 3 slova', trigger: 'blur' },
+          { required: true, message: 'Upiši naziv proizvoda', trigger: ['change', 'blur'] },
+          { min: 3, message: 'Napiši malo više od 3 slova', trigger: ['change', 'blur'] },
         ],
         price: [
-          { required: true, message: 'Upiši cijenu', trigger: 'blur' },
+          { required: true, message: 'Upiši cijenu', trigger: ['change', 'blur'] },
           { validator: (rule, value, callback) => {
               if (value < 3) {
                 callback(new Error());
@@ -105,10 +105,10 @@
           { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
         ],
         period: [
-          { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
+          { required: true, message: 'Odaberi učestalost plaćanja', trigger: 'change' },
         ],
         activationTimeDate: [
-          { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
+          { required: true, message: 'Odaberi trenutak aktivacije', trigger: 'change' },
         ],
       }
     }

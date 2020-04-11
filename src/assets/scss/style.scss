@@ -12,3 +12,12 @@ span.ant-page-header-heading-extra {
 html button {
   touch-action: manipulation;
 }
+
+.content-container {
+  background: #fff;
+  overflow-y: auto !important;
+}
+
+.content-container::-webkit-scrollbar {
+  display: none !important;
+}

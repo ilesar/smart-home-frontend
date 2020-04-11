@@ -1,5 +1,5 @@
 <template>
-    <a-row :gutter="16" :style="{paddingRight: $isMobile ? '0px' : '24px', margin: '0px'}">
+    <a-row :style="{paddingRight: $isMobile ? '0px' : '24px', margin: '0 24px'}">
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="room in rooms" :key="room.id">
             <div class="gutter-box">
                 <a-card hoverable @click="goToRoom(room)" :body-style="{ padding: '24px 24px 24px 16px'}">
@@ -67,6 +67,6 @@ export default class Rooms extends Vue {
     }
     .gutter-box {
         /*background: #00a0e9;*/
-        padding: 5px 0;
+        padding: 8px 0;
     }
 </style>

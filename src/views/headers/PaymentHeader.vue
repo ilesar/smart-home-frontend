@@ -2,7 +2,7 @@
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Plaćanja" class="o-section-header">
         <template slot="extra">
             <router-link :to="{name: historyRoute }">
-                <a-button type="link" @click="">Povijest plaćanja</a-button>
+                <a-button type="default" @click="">Povijest plaćanja</a-button>
             </router-link>
         </template>
     </a-page-header>

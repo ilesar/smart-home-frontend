@@ -10,7 +10,7 @@
                         :src="item.image ? item.image.path : 'testiram'"
                 />
             </a-list-item-meta>
-            <a-button type="default" shape="round" icon="edit" @click="editItem(item)"
+            <a-button type="default" shape="round" icon="edit" @click="$isMobile() ? editMobileItem(item) : editItem(item)"
                       style="margin-left: 16px">
             </a-button>
             <a-button type="danger" shape="round" icon="delete" @click="deleteItem(item)"
@@ -29,7 +29,8 @@ import {EventBus} from '@/helpers/EventBusHelper';
 import {EventBusEvents} from '@/enums/EventBusEvents';
 import {PopupDataInterface} from '@/interfaces/PopupDataInterface';
 import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
-import GroceryItemForm from '@/components/forms/GroceryItemForm.vue';
+import GroceryItemMobileFormEdit from '@/components/forms/GroceryItemMobileFormEdit.vue';
+import GroceryItemFormEdit from '@/components/forms/GroceryItemFormEdit.vue';
 
 @Component({
   name: 'Groceries',
@@ -47,6 +48,8 @@ export default class Groceries extends Vue {
   private deleteGroceryItem;
   @Action('groceries/updateGroceryItem')
   private updateGroceryItem;
+  @Action('images/upload')
+  private uploadImage;
 
   public async created() {
     this.fetchGroceryItemList();
@@ -72,11 +75,60 @@ export default class Groceries extends Vue {
     EventBus.$emit(EventBusEvents.OpenDrawer, {
       title: 'Uredi namirnicu',
       model: item,
-      component: GroceryItemForm.name,
+      component: GroceryItemFormEdit.name,
       submitText: 'Spremi',
-      onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
-        this.updateGroceryItem(item).then(() => {
+      onSubmit: (drawer: GroceryItemFormEdit, model: GroceryItem) => {
+        if (model.imageForUpload) {
+          this.uploadImage(model.imageForUpload).then((response) => {
+            model.imageId = response.response.data.data.id;
+
+            this.updateGroceryItem(model).then(() => {
+              EventBus.$emit(EventBusEvents.CloseDrawer);
+            }).catch((error) => {
+              console.log('ERROR CUST');
+              console.error(error);
+            });
+          });
+          return;
+        }
+
+        this.updateGroceryItem(model).then(() => {
           EventBus.$emit(EventBusEvents.CloseDrawer);
+        }).catch((error) => {
+          console.log('ERROR CUST');
+          console.error(error);
+        });
+      },
+    } as DrawerDataInterface<GroceryItem>);
+  }
+
+  public editMobileItem(item: GroceryItem) {
+    EventBus.$emit(EventBusEvents.OpenDrawer, {
+      title: 'Uredi namirnicu',
+      model: item,
+      component: GroceryItemMobileFormEdit.name,
+      submitText: 'Spremi',
+      onSubmit: (drawer: GroceryItemMobileFormEdit, model: GroceryItem) => {
+
+        if (model.imageForUpload) {
+          this.uploadImage(model.imageForUpload).then((response) => {
+            model.imageId = response.response.data.data.id;
+
+            this.updateGroceryItem(model).then(() => {
+              EventBus.$emit(EventBusEvents.CloseDrawer);
+            }).catch((error) => {
+              console.log('ERROR CUST');
+              console.error(error);
+            });
+          });
+          return;
+        }
+
+        this.updateGroceryItem(model).then(() => {
+          EventBus.$emit(EventBusEvents.CloseDrawer);
+        }).catch((error) => {
+          console.log('ERROR CUST');
+          console.error(error);
         });
       },
     } as DrawerDataInterface<GroceryItem>);

@@ -13,6 +13,7 @@
             <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
         </a-form-model-item>
         <a-form-model-item prop="image" ref="image">
+
             <a-upload-dragger
                     name="file"
                     listType="picture"
@@ -20,13 +21,9 @@
                     @change="handleChange"
                     :fileList="[]"
             >
-                <p class="ant-upload-drag-icon" v-if="!model.imageForUploadBase64">
-                    <a-icon type="arrow-down" />
-                </p>
-                <p class="ant-upload-text" v-if="!model.imageForUploadBase64">Uploadaj fotku</p>
                 <p class="ant-upload-hint">
                     Povuci fotku ovdje ili klikni, pa odaberi sa svojeg uređaja
-                    <img :src="model.imageForUploadBase64" class="image-preview"/>
+                    <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image.image" class="image-preview"/>
                 </p>
             </a-upload-dragger>
         </a-form-model-item>
@@ -50,16 +47,16 @@ import GroceryItem from '@/api/models/GroceryItem';
 import Camera from '@/components/Camera.vue';
 
 @Component({
-  name: 'GroceryItemForm',
+  name: 'GroceryItemFormEdit',
   components: {
     Camera,
   },
 })
-export default class GroceryItemForm extends Vue {
+export default class GroceryItemFormEdit extends Vue {
   @Prop()
   private submitButtonText!: string;
   @Prop()
-  private submitButtonCallback!: (form: GroceryItemForm, model: GroceryItem) => void;
+  private submitButtonCallback!: (form: GroceryItemFormEdit, model: GroceryItem) => void;
   @Prop()
   private model!: GroceryItem;
 

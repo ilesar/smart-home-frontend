@@ -2,7 +2,7 @@
     <div>
         <a-drawer
                 v-if="!$isMobile()"
-                :title="drawerObject.title"
+                :title="drawerObject ? drawerObject.title: ''"
                 placement="right"
                 :closable="false"
                 @close="closeDrawer"
@@ -10,11 +10,11 @@
                 width="50vw"
         >
             <component
-                    :is="drawerObject.component"
+                    :is="drawerObject ? drawerObject.component : ''"
                     @on-cancel="closeDrawer"
-                    :model="drawerObject.model"
-                    :submitButtonText="drawerObject.submitText"
-                    :submitButtonCallback="drawerObject.onSubmit" />
+                    :model="drawerObject ? drawerObject.model : ''"
+                    :submitButtonText="drawerObject ? drawerObject.submitText : ''"
+                    :submitButtonCallback="drawerObject ? drawerObject.onSubmit : ''" />
         </a-drawer>
         <a-drawer
                 v-if="$isMobile()"

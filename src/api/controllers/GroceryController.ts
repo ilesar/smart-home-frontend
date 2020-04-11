@@ -36,7 +36,7 @@ export default class GroceryController extends BaseController {
   }
 
   public static updateOne(groceryItem: GroceryItem) {
-    return this.makePatchRequest(GroceryItem, `${ApiRoutes.GroceryItem}/${groceryItem.id}`, {
+    return this.makePatchRequest(GroceryItem, `${ApiRoutes.GroceryItem}/${groceryItem.id}?include=image`, {
       data: {
         id: groceryItem.id,
         type: 'grocery_items',
@@ -44,6 +44,14 @@ export default class GroceryController extends BaseController {
           name: groceryItem.name,
           price: groceryItem.price,
           source: 'manual',
+        },
+        relationships: {
+          image: {
+            data: {
+              type: 'images',
+              id: groceryItem.imageId,
+            }
+          },
         },
       },
     });

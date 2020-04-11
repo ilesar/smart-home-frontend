@@ -25,12 +25,12 @@ const router = new Router({
 
 // router gards
 router.beforeEach((to: any, from: any, next: any) => {
-  console.log('Going From ' + from.path + ' to ' + to.path);
+  // console.log('Going From ' + from.path + ' to ' + to.path);
   next();
 });
 
 router.afterEach((to: any, from: any) => {
-  console.log('Arrived ' + to.path + ' from ' + from.path);
+  // console.log('Arrived ' + to.path + ' from ' + from.path);
 });
 
 const routeGuard = new RouteGuardService(router);

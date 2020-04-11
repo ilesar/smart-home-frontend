@@ -50,7 +50,7 @@ export default class GroceriesHeader extends Vue {
       component: GroceryItemMobileForm.name,
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemMobileForm, model: GroceryItem) => {
-        this.uploadImage(model.uploadedImage).then((response) => {
+        this.uploadImage(model.imageForUpload).then((response) => {
           model.imageId = response.response.data.data.id;
 
           this.createGroceryItem(model).then(() => {

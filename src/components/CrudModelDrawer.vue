@@ -71,7 +71,6 @@ export default class CrudModelDrawer extends Vue {
 
     requireComponent.keys().forEach((fileName) => {
       const componentConfig = requireComponent(fileName);
-      console.log(componentConfig.default);
       // Gets the file name regardless of folder depth
       const componentName = fileName
         .split('/')

@@ -13,9 +13,23 @@
         <a-form-model-item label="Cijena" prop="price" ref="price">
             <a-input type="number" v-model="model.price" placeholder="unesi cijenu namirnice" addonAfter="KN"/>
         </a-form-model-item>
-        <Camera></Camera>
+        <a-upload-dragger
+                name="file"
+                :multiple="true"
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                :customRequest="onPhotoDrop"
+                @change="handleChange"
+        >
+            <p class="ant-upload-drag-icon">
+                <a-icon type="arrow-down" />
+            </p>
+            <p class="ant-upload-text">Uploadaj fotku</p>
+            <p class="ant-upload-hint">
+                Ili ju povuci ovdje ili klikni pa odaberi sa svojeg uređaja
+            </p>
+        </a-upload-dragger>
         <a-divider></a-divider>
-        <a-form-model-item :wrapper-col="{ offset: 6 }">
+        <a-form-model-item>
             <a-button type="primary" @click="submitButtonCallback(instance, model)">
                 {{ submitButtonText }}
             </a-button>
@@ -57,6 +71,22 @@ export default class GroceryItemForm extends Vue {
 
   public get instance() {
     return this;
+  }
+
+  public handleChange(info) {
+    const status = info.file.status;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      this.$message.success(`Fotka dodana`);
+    } else if (status === 'error') {
+      this.$message.error(`Nešto je pošlo po krivu.`);
+    }
+  }
+
+  public onPhotoDrop(photo: File) {
+    this.model.imageForUpload = photo;
   }
 }
 </script>

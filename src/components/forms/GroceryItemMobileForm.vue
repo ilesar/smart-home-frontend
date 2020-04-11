@@ -17,7 +17,7 @@
                     :wrapper-col="wrapperCol"
                     style="padding: 24px"
             >
-                <img :src="model.uploadedImage" class="image-preview"/>
+                <img :src="model.imageForUpload" class="image-preview"/>
                 <a-form-model-item label="Naziv" prop="name" ref="name">
                     <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>
                 </a-form-model-item>
@@ -79,8 +79,12 @@ export default class GroceryItemMobileForm extends Vue {
     this.currentStep = 0;
   }
 
-  public onPhotoConfirm(image) {
-    this.model.uploadedImage = image;
+  public async onPhotoConfirm(imageBase64: string) {
+    const image: File = await fetch(imageBase64)
+      .then(res => res.blob())
+      .then(blob => new File([blob], "testupload", { type: 'image/png'}));
+
+    this.model.imageForUpload = image;
     this.currentStep = 2;
   }
 

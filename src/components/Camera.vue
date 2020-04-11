@@ -38,10 +38,6 @@ export default class Camera extends Vue {
   private canvas = null;
 
   public mounted() {
-    console.log('MOUNTING CAMERA...');
-    console.log(this.$el);
-    console.log('MEDIA');
-    console.log(navigator);
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       const device = this.extractDevice(devices);
       const constraints = this.createConstraints(device);
@@ -68,20 +64,11 @@ export default class Camera extends Vue {
     return this.image;
   }
 
-  // @Emit('on-confirm-photo')
-  // public confirmPhoto(images) {
-  // }
-
   public getCanvas() {
     const video = this.$refs.video as HTMLVideoElement;
     this.createCanvasFromVideo(video);
 
     const {context, canvas} = this;
-    // context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    console.log(video.getBoundingClientRect().width);
-    console.log(video.getBoundingClientRect().height);
-    console.log(Math.round((video.getBoundingClientRect().height - video.getBoundingClientRect().width) * 0.3));
     const offset = Math.round((window.innerWidth) * 0.3);
     context.drawImage(video, 0, offset, canvas.width, canvas.width,0, 0, canvas.width, canvas.width);
 

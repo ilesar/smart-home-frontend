@@ -13,7 +13,7 @@ import Vue from 'vue';
 export const registerDatabase = (dbModels: any, dbModules: any): Database => {
   const database = new Database();
   Object.keys(dbModels).map((key) => {
-    console.log(`Registering ORM for ${key} model`);
+    // console.log(`Registering ORM for ${key} model`);
     database.register(dbModels[key], dbModules[key] || {});
   });
   return database;

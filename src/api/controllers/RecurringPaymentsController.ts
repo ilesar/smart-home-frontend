@@ -14,7 +14,6 @@ export default class RecurringPaymentsController extends BaseController {
   }
 
   public static createOne(payment: RecurringPayment) {
-    console.log(payment);
     return this.makePostRequest(RecurringPayment, ApiRoutes.RecurringPayment, {
       data: {
         type: 'recurring_payments',
@@ -31,7 +30,6 @@ export default class RecurringPaymentsController extends BaseController {
   }
 
   public static updateOne(payment: RecurringPayment) {
-    console.log('patchings');
     return this.makePatchRequest(RecurringPayment, `${ApiRoutes.RecurringPayment}/${payment.id}`, {
       data: {
         id: payment.id,

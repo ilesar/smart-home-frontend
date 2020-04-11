@@ -7,7 +7,7 @@
         >
             <span slot="description">Nema izvršenih plaćanja</span>
         </a-empty>
-        <a-list-item slot="renderItem" slot-scope="item" style="padding-right: 24px">
+        <a-list-item slot="renderItem" slot-scope="item" :style="{paddingRight: '24px', paddingLeft: $isMobile() ? '16px' : '0px'}">
             <a-list-item-meta
                     :description="`${item.recurringPayment.price} kn`"
             >

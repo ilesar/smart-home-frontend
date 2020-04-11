@@ -41,14 +41,14 @@
             <a-switch v-model="model.isAutomated" />
         </a-form-model-item>
         <a-divider></a-divider>
-        <a-form-model-items>
+        <a-form-model-item>
             <a-button type="primary" @click="onSubmit(model)">
                 {{ submitButtonText }}
             </a-button>
             <a-button style="margin-left: 10px;" @click="$emit('on-cancel')">
                 Odustani
             </a-button>
-        </a-form-model-items>
+        </a-form-model-item>
     </a-form-model>
     </div>
 </template>

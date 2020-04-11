@@ -76,7 +76,7 @@ export default class RecurringPayments extends Vue {
       model: item,
       component: RecurringPaymentForm.name,
       submitText: 'Spremi plaćanje',
-      onSubmit: (model: RecurringPayment) => {
+      onSubmit: (drawer: RecurringPaymentForm, model: RecurringPayment) => {
         if (model.activationTimeDate) {
           console.log('changing date');
           console.log(model.activationTime);

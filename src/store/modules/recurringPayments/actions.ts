@@ -11,9 +11,7 @@ const actions: ActionTree<ILocalState, {}> = {
     });
   },
   async createRecurringPayment({commit, getters}, payment: RecurringPayment) {
-    RecurringPaymentsController.createOne(payment).catch((error) => {
-      console.error(error);
-    });
+    return RecurringPaymentsController.createOne(payment);
   },
   async updateRecurringPayment({commit, getters}, payment: RecurringPayment) {
     RecurringPaymentsController.updateOne(payment).catch((error) => {

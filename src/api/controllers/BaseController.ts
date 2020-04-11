@@ -23,9 +23,11 @@ export default class BaseController {
       return Promise.reject(e);
     }
 
-    await model.insertOrUpdate({
-      data: response.response.data,
-    });
+    console.log(response);
+    // response.response.data.data.relationships = undefined;
+    // await model.insertOrUpdate({
+    //   data: response.response.data.data.attributes,
+    // });
 
     return Promise.resolve(response);
   }
@@ -39,9 +41,9 @@ export default class BaseController {
       return Promise.reject(e);
     }
 
-    await model.insertOrUpdate({
-      data: response.response.data,
-    });
+    // await model.insertOrUpdate({
+    //   data: response.response.data,
+    // });
 
     return Promise.resolve(response);
   }

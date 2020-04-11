@@ -68,7 +68,7 @@ export default class Shopping extends Vue {
         cancelText: 'Ne',
         onOk: () => {
           this.resolveShoppingItem(model).then(() => {
-            model.$delete();
+            // model.$delete();
           });
         },
       },

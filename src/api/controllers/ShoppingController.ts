@@ -31,7 +31,7 @@ export default class ShoppingController extends BaseController {
     quantity: number,
   ): Promise<AxiosResponse | AxiosError> {
 
-    return this.makePostRequest(GroceryItem, ApiRoutes.ShoppingItem, {
+    return this.makePostRequest(ShoppingItem, `${ApiRoutes.ShoppingItem}?include=groceryItem`, {
       data: {
         type: 'shopping_list_items',
         attributes: {

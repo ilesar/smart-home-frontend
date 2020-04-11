@@ -1,4 +1,5 @@
 <template>
+    <div class="mobile-form">
     <a-form-model
             ref="ruleForm"
             :model="model"
@@ -13,7 +14,7 @@
         <a-form-model-item label="Cijena" prop="price" ref="price">
             <a-input type="number" v-model="model.price" placeholder="unesi iznos plaćanja" addonAfter="KN" />
         </a-form-model-item>
-        <a-form-model-item label="Tip plaćanja" prop="type" ref="type">
+        <a-form-model-item label="Tip plaćanja" prop="paymentType" ref="paymentType">
             <a-select v-model="model.paymentTag" placeholder="odaberi tip plaćanja">
                 <a-select-option v-for="type in model.types" :value="type.value" :key="model.id">
                     {{ type.name }}
@@ -40,15 +41,16 @@
             <a-switch v-model="model.isAutomated" />
         </a-form-model-item>
         <a-divider></a-divider>
-        <a-form-model-item :wrapper-col="{ offset: 6 }">
-            <a-button type="primary" @click="submitButtonCallback(model)">
+        <a-form-model-items>
+            <a-button type="primary" @click="onSubmit(model)">
                 {{ submitButtonText }}
             </a-button>
             <a-button style="margin-left: 10px;" @click="$emit('on-cancel')">
                 Odustani
             </a-button>
-        </a-form-model-item>
+        </a-form-model-items>
     </a-form-model>
+    </div>
 </template>
 
 <script lang="ts">
@@ -63,22 +65,60 @@
     @Prop()
     private submitButtonText!: string;
     @Prop()
-    private submitButtonCallback!: (model: GroceryItem) => void;
+    private submitButtonCallback!: (form: RecurringPaymentForm, model: RecurringPayment) => void;
     @Prop()
     private model!: RecurringPayment;
-
-    private rules = {};
 
     private labelCol = { span: 6 };
     private wrapperCol = { span: 18 };
 
-    // @Emit('on-cancel')
-    // public closeForm() {
-    //     console.log
-    // }
+    public onSubmit(model: RecurringPayment) {
+      const form = this.$refs['ruleForm'];
+
+      form.validate((valid: boolean) => {
+        if (valid) {
+          this.submitButtonCallback(this, model);
+        } else {
+          console.log('FORM ERROR');
+          return false;
+        }
+      });
+    }
+
+    public get rules() {
+      return {
+        name: [
+          { required: true, message: 'Upiši naziv proizvoda', trigger: 'blur' },
+          { min: 3, message: 'Napiši malo više od 3 slova', trigger: 'blur' },
+        ],
+        price: [
+          { required: true, message: 'Upiši cijenu', trigger: 'blur' },
+          { validator: (rule, value, callback) => {
+              if (value < 3) {
+                callback(new Error());
+              } else {
+                callback();
+              }
+            }, message: 'A bar 4 kn', trigger: 'blur' }
+        ],
+        paymentTag: [
+          { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
+        ],
+        period: [
+          { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
+        ],
+        activationTimeDate: [
+          { required: true, message: 'Odaberi tip plaćanja', trigger: 'change' },
+        ],
+      }
+    }
+
   }
 </script>
 
 <style lang="scss" scoped>
-
+    .mobile-form {
+        width: 100vw;
+        padding: 30px 30px 20px 30px;
+    }
 </style>

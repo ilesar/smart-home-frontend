@@ -28,13 +28,16 @@ export default class RecurringPaymentsHeader extends Vue {
       model: new RecurringPayment(),
       component: RecurringPaymentForm.name,
       submitText: 'Spremi',
-      onSubmit: (model: RecurringPayment) => {
+      onSubmit: (drawer: RecurringPaymentForm, model: RecurringPayment) => {
         if (model.activationTimeDate) {
           model.activationTime = model.activationTimeDate.format('YYYY-MM-DD HH:mm:ss');
         }
 
         this.createRecurringPayment(model).then(() => {
           EventBus.$emit(EventBusEvents.CloseDrawer);
+        }).catch((error) => {
+          console.log('ERROR CUST');
+          console.error(error);
         });
       },
     } as DrawerDataInterface<RecurringPayment>);

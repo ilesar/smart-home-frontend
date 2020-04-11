@@ -30,7 +30,7 @@ const actions: ActionTree<ILocalState, {}> = {
     async addGroceryItemToShoppingList({commit, getters, dispatch}, groceryItem: any) {
         return new Promise<void>(((resolve, reject) => {
             ShoppingController.addGroceryToShoppingList(groceryItem.item, groceryItem.quantity).then(() => {
-                dispatch('fetchShoppingItemList');
+                // dispatch('fetchShoppingItemList');
                 resolve();
             }).catch((error) => {
                 reject(error);

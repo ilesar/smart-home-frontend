@@ -9,7 +9,7 @@
         </a-empty>
         <a-col class="gutter-row" :md="12" :lg="8" :xl="4" v-for="device in devices" :key="device.id">
             <div class="gutter-box">
-                <a-card hoverable @click="goToDevice(device)" :body-style="{padding: '24px 24px 24px 16px'}">
+                <a-card hoverable @click="goToDevice(device)" :body-style="{padding: '24px 24px 24px 16px', borderLeft: device.configuration ? '5px solid #1890ff' : ''}" :class="!device.configuration ? 'disabled' : ''">
                     <a-card-meta :title="device.name" description="This is the description">
                         <a-avatar
                                 slot="avatar"
@@ -72,6 +72,11 @@ export default class Devices extends Vue {
     .gutter-box {
         /*background: #00a0e9;*/
         padding: 4px 0;
+    }
+
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
     }
 
 </style>

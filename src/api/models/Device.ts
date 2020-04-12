@@ -5,6 +5,8 @@ import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
+import ConfigurationItem from '@/api/models/ConfigurationItem';
+import Configuration from '@/api/models/Configuration';
 
 
 export default class Device extends Model {
@@ -45,6 +47,7 @@ export default class Device extends Model {
       name: this.string('deviceName'),
       slug: this.string(null),
       deviceType: this.string('deviceName'),
+      configuration: this.hasOne(Configuration, 'device_id'),
     };
   }
 

@@ -10,7 +10,7 @@ const getters: GetterTree<ILocalState, {}> = {
   getRoomById: (state) => (roomSlug: string) => {
     return Room
       .query()
-      .with('devices')
+      .withAllRecursive()
       .where('slug', roomSlug)
       .first();
   },

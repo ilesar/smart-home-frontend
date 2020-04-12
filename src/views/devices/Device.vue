@@ -1,8 +1,30 @@
 <template>
     <div style="padding: 24px; text-align: center">
-        <a-icon :type="device.deviceType" class="device-icon" style="background: #FFF; color: #1890ff; margin-bottom: 16px"/>
-        <h2>{{device ? device.name : ''}}</h2>
-        <h1>{{room ? room.name : ''}}</h1>
+        <a-card hoverable style="margin-bottom: 16px; background: #1890ff; padding-top: 8px">
+<!--            <template class="ant-card-actions" slot="actions">-->
+<!--                <a-icon type="setting" key="setting" />-->
+<!--                <a-icon type="edit" key="edit" />-->
+<!--                <a-icon type="ellipsis" key="ellipsis" />-->
+<!--            </template>-->
+            <a-icon :type="device ? device.deviceType : 'close'" class="device-icon" style="background: #1890ff; color: #FFF; margin-bottom: 16px"/>
+            <h2 style="color: #FFF">{{device ? device.name : ''}}</h2>
+            <h1 style="color: #FFF">{{room ? room.name : ''}}</h1>
+        </a-card>
+        <a-card hoverable v-if="device && device.configuration" style="text-align: left" title="Konfiguracijski detalji" :head-style="{background: '#EEE'}">
+            <a-list itemLayout="horizontal" :dataSource="device.configuration.items">
+                <a-list-item slot="renderItem" slot-scope="item, index">
+                    <a-list-item-meta :description="item.description"
+                    >
+                        <a slot="title" href="https://www.antdv.com/">{{item.name}}</a>
+<!--                        <a-avatar-->
+<!--                                slot="avatar"-->
+<!--                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"-->
+<!--                        />-->
+                    </a-list-item-meta>
+                </a-list-item>
+            </a-list>
+        </a-card>
+
     </div>
 </template>
 

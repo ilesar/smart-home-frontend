@@ -11,6 +11,7 @@ const getters: GetterTree<ILocalState, {}> = {
     return Room
       .query()
       .withAllRecursive()
+      .orderBy('devices.configuration', 'desc')
       .where('slug', roomSlug)
       .first();
   },

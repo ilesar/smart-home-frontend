@@ -12,6 +12,10 @@ export default class ConfigurationItem extends Model {
 
   public static primaryKey = 'id';
 
+  public name;
+  public description;
+  public inputType;
+
   public static fields() {
     return {
       id: this.string(null),

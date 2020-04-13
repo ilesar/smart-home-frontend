@@ -13,6 +13,8 @@ export default class Configuration extends Model {
 
   public static primaryKey = 'id';
 
+  public items: ConfigurationItem[];
+
   public static fields() {
     return {
       id: this.string(null),

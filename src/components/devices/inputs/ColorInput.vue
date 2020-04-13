@@ -1,12 +1,14 @@
 <template>
-    <div class="color-picker" style="height: 400px"></div>
+    <span class="color-picker" style="height: 400px"></span>
 </template>
 
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import Pickr from '@simonwep/pickr';
 
-  @Component
+  @Component({
+    name: 'ColorInput'
+  })
   export default class ColorInput extends Vue {
     private picker: Pickr;
 
@@ -46,6 +48,10 @@
       this.picker.on('change', (color, instance) => {
         this.$emit('color-changed', color, instance)
       });
+    }
+
+    beforeDestroy() {
+      this.picker.destroyAndRemove();
     }
   }
 </script>

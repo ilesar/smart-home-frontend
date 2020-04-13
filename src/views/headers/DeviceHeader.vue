@@ -1,6 +1,10 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" :title="title" class="o-section-header" @back="goBack">
-
+        <template slot="extra">
+            <a-button type="primary" @click="() => {}" >
+                Odaberi konfiguraciju
+            </a-button>
+        </template>
     </a-page-header>
 </template>
 

@@ -158,11 +158,11 @@ export default class ShoppingHeader extends Vue {
 
     @media only screen and (max-width: 576px) {
         .ant-drawer.shopping-item-drawer > .ant-drawer-content-wrapper {
-            zoom: 0.8;
+            /*zoom: 0.8;*/
         }
 
         .ant-drawer.shopping-item-choice-drawer > .ant-drawer-content-wrapper {
-            zoom: 0.8;
+            /*zoom: 0.8;*/
         }
     }
 </style>

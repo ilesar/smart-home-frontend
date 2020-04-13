@@ -171,7 +171,7 @@ export default class GroceryItemMobileForm extends Vue {
 
     .grocery-steps {
         width: 100vw;
-        zoom: 0.9;
+        /*zoom: 0.9;*/
     }
 
     .cam-view {

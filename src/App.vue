@@ -49,7 +49,7 @@ export default class App extends Vue {
 
     @media only screen and (max-width: 576px) {
         #app {
-            zoom: 0.8;
+            /*zoom: 0.8;*/
         }
     }
 </style>

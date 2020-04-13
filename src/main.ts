@@ -7,6 +7,9 @@ import store from './store';
 import Antd from 'ant-design-vue';
 const Loading = require('vue-loading-overlay');
 import 'vue-loading-overlay/dist/vue-loading.css';
+import '@simonwep/pickr/dist/themes/classic.min.css';
+import '@simonwep/pickr/dist/themes/monolith.min.css';
+import '@simonwep/pickr/dist/themes/nano.min.css';
 import VuePageTransition from 'vue-page-transition';
 import VueMobileDetection from 'vue-mobile-detection';
 

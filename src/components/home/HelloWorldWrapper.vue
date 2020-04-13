@@ -1,19 +1,16 @@
 <template>
     <div class="hello">
         <h3>WRAPPER</h3>
-        <br />
-        <br />
-        <input type="color" id="head" name="head" v-debounce:300ms="onChange"
-               value="#e66465">
-        <label for="head"> Inner</label>
-        <input type="color" id="head2" name="head" v-debounce:300ms="onChange2"
-               value="#e66465">
-        <label for="head2"> Outer</label>
+        <br/>
+        <color-input @color-changed="onColorChangeOne"></color-input>
+        <br/>
+        <color-input @color-changed="onColorChangeTwo"></color-input>
     </div>
 </template>
 
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
+  import ColorInput from '@/components/devices/inputs/ColorInput.vue';
 
   const mqtt = require('mqtt');
   const client = mqtt.connect('mqtt://192.168.31.125:9001');
@@ -22,60 +19,42 @@
     console.log('CONNECTED');
   });
 
-  @Component
+  @Component({
+    components: {
+      ColorInput,
+    }
+  })
   export default class HelloWorldWrapper extends Vue {
-    @Prop() private msg!: string;
 
 
     private color = {
-      value1: '#FFFFFF',
-      value2: '#FFFFFF',
+      value1: undefined,
+      value2: undefined,
     };
 
-    public onChange(newColor: string) {
-      this.color.value1 = newColor;
+    public onColorChangeOne(color, instance) {
+      this.color.value1 = color.toRGBA();
       this.sendData();
     }
 
-    public onChange2(newColor: string) {
-      this.color.value2 = newColor;
+    public onColorChangeTwo(color, instance) {
+      this.color.value2 = color.toRGBA();
       this.sendData();
     }
 
     private sendData() {
-      const rgbColor = this.hexToRgb(this.color.value1);
-      const rgbColor2 = this.hexToRgb(this.color.value2);
-
-      if (rgbColor === null) {
-        throw new Error('RGB CONVERSION FAILED');
-      }
-
-      if (rgbColor2 === null) {
-        throw new Error('RGB CONVERSION FAILED');
-      }
-
       client.publish('home/tv/light/wrapper', JSON.stringify({
         inner: {
-          r: rgbColor.r.toString(),
-          g: rgbColor.g.toString(),
-          b: rgbColor.b.toString(),
+          r: this.color.value1 ? parseInt(this.color.value1[0]).toString() : parseInt(this.color.value2[0]).toString(),
+          g: this.color.value1 ? parseInt(this.color.value1[1]).toString() : parseInt(this.color.value2[1]).toString(),
+          b: this.color.value1 ? parseInt(this.color.value1[2]).toString() : parseInt(this.color.value2[2]).toString(),
         },
         outer: {
-          r: rgbColor2.r.toString(),
-          g: rgbColor2.g.toString(),
-          b: rgbColor2.b.toString(),
+          r: this.color.value2 ? parseInt(this.color.value2[0]).toString() : parseInt(this.color.value1[0]).toString(),
+          g: this.color.value2 ? parseInt(this.color.value2[1]).toString() : parseInt(this.color.value1[1]).toString(),
+          b: this.color.value2 ? parseInt(this.color.value2[2]).toString() : parseInt(this.color.value1[2]).toString(),
         },
       }));
-    }
-
-    private hexToRgb(hex: string) {
-      console.log('CONVERTING: ', hex);
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      } : null;
     }
 
   }

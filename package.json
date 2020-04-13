@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@radial-color-picker/vue-color-picker": "^2.3.0",
+    "@simonwep/pickr": "^1.5.1",
     "@types/slug": "^0.9.1",
     "@types/webpack-env": "^1.15.1",
     "@vuex-orm/core": "^0.34.1",

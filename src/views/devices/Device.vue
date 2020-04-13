@@ -1,5 +1,8 @@
 <template>
     <div style="padding: 24px; text-align: center">
+        <hello-world></hello-world>
+        <hello-world-wrapper></hello-world-wrapper>
+        <hello-world-duo-tone></hello-world-duo-tone>
         <a-card hoverable style="margin-bottom: 16px; background: #1890ff; padding-top: 8px">
 <!--            <template class="ant-card-actions" slot="actions">-->
 <!--                <a-icon type="setting" key="setting" />-->
@@ -32,11 +35,16 @@
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
 import {Action} from 'vuex-class';
 import {RouteNames} from '@/enums/RouteNames';
+import HelloWorld from '@/components/home/HelloWorld.vue';
+import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
+import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
 
 @Component({
   name: 'Device.vue',
   components: {
-
+    HelloWorldDuoTone,
+    HelloWorldWrapper,
+    HelloWorld,
   },
 })
 export default class DeviceConfiguration extends Vue {

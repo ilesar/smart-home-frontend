@@ -12,10 +12,10 @@ import '@simonwep/pickr/dist/themes/monolith.min.css';
 import '@simonwep/pickr/dist/themes/nano.min.css';
 import VuePageTransition from 'vue-page-transition';
 import VueMobileDetection from 'vue-mobile-detection';
+import vueDebounce from 'vue-debounce';
 
 
 // import './registerServiceWorker';
-import vueDebounce from 'vue-debounce';
 
 Vue.config.productionTip = false;
 
@@ -26,8 +26,8 @@ Vue.use(VueMobileDetection);
 
 
 Vue.use(vueDebounce, {
-  listenTo: ['keyup', 'click'],
-  defaultTime: '200ms',
+  listenTo: ['keyup', 'click', 'input', 'change'],
+  defaultTime: '500ms',
 });
 
 new Vue({

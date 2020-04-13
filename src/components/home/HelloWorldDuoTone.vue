@@ -32,12 +32,12 @@
     };
 
     public onColorChangeOne(color, instance) {
-      this.color.value1 = color.toRGBA();
+      this.color.value1 = color;
       this.sendData();
     }
 
     public onColorChangeTwo(color, instance) {
-      this.color.value2 = color.toRGBA();
+      this.color.value2 = color;
       this.sendData();
     }
 

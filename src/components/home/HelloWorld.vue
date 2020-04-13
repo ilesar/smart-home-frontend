@@ -23,11 +23,10 @@
   export default class HelloWorld extends Vue {
 
     public onColorChange(color, instance) {
-      const rgbColor = color.toRGBA();
       client.publish('home/tv/light/solid', JSON.stringify({
-        r: parseInt(rgbColor[0]).toString(),
-        g: parseInt(rgbColor[1]).toString(),
-        b: parseInt(rgbColor[2]).toString(),
+        r: parseInt(color[0]).toString(),
+        g: parseInt(color[1]).toString(),
+        b: parseInt(color[2]).toString(),
       }));
     }
 

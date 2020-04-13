@@ -1,5 +1,5 @@
 <template>
-    <span class="color-picker" style="height: 400px"></span>
+    <span type="color" class="color-picker"></span>
 </template>
 
 <script lang="ts">
@@ -23,6 +23,8 @@
         theme: 'classic',
         default: '#00FF00',
         showAlways: false,
+        defaultRepresentation: 'RGBA',
+        outputPrecision: 0,
         components: {
           preview: true,
           opacity: false,
@@ -34,7 +36,7 @@
             hsva: false,
             cmyk: false,
             input: false,
-            clear: true,
+            clear: false,
             save: true
           }
         },
@@ -45,9 +47,15 @@
         }
       });
 
-      this.picker.on('change', (color, instance) => {
-        this.$emit('color-changed', color, instance)
+      this.picker.on('save', (color, instance) => {
+        this.$emit('on-change', color.toRGBA(), this);
+        this.picker.hide();
+        // debounce(() => this.$emit('on-change', color), 1000)();
       });
+
+      // this.picker.on('change', (color, instance) => {
+      //   debounce(() => this.$emit('on-change', color), 1000)();
+      // });
     }
 
     beforeDestroy() {

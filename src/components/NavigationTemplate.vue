@@ -7,7 +7,7 @@ import { RouteNames } from '@/enums/RouteNames'
                 <a-menu theme="light" mode="inline" :defaultSelectedKeys="['1']" class="o-section-nav">
                     <a-menu-item
                             v-for="navigationItem of navigationItems"
-                            :key="navigationItem.route"
+                            :key="navigationItem.name"
                             @click="navigationItem.route"
                             class="o-footer-menu-item"
                     >
@@ -18,7 +18,7 @@ import { RouteNames } from '@/enums/RouteNames'
                         <span slot="title"><a-icon type="user" />CMS</span>
                         <a-menu-item
                                 v-for="navigationItem of cmsItems"
-                                :key="navigationItem.route"
+                                :key="navigationItem.name"
                                 @click="navigationItem.route"
                                 class="o-footer-menu-item"
                         >
@@ -74,7 +74,7 @@ import { RouteNames } from '@/enums/RouteNames'
                     style="background: #1890ff !important;">
                 <a-menu-item
                         v-for="navigationItem of navigationItems"
-                        :key="navigationItem.route"
+                        :key="navigationItem.name"
                         @click="navigationItem.route"
                         class="o-footer-menu-item"
 
@@ -83,7 +83,7 @@ import { RouteNames } from '@/enums/RouteNames'
                 </a-menu-item>
                 <a-menu-item
                         v-for="navigationItem of cmsItems"
-                        :key="navigationItem.route"
+                        :key="navigationItem.name"
                         @click="navigationItem.route"
                         class="o-footer-menu-item"
 

@@ -1,18 +1,37 @@
 <template>
-    <div style="padding: 24px;">
-<!--        <a-card title="Kontrole">-->
-<!--            <a-list itemLayout="horizontal" :dataSource="[]">-->
-<!--                <a-list-item slot="renderItem" slot-scope="configurationItem">-->
-<!--                    <a-list-item-meta :title="configurationItem.name" :description="configurationItem.description"></a-list-item-meta>-->
-<!--                    <component :is="getConfigurationItemInput(configurationItem)"></component>-->
-<!--                </a-list-item>-->
-<!--            </a-list>-->
-<!--        </a-card>-->
-        <a-card title="Trenutna konfiguracija">
+    <div style="padding: 0px;">
+        <a-card :bordered="false" class="configuration-card" ref="configcard" body-style="padding: 0; height: calc(100vh - 129px); overflow-y: scroll;">
+                <template slot="title" style="line-height: 32px">
+                    <a-affix :target="() => this.$refs.configcard">
+                    Konfiguracija
+                    <a-button type="primary" :class="{disabled: !configurationChanged}"
+                              style="float: right; margin-left: 16px">Spremi
+                    </a-button>
+                    <a-button :class="{disabled: !configurationChanged}" style="float: right">Spremi kao novu</a-button>
+                    </a-affix>
+
+                </template>
             <a-list itemLayout="horizontal" :dataSource="currentConfiguration.items">
-                <a-list-item slot="renderItem" slot-scope="configurationItem">
-                    <a-list-item-meta :title="configurationItem.name" :description="configurationItem.description"></a-list-item-meta>
-                    <component :is="getConfigurationItemInput(configurationItem)"></component>
+                <a-list-item slot="renderItem" slot-scope="configurationItem" style="padding: 16px 24px">
+                    <a-list-item-meta :title="configurationItem.name"
+                                      :description="configurationItem.description"></a-list-item-meta>
+                    <a slot="actions">
+                        <a-icon type="highlight"></a-icon>
+                        copy
+                    </a>
+                    <a slot="actions">
+                        <a-icon type="copy"></a-icon>
+                        paste
+                    </a>
+                    <a slot="actions">
+                        <a-icon type="unordered-list"></a-icon>
+                        copy to all
+                    </a>
+                    <a slot="actions">
+                        <component :is="getConfigurationItemInput(configurationItem)"
+                                   @on-change="(value) => onItemChange(value, configurationItem)"></component>
+                    </a>
+
                 </a-list-item>
             </a-list>
         </a-card>
@@ -31,6 +50,8 @@
   import {DeviceInputType} from '@/enums/DeviceInputType';
   import Configuration from '@/api/models/Configuration';
 
+  const mqtt = require('mqtt');
+
   @Component({
     name: 'Device.vue',
     components: {
@@ -45,9 +66,15 @@
     @Action('rooms/fetchRooms') private fetchRooms;
 
     private localConfiguration: Configuration = new Configuration();
+    private configurationChanged: boolean = false;
+    private mqttClient = mqtt.connect('mqtt://192.168.31.125:9001');
 
     public created() {
       this.fetchRooms();
+
+      this.mqttClient.on('connect', () => {
+        console.log('CONNECTED');
+      });
     }
 
     public get room() {
@@ -59,18 +86,18 @@
     }
 
     public get currentConfiguration() {
-        if (this.localConfiguration.items.length === 0) {
-          if (this.device === null) {
-            return [];
-          }
-          this.localConfiguration.items = [];
-          const savedConfiguration = this.device.configuration;
-          for(const configurationItem of  savedConfiguration.items) {
-            this.localConfiguration.items.push(Object.assign({}, configurationItem));
-          }
+      if (this.localConfiguration.items.length === 0) {
+        if (this.device === null) {
+          return [];
         }
+        this.localConfiguration.items = [];
+        const savedConfiguration = this.device.configuration;
+        for (const configurationItem of savedConfiguration.items) {
+          this.localConfiguration.items.push(Object.assign({}, configurationItem));
+        }
+      }
 
-        return this.localConfiguration;
+      return this.localConfiguration;
     }
 
     public getConfigurationItemInput(configurationItem: ConfigurationItem) {
@@ -82,12 +109,31 @@
           throw new Error(`Device with unknown input (${configurationItem.inputType})`);
       }
     }
+
+    public onItemChange(color, item) {
+
+      this.configurationChanged = true;
+      console.log('ITEM CHANGED');
+      console.log(color);
+      console.log(item);
+
+      // this.mqttClient.publish('home/tv/light/solid', JSON.stringify({
+      //   r: parseInt(item[0]).toString(),
+      //   g: parseInt(item[1]).toString(),
+      //   b: parseInt(item[2]).toString(),
+      // }));
+    }
   }
 </script>
 
 <style lang="scss" scoped>
     .device-icon {
         font-size: 50vw;
+    }
+
+    .configuration-card {
+        height: 100%;
+        overflow-y: hidden;
     }
 
 </style>

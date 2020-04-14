@@ -22,6 +22,7 @@
         el: '.color-picker',
         theme: 'classic',
         default: '#00FF00',
+        padding: 0,
         showAlways: false,
         defaultRepresentation: 'RGBA',
         outputPrecision: 0,
@@ -59,6 +60,10 @@
     }
 
     beforeDestroy() {
+
+    }
+
+    afterDestroy() {
       this.picker.destroyAndRemove();
     }
   }

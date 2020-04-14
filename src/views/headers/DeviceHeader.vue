@@ -34,7 +34,7 @@ export default class DevicesHeader extends Vue {
     if (!this.room || !this.device) {
       return '';
     }
-    return `${this.device.name} - ${this.room.name}`;
+    return `${this.device.name}`;
   }
 }
 </script>

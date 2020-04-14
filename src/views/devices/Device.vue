@@ -1,6 +1,6 @@
 <template>
-    <div style="padding: 0px;">
-        <a-card :bordered="false" class="configuration-card" ref="configcard" body-style="padding: 0; height: calc(100vh - 129px); overflow-y: scroll;">
+    <div style="padding: 0px;" ref="configcard">
+        <a-card :bordered="false" class="configuration-card" :body-style="{padding: '0', height: !$isMobile() ? 'calc(100vh - 129px)' : 'calc(100vh - 65px)', overflowY: 'scroll'}">
                 <template slot="title" style="line-height: 32px">
                     <a-affix :target="() => this.$refs.configcard">
                     Konfiguracija
@@ -14,7 +14,7 @@
             <a-list itemLayout="horizontal" :dataSource="currentConfiguration.items">
                 <a-list-item slot="renderItem" slot-scope="configurationItem" style="padding: 16px 24px">
                     <a-list-item-meta :title="configurationItem.name"
-                                      :description="configurationItem.description"></a-list-item-meta>
+                                      :description="!$isMobile() ? configurationItem.description : ''"></a-list-item-meta>
                     <a slot="actions">
                         <a-icon type="highlight"></a-icon>
                         copy
@@ -117,11 +117,11 @@
       console.log(color);
       console.log(item);
 
-      // this.mqttClient.publish('home/tv/light/solid', JSON.stringify({
-      //   r: parseInt(item[0]).toString(),
-      //   g: parseInt(item[1]).toString(),
-      //   b: parseInt(item[2]).toString(),
-      // }));
+      this.mqttClient.publish('home/tv/light/solid', JSON.stringify({
+        r: parseInt(color[0]).toString(),
+        g: parseInt(color[1]).toString(),
+        b: parseInt(color[2]).toString(),
+      }));
     }
   }
 </script>

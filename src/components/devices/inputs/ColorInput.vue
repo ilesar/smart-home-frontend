@@ -59,6 +59,14 @@
       // });
     }
 
+    public getValue() {
+      return this.picker.getColor().toRGBA();
+    }
+
+    public setValue(color) {
+      return this.picker.setColor(color);
+    }
+
     beforeDestroy() {
 
     }

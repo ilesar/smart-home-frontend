@@ -1,16 +1,17 @@
 <template>
     <div style="padding: 0px;" ref="configcard">
-        <a-card :bordered="false" class="configuration-card" :body-style="{padding: '0', height: !$isMobile() ? 'calc(100vh - 129px)' : 'calc(100vh - 65px)', overflowY: 'scroll'}">
-                <template slot="title" style="line-height: 32px">
-                    <a-affix :target="() => this.$refs.configcard">
+        <a-card :bordered="false" class="configuration-card"
+                :body-style="{padding: '0', height: !$isMobile() ? 'calc(100vh - 129px)' : 'calc(100vh - 65px)', overflowY: 'scroll'}">
+            <template slot="title" style="line-height: 32px">
+                <a-affix :target="() => this.$refs.configcard">
                     Konfiguracija
                     <a-button type="primary" :class="{disabled: !configurationChanged}"
                               style="float: right; margin-left: 16px">Spremi
                     </a-button>
                     <a-button :class="{disabled: !configurationChanged}" style="float: right">Spremi kao novu</a-button>
-                    </a-affix>
+                </a-affix>
 
-                </template>
+            </template>
             <a-list itemLayout="horizontal" :dataSource="currentConfiguration.items">
                 <a-list-item slot="renderItem" slot-scope="configurationItem" style="padding: 16px 24px">
                     <a-list-item-meta :title="configurationItem.name"
@@ -28,7 +29,7 @@
                         copy to all
                     </a>
                     <a slot="actions">
-                        <component :is="getConfigurationItemInput(configurationItem)"
+                        <component :is="getConfigurationItemInput(configurationItem)" :ref="'picker'+configurationItem.id"
                                    @on-change="(value) => onItemChange(value, configurationItem)"></component>
                     </a>
 
@@ -85,7 +86,7 @@
       return this.$store.getters['devices/getDeviceById'](this.$route.params.deviceSlug);
     }
 
-    public get currentConfiguration() {
+    public get currentConfiguration(): any {
       if (this.localConfiguration.items.length === 0) {
         if (this.device === null) {
           return [];
@@ -101,7 +102,6 @@
     }
 
     public getConfigurationItemInput(configurationItem: ConfigurationItem) {
-      console.log('CALLED');
       switch (configurationItem.inputType) {
         case DeviceInputType.Color:
           return ColorInput.name;
@@ -113,15 +113,32 @@
     public onItemChange(color, item) {
 
       this.configurationChanged = true;
-      console.log('ITEM CHANGED');
-      console.log(color);
-      console.log(item);
+      const payload = [];
 
-      this.mqttClient.publish('home/tv/light/solid', JSON.stringify({
-        r: parseInt(color[0]).toString(),
-        g: parseInt(color[1]).toString(),
-        b: parseInt(color[2]).toString(),
-      }));
+      for (let i = 0; i < this.currentConfiguration.items.length; i++) {
+        // @ts-ignore
+        const color = this.$refs['picker'+this.currentConfiguration.items[i].id].getValue();
+
+        payload.push({
+          r: parseInt(color[0]),
+          g: parseInt(color[1]),
+          b: parseInt(color[2]),
+        })
+      }
+
+      this.mqttClient.publish('home/tv/light/solid', JSON.stringify(
+          {
+            '_': '_',
+            'configs': payload,
+          }
+      ));
+
+
+      // for (let i = 0; i < this.currentConfiguration.items.length; i++) {
+      //   // @ts-ignore
+      //   const color = this.$refs['picker'+this.currentConfiguration.items[i].id].setValue('#ffffff');
+      // }
+
     }
   }
 </script>

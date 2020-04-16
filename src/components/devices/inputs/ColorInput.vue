@@ -26,6 +26,8 @@
         showAlways: false,
         defaultRepresentation: 'RGBA',
         outputPrecision: 0,
+        position: 'bottom-middle',
+        appClass: 'custom-picker',
         components: {
           preview: true,
           opacity: false,
@@ -64,14 +66,11 @@
     }
 
     public setValue(color) {
-      return this.picker.setColor(color);
+      this.picker.setColor(color, true);
+      this.picker.applyColor(true);
     }
 
     beforeDestroy() {
-
-    }
-
-    afterDestroy() {
       this.picker.destroyAndRemove();
     }
   }

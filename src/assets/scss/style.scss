@@ -24,6 +24,13 @@ html button {
 
 .color-picker {
   display: inline-block;
+  margin-right:100px;
+}
+
+@media only screen and (max-width: 576px) {
+  .custom-picker {
+    margin-left: -55px;
+  }
 }
 
 .configuration-card .ant-card-head-title {

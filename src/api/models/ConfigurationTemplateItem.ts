@@ -5,26 +5,20 @@ import {ApiRoutes} from '@/enums/ApiRoutes';
 import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
+import ConfigurationItem from '@/api/models/ConfigurationItem';
 
 
-export default class ConfigurationItem extends Model {
-  public static entity = 'configurationitem';
+export default class Configuration extends Model {
+  public static entity = 'configurationtemplateitem';
 
   public static primaryKey = 'id';
-
-  public id;
-  public name;
-  public description;
-  public inputType;
 
   public static fields() {
     return {
       id: this.string(null),
-      name: this.string(undefined),
-      description: this.string(undefined),
-      inputType: this.string(undefined),
-      configuration_id: this.attr(undefined),
-      configuration_template_item_id: this.attr(null),
+      configuration_template_id: this.attr(undefined),
+      value: this.string(undefined),
+      configurationItem: this.hasOne(ConfigurationItem, 'configuration_template_item_id'),
     };
   }
 

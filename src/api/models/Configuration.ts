@@ -6,6 +6,7 @@ import GroceryItemImage from '@/api/models/GroceryItemImage';
 import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
 import ConfigurationItem from '@/api/models/ConfigurationItem';
+import ConfigurationTemplate from '@/api/models/ConfigurationTemplate';
 
 
 export default class Configuration extends Model {
@@ -24,6 +25,7 @@ export default class Configuration extends Model {
       id: this.string(null),
       device_id: this.attr(null),
       items: this.hasMany(ConfigurationItem, 'configuration_id'),
+      templates: this.hasMany(ConfigurationTemplate, 'configuration_id'),
     };
   }
 

@@ -8,10 +8,11 @@ import StringHelper from '@/helpers/StringHelper';
 import ConfigurationItem from '@/api/models/ConfigurationItem';
 
 
-export default class Configuration extends Model {
+export default class ConfigurationTemplateItem extends Model {
   public static entity = 'configurationtemplateitem';
 
   public static primaryKey = 'id';
+  public configurationItem;
 
   public static fields() {
     return {

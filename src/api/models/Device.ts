@@ -21,9 +21,16 @@ export default class Device extends Model {
     },
   };
 
-  public get activeConfigurationTemplate() {
-    for (const template of this.configuration.template)
-    return
+  public get activeTemplate() {
+    for (const template of this.configuration.templates) {
+      console.log('template');
+      console.log(template);
+      if (template.isActive) {
+        return template;
+      }
+    }
+
+    return null;
   }
 
   public static fieldsKeys() {

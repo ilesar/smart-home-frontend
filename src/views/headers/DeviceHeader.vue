@@ -1,7 +1,7 @@
 <template>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" :title="title" class="o-section-header" @back="goBack">
         <template slot="extra">
-            <a-button type="primary" @click="() => {}" >
+            <a-button type="primary" @click="() => {}" v-if="device && device.templates && device.templates.length > 0">
                 Odaberi konfiguraciju
             </a-button>
         </template>

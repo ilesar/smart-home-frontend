@@ -9,10 +9,16 @@ import ConfigurationItem from '@/api/models/ConfigurationItem';
 import ConfigurationTemplateItem from '@/api/models/ConfigurationTemplateItem';
 
 
-export default class Configuration extends Model {
+export default class ConfigurationTemplate extends Model {
   public static entity = 'configurationtemplate';
 
   public static primaryKey = 'id';
+
+  public items;
+
+  public get size() {
+    return this.items.length;
+  }
 
   public static fields() {
     return {

@@ -12,6 +12,7 @@ export default class ConfigurationItem extends Model {
 
   public static primaryKey = 'id';
 
+  public id;
   public name;
   public description;
   public inputType;

@@ -18,9 +18,6 @@
 
 <script lang="ts">
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-import HelloWorld from '@/components/home/HelloWorld.vue';
-import HelloWorldDuoTone from '@/components/home/HelloWorldDuoTone.vue';
-import HelloWorldWrapper from '@/components/home/HelloWorldWrapper.vue';
 import { LoadingOverlayHelper } from '@/helpers/LoadingOverlayHelper';
 import {
   State,
@@ -34,11 +31,6 @@ import Room from '@/api/models/Room';
 
 @Component({
   name: 'Devices',
-  components: {
-    HelloWorldDuoTone,
-    HelloWorldWrapper,
-    HelloWorld,
-  },
 })
 export default class Rooms extends Vue {
   @Action('rooms/fetchRooms') private fetchRooms;

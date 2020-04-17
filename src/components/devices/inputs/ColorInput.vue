@@ -5,14 +5,16 @@
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import Pickr from '@simonwep/pickr';
+  import {ConfigurationInputInterface} from '@/interfaces/ConfigurationInputInterface';
 
   @Component({
     name: 'ColorInput'
   })
-  export default class ColorInput extends Vue {
+  export default class ColorInput extends Vue implements ConfigurationInputInterface<any> {
     private picker: Pickr;
 
     public mounted() {
+      console.log('PICKER');
       if (this.picker) {
         this.picker.destroy();
         this.picker = null;
@@ -53,12 +55,7 @@
       this.picker.on('save', (color, instance) => {
         this.$emit('on-change', color.toRGBA(), this);
         this.picker.hide();
-        // debounce(() => this.$emit('on-change', color), 1000)();
       });
-
-      // this.picker.on('change', (color, instance) => {
-      //   debounce(() => this.$emit('on-change', color), 1000)();
-      // });
     }
 
     public getValue() {

@@ -18,6 +18,7 @@
     "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": ["./src/types", "node_modules/@types"],
     "types": [
       // "vue-tsx-support/enable-check",
       "node",
@@ -43,10 +44,11 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
   ],
   "exclude": [
     "node_modules",
-    "src/util"
+    "src/util",
+    "src/types"
   ]
 }

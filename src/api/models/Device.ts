@@ -45,6 +45,7 @@ export default class Device extends Model {
       name: this.string('deviceName'),
       slug: this.string(null),
       deviceType: this.string('deviceName'),
+      deviceId: this.string(undefined),
       configuration: this.hasOne(Configuration, 'device_id'),
     };
   }
@@ -56,5 +57,6 @@ export default class Device extends Model {
   public id;
   public slug;
   public configuration;
+  public deviceId;
 
 }

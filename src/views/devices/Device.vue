@@ -75,7 +75,6 @@
       return this.localConfiguration;
     }
 
-
     private valueChanged() {
         this.sendConfiguration();
     }
@@ -108,9 +107,9 @@
     private sendConfiguration() {
       const payload = [];
 
-      console.log(this.currentConfiguration);
       for (let i = 0; i < this.currentConfiguration.items.length; i++) {
         const colorInput = this.getConfigItem(i);
+
         const colorValue = colorInput.getValue();
 
         payload.push({
@@ -120,7 +119,7 @@
         });
       }
 
-      this.$mqtt.publish('15ledstrip', JSON.stringify(
+      this.$mqtt.publish(this.device.deviceId, JSON.stringify(
         {
           '_': '_',
           'configs': payload,

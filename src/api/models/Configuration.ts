@@ -15,6 +15,10 @@ export default class Configuration extends Model {
 
   public items: ConfigurationItem[];
 
+  public get size(): number {
+    return this.items.length;
+  }
+
   public static fields() {
     return {
       id: this.string(null),

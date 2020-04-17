@@ -17,8 +17,9 @@
                         slot="renderItem"
                         slot-scope="configurationItem"
                         :model="configurationItem"
-                        @send="sendConfiguration"
+                        @change="valueChanged"
                         @copy="copyValue"
+                        @paste="pasteValue"
                         @copy-all="pasteAllValues"
                         :ref="'configitem'+configurationItem.id"
                 ></input-wrapper>
@@ -34,6 +35,7 @@
   import ColorInputGroup from '@/components/devices/inputs/ColorInputGroup.vue';
   import Configuration from '@/api/models/Configuration';
   import InputWrapper from '@/components/devices/InputWrapper.vue';
+  import Device from '@/api/models/Device';
 
   const mqtt = require('mqtt');
 
@@ -47,6 +49,7 @@
   })
   export default class DeviceConfiguration extends Vue {
     @Action('rooms/fetchRooms') private fetchRooms;
+    // @Action('configurations/send') private sendConfiguration;
 
     private localConfiguration: Configuration = new Configuration();
 
@@ -54,12 +57,12 @@
       this.fetchRooms();
     }
 
-    public get device() {
+    public get device(): Device {
       return this.$store.getters['devices/getDeviceById'](this.$route.params.deviceSlug);
     }
 
     public get currentConfiguration(): Configuration {
-      if (this.localConfiguration.items.length > 0 || !this.device) {
+      if (this.localConfiguration.size > 0 || !this.device) {
         return this.localConfiguration;
       }
 
@@ -72,12 +75,42 @@
       return this.localConfiguration;
     }
 
+
+    private valueChanged() {
+        this.sendConfiguration();
+    }
+
+    private copyValue() {
+      for (let i = 0; i < this.currentConfiguration.size; i++) {
+        const colorInput = this.getConfigItem(i);
+        colorInput.pasteable = true;
+      }
+    }
+
+    private pasteValue() {
+      this.sendConfiguration();
+    }
+
+    private pasteAllValues() {
+      for (let i = 0; i < this.currentConfiguration.size; i++) {
+        const colorInput = this.getConfigItem(i);
+        colorInput.pasteValue(true);
+      }
+
+      this.sendConfiguration();
+    }
+
+    private getConfigItem(index: number) {
+      return this.$refs['configitem' + this.currentConfiguration.items[index].id] as any;
+    }
+
+
     private sendConfiguration() {
       const payload = [];
 
       console.log(this.currentConfiguration);
       for (let i = 0; i < this.currentConfiguration.items.length; i++) {
-        const colorInput = this.$refs['configitem' + this.currentConfiguration.items[i].id] as any;
+        const colorInput = this.getConfigItem(i);
         const colorValue = colorInput.getValue();
 
         payload.push({
@@ -93,24 +126,6 @@
           'configs': payload,
         }
       ));
-    }
-
-    private pasteAllValues() {
-
-      console.log(this.currentConfiguration);
-      for (let i = 0; i < this.currentConfiguration.items.length; i++) {
-        const colorInput = this.$refs['configitem' + this.currentConfiguration.items[i].id] as any;
-        colorInput.pasteValue(false);
-      }
-
-      this.sendConfiguration();
-    }
-
-    private copyValue() {
-      for (let i = 0; i < this.currentConfiguration.items.length; i++) {
-        const colorInput = this.$refs['configitem' + this.currentConfiguration.items[i].id] as any;
-        colorInput.pasteable = true;
-      }
     }
 
   }

@@ -3,7 +3,7 @@
         <a-list-item-meta :title="model.name"
                           :description="!$isMobile() ? model.description : ''"></a-list-item-meta>
         <a slot="actions">
-                        <span @click="pasteValue" v-if="pasteable">
+                        <span @click="pasteValue(false)" v-if="pasteable">
                             <a-icon type="copy"></a-icon>
                         paste
                         </span>
@@ -22,15 +22,15 @@
         </a>
         <a slot="actions">
             <component :is="configurationItemType"
-                       :ref="'viewModel' + model.id"
-                       @on-change="sendConfiguration()"></component>
+                       ref="viewModel"
+                       @on-change="valueChanged"></component>
         </a>
 
     </a-list-item>
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop, Watch, Emit} from 'vue-property-decorator';
+  import {Vue, Component, Prop, Watch, Emit, Ref} from 'vue-property-decorator';
   import {LocalStorageService} from '@/services/LocalStorageService';
   import ConfigurationItem from '@/api/models/ConfigurationItem';
   import {DeviceInputType} from '@/enums/DeviceInputType';
@@ -48,14 +48,11 @@
     private model!: ConfigurationItem;
     public pasteable = false;
 
-    public get viewModel(): ConfigurationInputInterface<any> {
-      // @ts-ignore
-      return this.$refs['viewModel'+this.model.id];
-    }
+    @Ref(`viewModel`)
+    public readonly viewModel!: ConfigurationInputInterface<any>;
 
-    public getValue() {
-      return this.viewModel.getValue();
-    }
+    @Emit('change')
+    public valueChanged() {}
 
     @Emit('copy')
     public copyValue() {
@@ -63,22 +60,23 @@
       LocalStorageService.save('deviceClipboard', value);
     }
 
-    @Emit('send')
-    public sendConfiguration() {}
-
     @Emit('copy-all')
     public copyAllValues() {
-      this.copyValue();
+      const value = this.viewModel.getValue();
+      LocalStorageService.save('deviceClipboard', value);
     }
 
-    @Emit('paste')
-    public pasteValue(send: boolean = true) {
+    public pasteValue(silent: boolean = false) {
       const value = LocalStorageService.get('deviceClipboard');
       this.viewModel.setValue(value);
 
-      if (send) {
-        this.sendConfiguration();
+      if (silent == false) {
+        this.$emit('paste');
       }
+    }
+
+    public getValue() {
+      return this.viewModel.getValue();
     }
 
     public get configurationItemType() {
@@ -89,6 +87,7 @@
           throw new Error(`Device with unknown input (${this.model.inputType})`);
       }
     }
+
   }
 </script>
 

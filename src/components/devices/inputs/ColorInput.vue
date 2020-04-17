@@ -14,7 +14,6 @@
     private picker: Pickr;
 
     public mounted() {
-      console.log('PICKER');
       if (this.picker) {
         this.picker.destroy();
         this.picker = null;

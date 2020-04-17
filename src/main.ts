@@ -20,6 +20,11 @@ const mqtt = require('mqtt');
 declare module 'vue/types/vue' {
   interface Vue {
     $mqtt: any;
+    $isMobile: any;
+  }
+
+  interface VueConstructor {
+    $mqtt: any;
   }
 }
 

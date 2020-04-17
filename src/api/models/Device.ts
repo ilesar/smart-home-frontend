@@ -55,5 +55,6 @@ export default class Device extends Model {
 
   public id;
   public slug;
+  public configuration;
 
 }

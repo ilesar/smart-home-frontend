@@ -13,16 +13,12 @@ export const ApiRoutes = {
     RecurringPayment: '/recurring/payments',
     RecurringPayments: '/recurring/payments?filter[isDeleted]=0',
 
-    Rooms: '/rooms?include=devices,devices.configuration,devices.configuration.items',
+    Rooms: '/rooms?include=devices,devices.configuration,devices.configuration.items,devices.configuration.templates,devices.configuration.templates.items',
 
     Expense: '/expenses',
     Expenses: '/expenses?include=recurringPayment',
     ResolvedExpenses: '/expenses?include=recurringPayment&filter[isResolved]=1',
 
     Image: '/images',
-
-
-
-
 
 };

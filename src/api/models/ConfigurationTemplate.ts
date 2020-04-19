@@ -7,6 +7,7 @@ import ShoppingItem from '@/api/models/ShoppingItem';
 import StringHelper from '@/helpers/StringHelper';
 import ConfigurationItem from '@/api/models/ConfigurationItem';
 import ConfigurationTemplateItem from '@/api/models/ConfigurationTemplateItem';
+import Configuration from '@/api/models/Configuration';
 
 
 export default class ConfigurationTemplate extends Model {
@@ -17,9 +18,14 @@ export default class ConfigurationTemplate extends Model {
   public items;
   public name;
   public isActive;
+  private configuration_id;
 
   public get size() {
     return this.items.length;
+  }
+
+  public get configuration() {
+    return Configuration.find(this.configuration_id);
   }
 
   public static fields() {

@@ -14,6 +14,7 @@ export default class Configuration extends Model {
 
   public static primaryKey = 'id';
 
+  public id;
   public items: ConfigurationItem[];
 
   public get size(): number {

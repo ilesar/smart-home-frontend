@@ -5,11 +5,11 @@
             <template slot="title" style="line-height: 32px">
                 <a-affix :target="() => this.$refs.configcard">
                     Predlošci
-                    <!--                    <a-button type="default"-->
-                    <!--                              style="float: right; margin-right: 8px"-->
-                    <!--                    >-->
-                    <!--                        Stvori novi predložak-->
-                    <!--                    </a-button>-->
+                                        <a-button type="primary"
+                                                  style="float: right; margin-right: 8px"
+                                        >
+                                            Stvori novi predložak
+                                        </a-button>
                 </a-affix>
 
             </template>
@@ -21,7 +21,7 @@
                         :imageStyle="{height: '60px'}"
                 >
                 </a-empty>
-                <a-list-item style="padding: 16px 24px" slot="renderItem" slot-scope="template">
+                <a-list-item :style="{padding: '16px 24px', cursor: !template.isActive ? 'pointer' : 'default'}" slot="renderItem" slot-scope="template" @click="() => template.isActive ? null : activateTemplate(template)">
                     <a-list-item-meta>
                         <a slot="title">
                             {{ template.name }}
@@ -41,24 +41,24 @@
 
                     <a slot="actions">
                         <a-badge
-                                :count="'Aktivna konfiguracija'"
+                                :count="'Aktivno'"
                                 v-if="template.isActive === true && !activating"
                                 :numberStyle="{
-                                    backgroundColor: '#fff',
-                                    color: '#999',
+                                    backgroundColor: '#FFFFFF',
+                                    color: '#1890ff',
                                     boxShadow: '0 0 0 1px #d9d9d9 inset',
                                   }"
                                 style="margin-right: 50%"
                         >
 
                         </a-badge>
-                        <a-button type="primary"
-                                  style="float: right; margin-right: 0px"
-                                  v-if="template.isActive === false && !activating"
-                                  @click="activateTemplate(template)"
-                        >
-                            Aktiviraj
-                        </a-button>
+<!--                        <a-button type="default"-->
+<!--                                  style="float: right; margin-right: 0px"-->
+<!--                                  v-if="template.isActive === false && !activating"-->
+<!--                                  @click="activateTemplate(template)"-->
+<!--                        >-->
+<!--                            Aktiviraj-->
+<!--                        </a-button>-->
                     </a>
 
                 </a-list-item>
@@ -90,6 +90,8 @@
     @Action('rooms/fetchRooms') private fetchRooms;
     @Action('configurationtemplates/updateConfigurationTemplate')
     private updateConfigurationTemplate;
+    @Action('configurationtemplates/activateLocalTemplate')
+    private activateLocalTemplate;
 
     private activating = false;
 
@@ -123,9 +125,11 @@
     }
 
 
-    public activateTemplate(template: ConfigurationTemplate) {
-      template.isActive = true;
-      this.updateConfigurationTemplate(template).then(() => {
+    public activateTemplate(currentTemplate: ConfigurationTemplate) {
+      this.activateLocalTemplate(currentTemplate);
+
+      currentTemplate.isActive = true;
+      this.updateConfigurationTemplate(currentTemplate).then(() => {
         this.fetchRooms();
       });
     }

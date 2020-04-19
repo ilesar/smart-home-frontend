@@ -41,13 +41,13 @@ Vue.use(vueDebounce, {
   defaultTime: '500ms',
 });
 
-const mqttClient = mqtt.connect('mqtt://192.168.31.125:9001');
+// const mqttClient = mqtt.connect('mqtt://192.168.31.125:9001');
+//
+// mqttClient.on('connect', () => {
+//   console.log('CONNECTED');
+// });
 
-mqttClient.on('connect', () => {
-  console.log('CONNECTED');
-});
-
-Vue.prototype.$mqtt = mqttClient;
+// Vue.prototype.$mqtt = mqttClient;
 
 new Vue({
   router,

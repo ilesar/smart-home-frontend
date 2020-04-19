@@ -13,8 +13,10 @@ export default class ConfigurationTemplate extends Model {
   public static entity = 'configurationtemplate';
 
   public static primaryKey = 'id';
-
+  public id;
   public items;
+  public name;
+  public isActive;
 
   public get size() {
     return this.items.length;
@@ -23,7 +25,8 @@ export default class ConfigurationTemplate extends Model {
   public static fields() {
     return {
       id: this.string(null),
-      isActive: this.boolean(false),
+      isActive: this.boolean(undefined),
+      name: this.string(undefined),
       configuration_id: this.attr(undefined),
       items: this.hasMany(ConfigurationTemplateItem, 'configuration_template_id'),
     };

@@ -8,12 +8,12 @@ export const ApiRoutes = {
     ShoppingItem: '/shopping/list/items',
     ShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=0',
     ResolvedShoppingItems: '/shopping/list/items?include=groceryItem,groceryItem.image&filter[isResolved]=1',
-    addGroceryToShoppingList: '/shopping/list/items',
 
     RecurringPayment: '/recurring/payments',
     RecurringPayments: '/recurring/payments?filter[isDeleted]=0',
 
     Rooms: '/rooms?include=devices,devices.configuration,devices.configuration.items,devices.configuration.templates,devices.configuration.templates.items,devices.configuration.templates.items.configurationItem',
+    ConfigurationTemplate: '/configuration/templates',
 
     Expense: '/expenses',
     Expenses: '/expenses?include=recurringPayment',

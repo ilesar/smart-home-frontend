@@ -28,6 +28,18 @@ export const routes: RouteConfig[] = [
     },
   },
   {
+    path: `/${RouteNames.Rooms}/:roomSlug/devices/:deviceSlug/configurations/:configurationSlug`,
+    name: RouteNames.Device,
+    meta: {
+      navigationLayout: true,
+      popup: true,
+    },
+    components: {
+      default: loadView('devices/DeviceConfiguration'),
+      header: loadView('headers/DeviceConfigurationHeader'),
+    },
+  },
+  {
     path: `/${RouteNames.Rooms}/:roomSlug/devices/:deviceSlug`,
     name: RouteNames.Device,
     meta: {

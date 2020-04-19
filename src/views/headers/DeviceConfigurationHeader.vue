@@ -15,7 +15,7 @@ import Room from '@/api/models/Room';
 import {RouteNames} from '@/enums/RouteNames';
 
 @Component
-export default class DeviceHeader extends Vue {
+export default class DeviceConfigurationHeader extends Vue {
   private visible: boolean = false;
 
   public get room() {

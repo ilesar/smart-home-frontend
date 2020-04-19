@@ -4,51 +4,74 @@
                 :body-style="{padding: '0', height: !$isMobile() ? 'calc(100vh - 129px)' : 'calc(100vh - 65px)', overflowY: 'scroll'}">
             <template slot="title" style="line-height: 32px">
                 <a-affix :target="() => this.$refs.configcard">
-                    Konfiguracija
-                    <a-button type="primary"
-                              style="float: right; margin-left: 16px"
-                              v-if="activeTemplate && hasChanged"
-                    >
-                        Spremi
-                    </a-button>
-                    <a-button style="float: right"
-                              v-if="activeTemplate && hasChanged"
-                    >
-                        Spremi kao novu
-                    </a-button>
+                    Predlošci
+                    <!--                    <a-button type="default"-->
+                    <!--                              style="float: right; margin-right: 8px"-->
+                    <!--                    >-->
+                    <!--                        Stvori novi predložak-->
+                    <!--                    </a-button>-->
                 </a-affix>
 
             </template>
-            <a-list itemLayout="horizontal" :dataSource="activeTemplate ? activeTemplate.items : []">
+            <a-list itemLayout="horizontal" :dataSource="templates">
                 <a-empty
-                        v-if="!activeTemplate"
+                        v-if="templates.length === 0"
                         :style="{ paddingTop: '64px'}"
                         image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
                         :imageStyle="{height: '60px'}"
                 >
-                    <span slot="description">Ne postoji aktivna konfiguracija</span>
                 </a-empty>
-                <input-wrapper
-                        slot="renderItem"
-                        slot-scope="configurationItem"
-                        :model="configurationItem"
-                        @change="valueChanged"
-                        @copy="copyValue"
-                        @paste="pasteValue"
-                        @copy-all="pasteAllValues"
-                        :ref="'configitem'+configurationItem.id"
-                ></input-wrapper>
+                <a-list-item style="padding: 16px 24px" slot="renderItem" slot-scope="template">
+                    <a-list-item-meta>
+                        <a slot="title">
+                            {{ template.name }}
+                        </a>
+                        <a slot="description">
+                            <a-col style="width: 20vw; min-width: 200px">
+                                <a-progress
+                                        :strokeColor="lampColorSchema(template)"
+                                        :percent="100"
+                                        type="line"
+                                        :strokeWidth="10"
+                                        :show-info="false"
+                                />
+                            </a-col>
+                        </a>
+                    </a-list-item-meta>
+
+                    <a slot="actions">
+                        <a-badge
+                                :count="'Aktivna konfiguracija'"
+                                v-if="template.isActive === true && !activating"
+                                :numberStyle="{
+                                    backgroundColor: '#fff',
+                                    color: '#999',
+                                    boxShadow: '0 0 0 1px #d9d9d9 inset',
+                                  }"
+                                style="margin-right: 50%"
+                        >
+
+                        </a-badge>
+                        <a-button type="primary"
+                                  style="float: right; margin-right: 0px"
+                                  v-if="template.isActive === false && !activating"
+                                  @click="activateTemplate(template)"
+                        >
+                            Aktiviraj
+                        </a-button>
+                    </a>
+
+                </a-list-item>
             </a-list>
         </a-card>
     </div>
-</template>
+</template>s
 
 <script lang="ts">
   import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
   import {Action, Getter} from 'vuex-class';
   import ColorInput from '@/components/devices/inputs/ColorInput.vue';
   import ColorInputGroup from '@/components/devices/inputs/ColorInputGroup.vue';
-  import Configuration from '@/api/models/Configuration';
   import InputWrapper from '@/components/devices/InputWrapper.vue';
   import Device from '@/api/models/Device';
   import ConfigurationTemplate from '@/api/models/ConfigurationTemplate';
@@ -56,7 +79,7 @@
   const mqtt = require('mqtt');
 
   @Component({
-    name: 'Device.vue',
+    name: 'Device',
     components: {
       InputWrapper,
       ColorInputGroup,
@@ -65,10 +88,10 @@
   })
   export default class DeviceConfiguration extends Vue {
     @Action('rooms/fetchRooms') private fetchRooms;
-    // @Action('configurations/send') private sendConfiguration;
+    @Action('configurationtemplates/updateConfigurationTemplate')
+    private updateConfigurationTemplate;
 
-    private localConfiguration: Configuration = new Configuration();
-    private hasChanged: boolean = false;
+    private activating = false;
 
     public created() {
       this.fetchRooms();
@@ -78,72 +101,57 @@
       return this.$store.getters['devices/getDeviceById'](this.$route.params.deviceSlug);
     }
 
-    public get activeTemplate(): ConfigurationTemplate {
+    public get templates(): ConfigurationTemplate[] {
       if (this.device) {
-        return this.device.activeTemplate;
-      }
-      return null;
-    }
-
-    // public get currentConfiguration(): Configuration {
-    //   if (this.localConfiguration.size > 0 || !this.device) {
-    //     return this.localConfiguration;
-    //   }
-    //
-    //   const savedConfiguration = this.device.configuration;
-    //
-    //   for (const configurationItem of savedConfiguration.items) {
-    //     this.localConfiguration.items.push(Object.assign({}, configurationItem));
-    //   }
-    //
-    //   return this.localConfiguration;
-    // }
-
-    private valueChanged() {
-        this.sendConfiguration();
-    }
-
-    private copyValue() {
-      for (let i = 0; i < this.activeTemplate.size; i++) {
-        const colorInput = this.getConfigItem(i);
-        colorInput.pasteable = true;
-      }
-    }
-
-    private pasteValue() {
-      this.hasChanged = true;
-      this.sendConfiguration();
-    }
-
-    private pasteAllValues() {
-      this.hasChanged = true;
-      for (let i = 0; i < this.activeTemplate.size; i++) {
-        const colorInput = this.getConfigItem(i);
-        colorInput.pasteValue(true);
+        return this.device.configuration.templates;
       }
 
-      this.sendConfiguration();
+      return [];
     }
 
-    private getConfigItem(index: number) {
-      return this.$refs['configitem' + this.activeTemplate.items[index].id] as any;
+    public lampColorSchema(template: ConfigurationTemplate) {
+      const schema = {};
+      let i = 0;
+
+      for (const configurationItem of template.items) {
+        const percent = Math.round(i * (100 / (template.items.length - 1))) + '%';
+        schema[percent] = configurationItem.value;
+        i++;
+      }
+
+      return schema;
     }
 
 
-    private sendConfiguration() {
+    public activateTemplate(template: ConfigurationTemplate) {
+      this.activating = true;
+      template.isActive = true;
+      this.updateConfigurationTemplate(template).then(() => {
+        this.fetchRooms().then(() => {
+          console.log('sendign');
+            this.sendTemplateToMQTT(template);
+        }).finally(() => {
+          this.activating = false;
+        });
+      });
+    }
+
+    private sendTemplateToMQTT(template: ConfigurationTemplate) {
       const payload = [];
 
-      for (let i = 0; i < this.activeTemplate.items.length; i++) {
-        const colorInput = this.getConfigItem(i);
+      for (const configurationTemplateItem of template.items) {
+        const rgb = this.hexToRGB(configurationTemplateItem.value);
 
-        const colorValue = colorInput.getValue();
-
-        payload.push({
-          r: parseInt(colorValue[0]),
-          g: parseInt(colorValue[1]),
-          b: parseInt(colorValue[2]),
-        });
+        payload.push(rgb);
       }
+
+      console.log(this.device.deviceId);
+      console.log(JSON.stringify(
+        {
+          '_': '_',
+          'configs': payload,
+        }
+      ));
 
       this.$mqtt.publish(this.device.deviceId, JSON.stringify(
         {
@@ -151,6 +159,15 @@
           'configs': payload,
         }
       ));
+    }
+
+    hexToRGB(hex){
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
     }
 
   }

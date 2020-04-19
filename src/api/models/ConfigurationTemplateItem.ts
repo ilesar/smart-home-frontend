@@ -12,7 +12,9 @@ export default class ConfigurationTemplateItem extends Model {
   public static entity = 'configurationtemplateitem';
 
   public static primaryKey = 'id';
+  public id;
   public configurationItem;
+  public value;
 
   public static fields() {
     return {

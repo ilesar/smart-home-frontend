@@ -1,7 +1,8 @@
 import { ActionTree } from 'vuex';
 import ILocalState from './stateInterface';
 import Vue from 'vue';
-import Configuration from '@/api/models/Configuration';
+import ConfigurationTemplate from '@/api/models/ConfigurationTemplate';
+import ConfigurationTemplateController from '@/api/controllers/ConfigurationTemplateController';
 
 
 const actions: ActionTree<ILocalState, {}> = {

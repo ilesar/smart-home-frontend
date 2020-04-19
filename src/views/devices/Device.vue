@@ -124,41 +124,10 @@
 
 
     public activateTemplate(template: ConfigurationTemplate) {
-      this.activating = true;
       template.isActive = true;
       this.updateConfigurationTemplate(template).then(() => {
-        this.fetchRooms().then(() => {
-          console.log('sendign');
-            this.sendTemplateToMQTT(template);
-        }).finally(() => {
-          this.activating = false;
-        });
+        this.fetchRooms();
       });
-    }
-
-    private sendTemplateToMQTT(template: ConfigurationTemplate) {
-      const payload = [];
-
-      for (const configurationTemplateItem of template.items) {
-        const rgb = this.hexToRGB(configurationTemplateItem.value);
-
-        payload.push(rgb);
-      }
-
-      console.log(this.device.deviceId);
-      console.log(JSON.stringify(
-        {
-          '_': '_',
-          'configs': payload,
-        }
-      ));
-
-      this.$mqtt.publish(this.device.deviceId, JSON.stringify(
-        {
-          '_': '_',
-          'configs': payload,
-        }
-      ));
     }
 
     hexToRGB(hex){

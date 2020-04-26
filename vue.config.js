@@ -7,6 +7,9 @@ module.exports = {
   //     background_color: '#FFFFFF'
   //   }
   // },
+  devServer: {
+    disableHostCheck: true,
+  },
   css: {
     sourceMap: true,
     loaderOptions: {

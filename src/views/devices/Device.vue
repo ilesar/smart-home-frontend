@@ -7,6 +7,7 @@
                     Predlošci
                                         <a-button type="primary"
                                                   style="float: right; margin-right: 8px"
+                                                  @click="newConfiguration"
                                         >
                                             Stvori novi predložak
                                         </a-button>
@@ -75,6 +76,12 @@
   import InputWrapper from '@/components/devices/InputWrapper.vue';
   import Device from '@/api/models/Device';
   import ConfigurationTemplate from '@/api/models/ConfigurationTemplate';
+  import {EventBus} from "@/helpers/EventBusHelper";
+  import {EventBusEvents} from "@/enums/EventBusEvents";
+  import GroceryItemFormEdit from "@/components/forms/GroceryItemFormEdit.vue";
+  import GroceryItem from "@/api/models/GroceryItem";
+  import {DrawerDataInterface} from "@/interfaces/DrawerDataInterface";
+  import DeviceConfigurationForm from "@/components/forms/DeviceConfigurationForm.vue";
 
   const mqtt = require('mqtt');
 
@@ -97,6 +104,17 @@
 
     public created() {
       this.fetchRooms();
+    }
+
+    public newConfiguration() {
+        EventBus.$emit(EventBusEvents.OpenDrawer, {
+            title: 'Dodaj novi predložak',
+            model: {},
+            component: DeviceConfigurationForm.name,
+            submitText: 'Spremi',
+            onSubmit: (drawer: DeviceConfigurationForm, model: GroceryItem) => {
+            },
+        } as DrawerDataInterface<GroceryItem>);
     }
 
     public get device(): Device {

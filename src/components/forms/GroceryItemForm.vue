@@ -124,6 +124,7 @@ export default class GroceryItemForm extends Vue {
   public onSubmit(model: GroceryItem) {
     const form = this.$refs['ruleForm'];
 
+    // @ts-ignore
     form.validate((valid: boolean) => {
       if (valid) {
         this.submitButtonCallback(this, model);

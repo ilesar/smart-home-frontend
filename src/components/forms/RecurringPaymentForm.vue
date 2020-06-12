@@ -75,6 +75,7 @@
     public onSubmit(model: RecurringPayment) {
       const form = this.$refs['ruleForm'];
 
+      // @ts-ignore
       form.validate((valid: boolean) => {
         if (valid) {
           this.submitButtonCallback(this, model);

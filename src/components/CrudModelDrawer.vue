@@ -10,7 +10,7 @@
                 width="50vw"
         >
             <component
-                    :is="drawerObject ? drawerObject.component : ''"
+                    v-bind:is="drawerObject ? drawerObject.component : ''"
                     @on-cancel="closeDrawer"
                     :model="drawerObject ? drawerObject.model : ''"
                     :submitButtonText="drawerObject ? drawerObject.submitText : ''"
@@ -27,7 +27,7 @@
                 :body-style="{ padding: '0px', width: '100vw'}"
         >
             <component
-                    :is="drawerObject ? drawerObject.component : ''"
+                    v-bind:is="drawerObject ? drawerObject.component : ''"
                     @on-cancel="closeDrawer"
                     :model="drawerObject ? drawerObject.model : ''"
                     :submitButtonText="drawerObject ? drawerObject.submitText : ''"
@@ -47,12 +47,16 @@ import RecurringPaymentForm from '@/components/forms/RecurringPaymentForm.vue';
 
 @Component
 export default class CrudModelDrawer extends Vue {
-  private visible: boolean = false;
-  private drawerObject: DrawerDataInterface<any> | {} = {};
+  public visible: boolean = false;
+  public drawerObject: DrawerDataInterface<any> | {} = {};
 
   public beforeDestroy() {
     EventBus.$off(EventBusEvents.OpenDrawer);
     EventBus.$off(EventBusEvents.CloseDrawer);
+  }
+
+  public get dObject() {
+      return this.drawerObject;
   }
 
   public closeDrawer() {

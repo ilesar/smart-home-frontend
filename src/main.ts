@@ -29,6 +29,7 @@ declare module 'vue/types/vue' {
 }
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 Vue.use(Antd);
 Vue.use(Loading);

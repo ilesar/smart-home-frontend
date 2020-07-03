@@ -26,7 +26,7 @@ export default class RecurringPaymentsHeader extends Vue {
     EventBus.$emit(EventBusEvents.OpenDrawer, {
       title: 'Novo plaćanje',
       model: new RecurringPayment(),
-      component: RecurringPaymentForm.name,
+      component: RecurringPaymentForm,
       submitText: 'Spremi',
       onSubmit: (drawer: RecurringPaymentForm, model: RecurringPayment) => {
         if (model.activationTimeDate) {

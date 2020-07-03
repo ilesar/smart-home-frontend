@@ -33,7 +33,7 @@ export default class GroceriesHeader extends Vue {
     EventBus.$emit(EventBusEvents.OpenDrawer, {
       title: 'Nova namirnica',
       model: new GroceryItem(),
-      component: GroceryItemForm.name,
+      component: GroceryItemForm,
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
         this.uploadImage(model.imageForUpload).then((response) => {
@@ -54,7 +54,7 @@ export default class GroceriesHeader extends Vue {
     EventBus.$emit(EventBusEvents.OpenDrawer, {
       title: 'Nova namirnica',
       model: new GroceryItem(),
-      component: GroceryItemMobileForm.name,
+      component: GroceryItemMobileForm,
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemMobileForm, model: GroceryItem) => {
         this.uploadImage(model.imageForUpload).then((response) => {

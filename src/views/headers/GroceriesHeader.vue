@@ -37,7 +37,7 @@ export default class GroceriesHeader extends Vue {
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemForm, model: GroceryItem) => {
         this.uploadImage(model.imageForUpload).then((response) => {
-          model.imageId = response.response.data.data.id;
+          model.image.id = response.response.data.data.id;
 
           this.createGroceryItem(model).then(() => {
             EventBus.$emit(EventBusEvents.CloseDrawer);
@@ -58,7 +58,7 @@ export default class GroceriesHeader extends Vue {
       submitText: 'Spremi',
       onSubmit: (drawer: GroceryItemMobileForm, model: GroceryItem) => {
         this.uploadImage(model.imageForUpload).then((response) => {
-          model.imageId = response.response.data.data.id;
+          model.image.id = response.response.data.data.id;
 
           this.createGroceryItem(model).then(() => {
             EventBus.$emit(EventBusEvents.CloseDrawer);

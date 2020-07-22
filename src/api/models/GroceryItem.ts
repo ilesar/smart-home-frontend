@@ -53,6 +53,6 @@ export default class GroceryItem extends Model {
   public price;
   public imageForUploadBase64: string;
   public imageForUpload: File;
-  public imageId: string;
+  public image;
 
 }

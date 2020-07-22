@@ -27,7 +27,7 @@ export default class GroceryController extends BaseController {
           image: {
             data: {
               type: 'images',
-              id: groceryItem.imageId,
+              id: groceryItem.image.id,
             }
           },
         },
@@ -49,7 +49,7 @@ export default class GroceryController extends BaseController {
           image: {
             data: {
               type: 'images',
-              id: groceryItem.imageId,
+              id: groceryItem.image.id,
             }
           },
         },

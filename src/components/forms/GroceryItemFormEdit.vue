@@ -22,7 +22,7 @@
                     :fileList="[]"
             >
                 <p class="ant-upload-hint">
-                    Povuci fotku ovdje ili klikni, pa odaberi sa svojeg uređaja
+                    Povuci fotku ovdje ili klikni
                     <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image.image" class="image-preview"/>
                 </p>
             </a-upload-dragger>
@@ -109,7 +109,8 @@ export default class GroceryItemFormEdit extends Vue {
       image: [
         { validator: (rule, value, callback) => {
             if (!this.model.imageForUploadBase64) {
-              callback(new Error());
+              // callback(new Error());
+                callback();
             } else {
               callback();
             }

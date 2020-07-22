@@ -82,12 +82,11 @@
                 onSubmit: (drawer: GroceryItemFormEdit, model: GroceryItem) => {
                     if (model.imageForUpload) {
                         this.uploadImage(model.imageForUpload).then((response) => {
-                            model.imageId = response.response.data.data.id;
+                            model.image.id = response.response.data.data.id;
 
                             this.updateGroceryItem(model).then(() => {
                                 EventBus.$emit(EventBusEvents.CloseDrawer);
                             }).catch((error) => {
-                                console.log('ERROR CUST');
                                 console.error(error);
                             });
                         });
@@ -114,7 +113,7 @@
 
                     if (model.imageForUpload) {
                         this.uploadImage(model.imageForUpload).then((response) => {
-                            model.imageId = response.response.data.data.id;
+                            model.image.id = response.response.data.data.id;
 
                             this.updateGroceryItem(model).then(() => {
                                 EventBus.$emit(EventBusEvents.CloseDrawer);

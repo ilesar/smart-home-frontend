@@ -45,14 +45,16 @@ export default class GroceryController extends BaseController {
           price: groceryItem.price,
           source: 'manual',
         },
-        relationships: {
-          image: {
-            data: {
-              type: 'images',
-              id: groceryItem.image.id,
-            }
-          },
-        },
+        relationships: (() => {
+          return {
+            image: {
+              data: {
+                type: 'images',
+                id: groceryItem.image.id,
+              }
+            },
+          };
+        })(),
       },
     });
   }

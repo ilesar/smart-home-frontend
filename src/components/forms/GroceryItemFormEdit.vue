@@ -23,7 +23,7 @@
             >
                 <p class="ant-upload-hint">
                     Povuci fotku ovdje ili klikni
-                    <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image.image" class="image-preview"/>
+                    <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image ? model.image.image : null" class="image-preview"/>
                 </p>
             </a-upload-dragger>
         </a-form-model-item>
@@ -127,7 +127,7 @@ export default class GroceryItemFormEdit extends Vue {
       if (valid) {
         this.submitButtonCallback(this, model);
       } else {
-        console.log('FORM ERROR');
+        console.error('FORM ERROR');
         return false;
       }
     });

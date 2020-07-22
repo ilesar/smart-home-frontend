@@ -33,6 +33,8 @@
     import {DrawerDataInterface} from '@/interfaces/DrawerDataInterface';
     import GroceryItemMobileFormEdit from '@/components/forms/GroceryItemMobileFormEdit.vue';
     import GroceryItemFormEdit from '@/components/forms/GroceryItemFormEdit.vue';
+    import {debug} from "webpack";
+    import GroceryItemImage from "@/api/models/GroceryItemImage";
 
     @Component({
         name: 'Groceries',
@@ -82,6 +84,9 @@
                 onSubmit: (drawer: GroceryItemFormEdit, model: GroceryItem) => {
                     if (model.imageForUpload) {
                         this.uploadImage(model.imageForUpload).then((response) => {
+                            if (model.image == null) {
+                                model.image = new GroceryItemImage();
+                            }
                             model.image.id = response.response.data.data.id;
 
                             this.updateGroceryItem(model).then(() => {

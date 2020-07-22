@@ -18,7 +18,7 @@
                     style="padding: 24px"
             >
                 <a-form-model-item label="Slika" prop="image" ref="image">
-                    <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image.image" class="image-preview"/>
+                    <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image ? model.image.image : null" class="image-preview"/>
                 </a-form-model-item>
                 <a-form-model-item label="Naziv" prop="name" ref="name">
                     <a-input v-model="model.name" @blur="() => {$refs.name.onFieldBlur()}" placeholder="unesi naziv namirnice"/>

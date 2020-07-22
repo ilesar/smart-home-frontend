@@ -51,7 +51,7 @@
                         <span slot="title">{{chosenItem ? chosenItem.name : ''}}</span>
                         <a-avatar
                                 slot="avatar"
-                                :src="chosenItem ? chosenItem.image.path : 'testiram'"
+                                :src="(chosenItem ? chosenItem.image : null) ? chosenItem.image.path : null"
                         />
                     </a-list-item-meta>
                 </a-list-item>

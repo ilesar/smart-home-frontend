@@ -220,13 +220,15 @@ import { RouteNames } from '@/enums/RouteNames'
     }
 
     .o-footer {
+        position: relative;
+        top: 1px;
         text-align: center;
         padding: 0px;
         border-top: 1px solid #1890ff;
     }
 
     .mobile-menu-icon {
-        font-size: 20px;
+        /*font-size: 30px;*/
         position: relative;
         top: 2px;
         padding: 16px 4px;

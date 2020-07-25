@@ -7,7 +7,7 @@
                 :closable="false"
                 @close="closeDrawer"
                 :visible="visible"
-                width="50vw"
+                width="700"
         >
             <component
                     v-bind:is="drawerObject ? drawerObject.component : ''"
@@ -24,7 +24,7 @@
                 @close="closeDrawer"
                 :visible="visible"
                 width="100vw"
-                :body-style="{ padding: '0px', width: '100vw'}"
+                :body-style="{ padding: '20px', width: '100vw'}"
         >
             <component
                     v-bind:is="drawerObject ? drawerObject.component : ''"

@@ -1,12 +1,13 @@
 <template>
     <div class="mobile-form">
-        <div class="steps-wrapper">
-            <a-steps  :current="currentStep" progressDot class="grocery-steps" >
-                <a-step title="Fotkaj"/>
-                <a-step title="Provjeri"/>
-                <a-step title="Ispuni"/>
-            </a-steps>
-        </div>
+<!--        <div class="steps-wrapper">-->
+<!--            <a-steps  :current="currentStep" progressDot class="grocery-steps" >-->
+<!--                <a-step title="Fotkaj"/>-->
+<!--                <a-step title="Provjeri"/>-->
+<!--                <a-step title="Ispuni"/>-->
+<!--            </a-steps>-->
+<!--        </div>-->
+<!--        <a-divider></a-divider>-->
         <div class="steps-content" v-if="currentStep === 2">
             <a-form-model
                     ref="ruleForm"
@@ -15,7 +16,6 @@
                     layout="vertical"
                     :label-col="labelCol"
                     :wrapper-col="wrapperCol"
-                    style="padding: 24px"
             >
                 <a-form-model-item label="Slika" prop="image" ref="image">
                     <img :src="model.imageForUploadBase64 ? model.imageForUploadBase64 : model.image ? model.image.image : null" class="image-preview"/>
@@ -167,7 +167,9 @@ export default class GroceryItemMobileFormEdit extends Vue {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 30px 30px 20px 30px;
+        transform: scale(0.8);
+        position: relative;
+        left: -8%;
     }
 
     .grocery-steps {
